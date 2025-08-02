@@ -91,26 +91,43 @@ footer {
   text-decoration: underline;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  /* Menu links become vertical, hidden by default */
-  .nav-links {
-    flex-direction: column;
-    background-color: #005f99;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+/* Par défaut (grand écran) */
+.menu-icon {
+    display: none; /* burger caché */
+}
 
-  /* Show burger icon */
-  .menu-icon {
-    display: block;
-  }
+.nav-links {
+    display: flex; /* menu visible horizontal */
+    flex-direction: row;
+    max-height: none !important; /* assure que la nav est visible */
+    position: static;
+    background: none;
+    overflow: visible;
+}
+
+/* Sur petits écrans */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block; /* burger visible */
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #005f99;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    #menu-toggle:checked + .menu-icon + .nav-links {
+        max-height: 300px; /* ou plus selon taille menu */
+    }
+}
 
   /* When checked, expand menu */
   #menu-toggle:checked + .menu-icon + .nav-links {
