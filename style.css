@@ -113,6 +113,18 @@ body {
   margin-left: auto;
 }
 
+
+.nav-links li {
+  margin-left: 1.5rem; /* espace entre chaque lien */
+}
+
+.nav-links li:nth-child(1) {
+  margin-left: 0; /* pas d'espace avant le premier lien */
+}
+
+.nav-links li:nth-child(2) {
+  margin-left: 3rem; /* plus grand écart après "About Me" */
+}
 .nav-links a::after {
   content: '';
   display: block;
@@ -218,5 +230,6 @@ footer {
     transform: translateX(-50%);
   }
 }
+
 
 
