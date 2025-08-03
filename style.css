@@ -81,10 +81,8 @@ footer {
 }
 
 .footer-content a {
-  color: #aaddff;
-  margin: 0 1rem;
-  text-decoration: none;
-  font-weight: 500;
+    display: inline-block; /* pour gérer margin proprement */
+    margin: 0 1rem;
 }
 
 .footer-content a:hover {
@@ -169,3 +167,4 @@ footer {
     font-size: 0.95rem;
   }
 }
+
