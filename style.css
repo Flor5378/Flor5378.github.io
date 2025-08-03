@@ -139,3 +139,62 @@ footer {
   }
 }
 
+.language-flags {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.flag-tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.flag-tooltip img {
+  width: 24px;
+  height: auto;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.flag-tooltip:hover img {
+  transform: scale(1.2);
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  background-color: #004080;
+  color: #fff;
+  text-align: center;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 10;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.flag-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(5px);
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+  .language-flags {
+    margin-left: 0.5rem;
+  }
+
+  .flag-tooltip img {
+    width: 20px;
+  }
+}
+
