@@ -80,14 +80,25 @@ footer {
   text-align: center;
 }
 
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; /* pour éviter de déborder sur mobile */
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; /* espace entre les éléments */
+    text-align: center;
+}
+
 .footer-content a {
-    display: inline-block; /* pour gérer margin proprement */
-    margin: 0 1rem;
+    color: #aaddff;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 .footer-content a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
 
 /* Par défaut (grand écran) */
 .menu-icon {
@@ -175,5 +186,6 @@ footer {
     font-size: 0.95rem;
   }
 }
+
 
 
