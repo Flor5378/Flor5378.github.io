@@ -76,7 +76,7 @@ body {
 }
 
 .flag-tooltip img {
-  height: 100%; /* fait que toutes les images font 30px de hauteur */
+  height: 75%; /* fait que toutes les images font 30px de hauteur */
   width: auto;  /* garde le ratio */
   border-radius: 4px;
   transition: transform 0.3s ease;
@@ -233,5 +233,6 @@ footer {
     top: 120%; /* tu peux aussi ajuster cette valeur si besoin */
   }
 }
+
 
 
