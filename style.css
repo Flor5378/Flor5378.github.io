@@ -37,8 +37,34 @@ body {
 
 /* Logo */
 .logo {
+  color: white;
+  text-decoration: none;
+  position: relative;
   font-size: 1.5rem;
   font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+}
+
+.logo::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+/* Empêche le changement de couleur au hover */
+.logo:hover {
+  color: white;
 }
 
 /* Language Flags */
@@ -230,6 +256,7 @@ footer {
     transform: translateX(-50%);
   }
 }
+
 
 
 
