@@ -104,20 +104,17 @@ body {
   transform: translateX(-50%) translateY(5px);
 }
 
-/* Nav Links */
 .nav-links {
-  display: flex;
-  list-style: none;
-  margin-left: auto;
-  gap: 3rem;
+  display: flex;           /* aligner horizontalement */
+  list-style: none;        /* enlever les puces */
+  margin-left: auto;       /* pousse le menu à droite */
+  gap: 2.5rem;             /* espace régulier entre les liens */
+  padding-left: 0;         /* enlever padding par défaut */
+  align-items: center;     /* centrer verticalement si besoin */
 }
 
 .nav-links li {
-  margin-left: 0;
-}
-
-.nav-links li:nth-child {
-  margin-left: 3rem;
+  margin: 0;               /* enlever marges individuelles pour éviter conflit */
 }
 
 .nav-links a {
@@ -125,12 +122,23 @@ body {
   font-weight: 500;
   text-decoration: none;
   position: relative;
+  padding-bottom: 2px;     /* pour espace sous le texte et effet underline */
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover::after {
-  width: 100%;
+  width: 100%;             /* underline qui s’étend au hover */
 }
-
 /* Burger menu */
 #menu-toggle {
   display: none;
@@ -220,4 +228,5 @@ footer {
     top: 120%;
   }
 }
+
 
