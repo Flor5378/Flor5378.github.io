@@ -19,7 +19,7 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start; /* <-- change ici */
   padding: 1rem 2rem;
   background: #004080;
   color: #fff;
@@ -228,5 +228,6 @@ footer {
     top: 120%;
   }
 }
+
 
 
