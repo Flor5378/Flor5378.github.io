@@ -85,8 +85,9 @@ body {
 }
 
 .tooltip-text {
+  
   position: absolute;
-  bottom: -150%;
+  bottom: -130%; /* Ajuste la valeur pour bien aligner verticalement */
   left: 50%;
   transform: translateX(-50%);
   background: #004080;
@@ -230,6 +231,7 @@ footer {
 
   .tooltip-text {
     bottom: auto;
-    top: 120%;
+    top: 120%; /* tu peux aussi ajuster cette valeur si besoin */
   }
 }
+
