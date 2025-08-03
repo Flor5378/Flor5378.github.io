@@ -70,41 +70,40 @@ body {
 .flag-tooltip {
   position: relative;
   cursor: pointer;
+  display: inline-block;
+  height: 30px; /* hauteur fixe du conteneur drapeau + tooltip */
+  vertical-align: middle;
 }
 
 .flag-tooltip img {
-  width: 3vw;
-  max-width: 40px;
-  min-width: 20px;
+  height: 100%; /* fait que toutes les images font 30px de hauteur */
+  width: auto;  /* garde le ratio */
   border-radius: 4px;
   transition: transform 0.3s ease;
+  display: block; /* évite l’espace sous l’image */
 }
 
-.flag-tooltip:hover img {
-  transform: scale(1.2);
-}
-
+/* Tooltip - positionné en dessous avec top fixe */
 .tooltip-text {
-  
+  visibility: hidden;
+  opacity: 0;
   position: absolute;
-  bottom: -130%; /* Ajuste la valeur pour bien aligner verticalement */
+  top: 110%; /* fixe la position verticale */
   left: 50%;
   transform: translateX(-50%);
-  background: #004080;
-  color: #fff;
+  background-color: #004080;
+  color: white;
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   white-space: nowrap;
   font-size: 0.8rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, transform 0.3s;
   z-index: 10;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .flag-tooltip:hover .tooltip-text {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
   transform: translateX(-50%) translateY(5px);
 }
 
@@ -234,4 +233,5 @@ footer {
     top: 120%; /* tu peux aussi ajuster cette valeur si besoin */
   }
 }
+
 
