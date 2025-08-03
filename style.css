@@ -1,6 +1,8 @@
 /* Reset */
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Base */
@@ -11,7 +13,8 @@ body {
   line-height: 1.6;
 }
 
-.logo, .hero h1 {
+.logo,
+.hero h1 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -19,7 +22,7 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* <-- change ici */
+  justify-content: flex-start; /* <-- modifié ici */
   padding: 1rem 2rem;
   background: #004080;
   color: #fff;
@@ -104,17 +107,18 @@ body {
   transform: translateX(-50%) translateY(5px);
 }
 
+/* Navigation links */
 .nav-links {
   display: flex;           /* aligner horizontalement */
   list-style: none;        /* enlever les puces */
   margin-left: auto;       /* pousse le menu à droite */
   gap: 2.5rem;             /* espace régulier entre les liens */
   padding-left: 0;         /* enlever padding par défaut */
-  align-items: center;     /* centrer verticalement si besoin */
+  align-items: center;     /* centrer verticalement */
 }
 
 .nav-links li {
-  margin: 0;               /* enlever marges individuelles pour éviter conflit */
+  margin: 0;               /* enlever marges individuelles */
 }
 
 .nav-links a {
@@ -122,7 +126,7 @@ body {
   font-weight: 500;
   text-decoration: none;
   position: relative;
-  padding-bottom: 2px;     /* pour espace sous le texte et effet underline */
+  padding-bottom: 2px;     /* espace sous le texte pour effet underline */
 }
 
 .nav-links a::after {
@@ -139,6 +143,7 @@ body {
 .nav-links a:hover::after {
   width: 100%;             /* underline qui s’étend au hover */
 }
+
 /* Burger menu */
 #menu-toggle {
   display: none;
@@ -192,7 +197,7 @@ footer {
   .menu-icon {
     display: block;
   }
-  
+
   .nav-links {
     position: absolute;
     top: 100%;
@@ -206,28 +211,25 @@ footer {
     transition: max-height 0.3s ease;
     gap: 0;
   }
-  
+
   #menu-toggle:checked + .menu-icon + .nav-links {
     max-height: 300px;
   }
-  
+
   .nav-links li {
     margin: 1rem 0;
   }
-  
+
   .language-flags {
     gap: 0.3rem;
   }
-  
+
   .flag-tooltip img {
     width: 20px;
   }
-  
+
   .tooltip-text {
     bottom: auto;
     top: 120%;
   }
 }
-
-
-
