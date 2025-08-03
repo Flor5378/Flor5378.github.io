@@ -7,11 +7,16 @@
 
 /* Body Styling */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Merriweather', serif;
   background-color: #ffffff;
   color: #2c3e50;
   line-height: 1.6;
 }
+
+.logo, .hero h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 
 /* Navbar Styling */
 .navbar {
@@ -133,3 +138,4 @@ footer {
     margin: 1rem 0;
   }
 }
+
