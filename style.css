@@ -127,6 +127,14 @@ footer {
     }
 }
 
+.social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* pour qu'ils aillent à la ligne si trop serrés sur mobile */
+    gap: 1rem;
+}
+
+
   /* When checked, expand menu */
   #menu-toggle:checked + .menu-icon + .nav-links {
     max-height: 500px; /* large enough for all menu items */
@@ -167,4 +175,5 @@ footer {
     font-size: 0.95rem;
   }
 }
+
 
