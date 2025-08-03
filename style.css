@@ -116,7 +116,7 @@ body {
   margin-left: 0;
 }
 
-.nav-links li:nth-child(2) {
+.nav-links li:nth-child {
   margin-left: 3rem;
 }
 
@@ -220,3 +220,4 @@ footer {
     top: 120%;
   }
 }
+
