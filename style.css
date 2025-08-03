@@ -1,191 +1,135 @@
-/* ===== Global Styles ===== */
-body {
+/* Reset CSS */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ===== Navbar ===== */
+/* Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+/* Navbar Styling */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #005f99;
   padding: 1rem 2rem;
+  background-color: #004080; /* Deep Blue */
   color: white;
   position: relative;
-  z-index: 1000;
 }
 
-.navbar .logo {
+.logo {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
+/* Nav Links */
 .nav-links {
   list-style: none;
   display: flex;
   gap: 1.5rem;
-  margin: 0;
-  padding: 0;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+  position: relative;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
+.nav-links a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width .3s;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
 }
 
-/* ===== Burger Icon ===== */
-.menu-icon {
-  display: none;
-  font-size: 2rem;
-  cursor: pointer;
-  user-select: none;
+.nav-links a:hover::after {
+  width: 100%;
 }
 
-/* Hide the checkbox */
+/* Burger Menu (Mobile) */
 #menu-toggle {
   display: none;
 }
 
-/* ===== Hero Section ===== */
+.menu-icon {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
 .hero {
+  padding: 4rem 2rem;
   text-align: center;
-  padding: 5rem 2rem;
-  background-color: #e6f0fa;
+  background: linear-gradient(to bottom, #e0f0ff, #ffffff);
 }
 
 .hero h1 {
   font-size: 2.5rem;
-  color: #005f99;
-  margin: 0 0 1rem;
+  color: #004080;
+  margin-bottom: 1rem;
 }
 
 .hero p {
   font-size: 1.2rem;
-  margin: 0;
+  color: #333;
 }
 
-/* ===== Footer ===== */
+/* Footer */
 footer {
-  background-color: #003f66;
-  color: white;
+  background-color: #f0f0f0;
   padding: 1.5rem 2rem;
   text-align: center;
 }
 
-.footer-content {
-    display: flex;
-    flex-wrap: wrap; /* pour éviter de déborder sur mobile */
-    justify-content: center;
-    align-items: center;
-    gap: 1rem; /* espace entre les éléments */
-    text-align: center;
-}
-
 .footer-content a {
-    color: #aaddff;
-    text-decoration: none;
-    font-weight: 500;
+  margin: 0 0.5rem;
+  color: #004080;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .footer-content a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-
-/* Par défaut (grand écran) */
-.menu-icon {
-    display: none; /* burger caché */
-}
-
-.nav-links {
-    display: flex; /* menu visible horizontal */
-    flex-direction: row;
-    max-height: none !important; /* assure que la nav est visible */
-    position: static;
-    background: none;
-    overflow: visible;
-}
-
-/* Sur petits écrans */
+/* Responsive - Mobile */
 @media (max-width: 768px) {
-    .menu-icon {
-        display: block; /* burger visible */
-    }
+  .menu-icon {
+    display: block;
+  }
 
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #005f99;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
-    }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #004080;
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
 
-    #menu-toggle:checked + .menu-icon + .nav-links {
-        max-height: 300px; /* ou plus selon taille menu */
-    }
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* pour qu'ils aillent à la ligne si trop serrés sur mobile */
-    gap: 1rem;
-}
-
-
-  /* When checked, expand menu */
   #menu-toggle:checked + .menu-icon + .nav-links {
-    max-height: 500px; /* large enough for all menu items */
+    max-height: 300px;
   }
 
   .nav-links li {
-    padding: 1rem 0;
-  }
-
-  .hero {
-    padding: 3rem 1rem;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .footer-content a {
-    display: block;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
   }
 }
-
-@media (max-width: 480px) {
-  .navbar {
-    padding: 1rem;
-  }
-
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero p {
-    font-size: 0.95rem;
-  }
-}
-
-
-
