@@ -241,5 +241,11 @@ footer {
   .tooltip-text {
     top: 120%;
   }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
 }
+
 
