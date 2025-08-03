@@ -66,14 +66,14 @@ body {
   transform: scale(1.2);
 }
 
-/* Tooltip text */
+/* Tooltip text default to appear below the flag */
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  top: 50%;
-  left: 120%;
-  transform: translateY(-50%);
+  bottom: -150%;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #004080;
   color: white;
   padding: 0.3rem 0.6rem;
@@ -84,13 +84,13 @@ body {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Show tooltip on hover */
+
+/* On hover, show tooltip */
 .flag-tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
-  transform: translateY(-50%) translateX(5px);
+  transform: translateX(-50%) translateY(5px);
 }
-
 /* Nav Links */
 .nav-links {
   list-style: none;
@@ -202,4 +202,12 @@ footer {
   .flag-tooltip img {
     width: 20px;
   }
+
+  .tooltip-text {
+    bottom: auto;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
+
