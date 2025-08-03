@@ -22,11 +22,9 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* <-- modifié ici */
   padding: 1rem 2rem;
   background: #004080;
   color: #fff;
-  position: relative;
 }
 
 .logo-group {
@@ -70,25 +68,23 @@ body {
 .flag-tooltip {
   position: relative;
   cursor: pointer;
-  display: inline-block;
-  height: 30px; /* hauteur fixe du conteneur drapeau + tooltip */
-  vertical-align: middle;
+  height: 30px;
 }
 
 .flag-tooltip img {
-  height: 75%; /* fait que toutes les images font 30px de hauteur */
-  width: auto;  /* garde le ratio */
+  height: 100%;
+  width: auto;
   border-radius: 4px;
   transition: transform 0.3s ease;
-  display: block; /* évite l’espace sous l’image */
+  display: block;
 }
 
-/* Tooltip - positionné en dessous avec top fixe */
+/* Tooltip */
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  top: 110%; /* fixe la position verticale */
+  top: 110%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #004080;
@@ -109,16 +105,11 @@ body {
 
 /* Navigation links */
 .nav-links {
-  display: flex;           /* aligner horizontalement */
-  list-style: none;        /* enlever les puces */
-  margin-left: auto;       /* pousse le menu à droite */
-  gap: 2.5rem;             /* espace régulier entre les liens */
-  padding-left: 0;         /* enlever padding par défaut */
-  align-items: center;     /* centrer verticalement */
-}
-
-.nav-links li {
-  margin: 0;               /* enlever marges individuelles */
+  display: flex;
+  list-style: none;
+  margin-left: auto;
+  gap: 2.5rem;
+  align-items: center;
 }
 
 .nav-links a {
@@ -126,7 +117,8 @@ body {
   font-weight: 500;
   text-decoration: none;
   position: relative;
-  padding-bottom: 2px;     /* espace sous le texte pour effet underline */
+  padding-bottom: 2px;
+  transition: color 0.3s;
 }
 
 .nav-links a::after {
@@ -141,7 +133,7 @@ body {
 }
 
 .nav-links a:hover::after {
-  width: 100%;             /* underline qui s’étend au hover */
+  width: 100%;
 }
 
 /* Burger menu */
@@ -186,6 +178,7 @@ footer {
   color: #004080;
   font-weight: 500;
   text-decoration: none;
+  transition: text-decoration 0.3s;
 }
 
 .footer-content a:hover {
@@ -226,13 +219,10 @@ footer {
 
   .flag-tooltip img {
     width: 20px;
+    height: auto;
   }
 
   .tooltip-text {
-    bottom: auto;
-    top: 120%; /* tu peux aussi ajuster cette valeur si besoin */
+    top: 120%;
   }
 }
-
-
-
