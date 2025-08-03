@@ -67,10 +67,9 @@ body {
   color: white;
 }
 
-/* Language Flags */
 .language-flags {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem; /* plus d’espace entre les drapeaux */
   align-items: center;
 }
 
@@ -80,14 +79,14 @@ body {
   cursor: pointer;
 }
 
-/* Flag images */
-.flag-tooltip img {
-  width: 24px;
+/.flag-tooltip img {
+  width: 3vw; /* taille relative à la largeur de l’écran */
+  max-width: 40px; /* limite max pour grands écrans */
+  min-width: 20px; /* limite min pour petits écrans */
   height: auto;
   border-radius: 4px;
   transition: transform 0.3s ease;
 }
-
 .flag-tooltip:hover img {
   transform: scale(1.2);
 }
@@ -151,17 +150,14 @@ body {
 .nav-links li:nth-child(2) {
   margin-left: 3rem; /* plus grand écart après "About Me" */
 }
-.nav-links a::after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  background: white;
-  transition: width .3s;
-  position: absolute;
-  bottom: -4px;
-  left: 0;
+.nav-links {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  margin-left: auto;
+  gap: 3rem; /* espacement plus large entre liens */
 }
+
 
 .nav-links a:hover::after {
   width: 100%;
@@ -256,6 +252,7 @@ footer {
     transform: translateX(-50%);
   }
 }
+
 
 
 
