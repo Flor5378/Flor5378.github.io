@@ -93,16 +93,24 @@ body {
 }
 /* Nav Links */
 .nav-links {
-  list-style: none;
   display: flex;
-  gap: 1.5rem;
+  width: 100%;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
+
 
 .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
   position: relative;
+}
+
+/* pousse tout ce qui est après le premier lien à droite */
+.nav-links li:nth-child(2) {
+  margin-left: auto;
 }
 
 .nav-links a::after {
@@ -210,4 +218,5 @@ footer {
     transform: translateX(-50%);
   }
 }
+
 
