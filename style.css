@@ -1,14 +1,12 @@
-/* Reset CSS */
+/* Reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; padding: 0; box-sizing: border-box;
 }
 
-/* Body Styling */
+/* Base */
 body {
   font-family: 'Merriweather', serif;
-  background-color: #ffffff;
+  background: #fff;
   color: #2c3e50;
   line-height: 1.6;
 }
@@ -17,153 +15,123 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Navbar Styling */
+/* Navbar */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background-color: #004080;
-  color: white;
+  background: #004080;
+  color: #fff;
   position: relative;
 }
 
-/* Logo group (logo + flags) */
 .logo-group {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-/* Logo */
 .logo {
-  color: white;
-  text-decoration: none;
-  position: relative;
   font-size: 1.5rem;
   font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
 .logo::after {
   content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  background: white;
-  transition: width 0.3s;
   position: absolute;
   bottom: -4px;
   left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s;
 }
 
 .logo:hover::after {
   width: 100%;
 }
 
-/* Empêche le changement de couleur au hover */
-.logo:hover {
-  color: white;
-}
-
+/* Language flags */
 .language-flags {
   display: flex;
-  gap: 1rem; /* plus d’espace entre les drapeaux */
+  gap: 1rem;
   align-items: center;
 }
 
-/* Tooltip container */
 .flag-tooltip {
   position: relative;
   cursor: pointer;
 }
 
-/.flag-tooltip img {
-  width: 3vw; /* taille relative à la largeur de l’écran */
-  max-width: 40px; /* limite max pour grands écrans */
-  min-width: 20px; /* limite min pour petits écrans */
-  height: auto;
+.flag-tooltip img {
+  width: 3vw;
+  max-width: 40px;
+  min-width: 20px;
   border-radius: 4px;
   transition: transform 0.3s ease;
 }
+
 .flag-tooltip:hover img {
   transform: scale(1.2);
 }
 
-/* Tooltip text default to appear below the flag */
 .tooltip-text {
-  visibility: hidden;
-  opacity: 0;
   position: absolute;
   bottom: -150%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #004080;
-  color: white;
+  background: #004080;
+  color: #fff;
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   white-space: nowrap;
   font-size: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, transform 0.3s;
   z-index: 10;
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-
-/* On hover, show tooltip */
 .flag-tooltip:hover .tooltip-text {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
   transform: translateX(-50%) translateY(5px);
 }
+
 /* Nav Links */
 .nav-links {
   display: flex;
-  width: 100%;
   list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-}
-
-/* pousse tout ce qui est après le premier lien à droite */
-.nav-links li:nth-child(2) {
   margin-left: auto;
+  gap: 3rem;
 }
-
 
 .nav-links li {
-  margin-left: 1.5rem; /* espace entre chaque lien */
-}
-
-.nav-links li:nth-child(1) {
-  margin-left: 0; /* pas d'espace avant le premier lien */
+  margin-left: 0;
 }
 
 .nav-links li:nth-child(2) {
-  margin-left: 3rem; /* plus grand écart après "About Me" */
-}
-.nav-links {
-  display: flex;
-  list-style: none;
-  padding-left: 0;
-  margin-left: auto;
-  gap: 3rem; /* espacement plus large entre liens */
+  margin-left: 3rem;
 }
 
+.nav-links a {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+}
 
 .nav-links a:hover::after {
   width: 100%;
 }
 
-/* Burger Menu (Mobile) */
+/* Burger menu */
 #menu-toggle {
   display: none;
 }
@@ -172,18 +140,19 @@ body {
   display: none;
   font-size: 2rem;
   cursor: pointer;
+  color: #fff;
 }
 
-/* Hero Section */
+/* Hero */
 .hero {
   padding: 4rem 2rem;
   text-align: center;
-  background: linear-gradient(to bottom, #e0f0ff, #ffffff);
+  background: linear-gradient(to bottom, #e0f0ff, #fff);
+  color: #004080;
 }
 
 .hero h1 {
   font-size: 2.5rem;
-  color: #004080;
   margin-bottom: 1rem;
 }
 
@@ -194,7 +163,7 @@ body {
 
 /* Footer */
 footer {
-  background-color: #f0f0f0;
+  background: #f0f0f0;
   padding: 1.5rem 2rem;
   text-align: center;
 }
@@ -202,58 +171,52 @@ footer {
 .footer-content a {
   margin: 0 0.5rem;
   color: #004080;
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
 }
 
 .footer-content a:hover {
   text-decoration: underline;
 }
 
-/* Responsive - Mobile */
+/* Responsive */
 @media (max-width: 768px) {
   .menu-icon {
     display: block;
   }
-
+  
   .nav-links {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #004080;
+    background: #004080;
     flex-direction: column;
     align-items: center;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
+    transition: max-height 0.3s ease;
+    gap: 0;
   }
-
+  
   #menu-toggle:checked + .menu-icon + .nav-links {
     max-height: 300px;
   }
-
+  
   .nav-links li {
     margin: 1rem 0;
   }
-
+  
   .language-flags {
     gap: 0.3rem;
   }
-
+  
   .flag-tooltip img {
     width: 20px;
   }
-
+  
   .tooltip-text {
     bottom: auto;
     top: 120%;
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
-
-
-
-
-
