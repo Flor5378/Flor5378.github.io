@@ -35,6 +35,12 @@ body {
   font-weight: bold;
 }
 
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacement entre logo et flags */
+}
+
 /* Nav Links */
 .nav-links {
   list-style: none;
@@ -173,20 +179,20 @@ footer {
   border-radius: 6px;
   position: absolute;
   z-index: 10;
-  bottom: -35px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
   white-space: nowrap;
   font-size: 0.8rem;
 }
-
 .flag-tooltip:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
-  transform: translateX(-50%) translateY(5px);
+  transform: translateY(-50%) translateX(5px);
 }
+
 
 /* Adjust for smaller screens */
 @media (max-width: 768px) {
@@ -198,5 +204,6 @@ footer {
     width: 20px;
   }
 }
+
 
 
