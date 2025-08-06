@@ -75,3 +75,8 @@ avatarContainer.addEventListener('mouseenter', () => {
 
 window.addEventListener('resize', updateLines);
 window.addEventListener('scroll', updateLines);
+
+document.addEventListener('DOMContentLoaded', () => {
+  positionNodes();  // Position initiale des nodes (cachée en scale(0))
+});
+
