@@ -226,8 +226,7 @@ footer {
 .node {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
+  transform: translateY(-50%) scale(0);
   opacity: 0;
   transition: transform 0.6s ease, opacity 0.6s ease;
   transition-delay: calc(var(--i) * 0.1s);
@@ -239,9 +238,10 @@ footer {
   white-space: nowrap;
 }
 
+/* When hovering, position nodes left and right alternately */
 .avatar-container:hover .node {
   opacity: 1;
-  transform: translate(-50%, -50%) rotate(calc(var(--i) * 60deg)) translate(160px) rotate(calc(var(--i) * -60deg));
+  transform: translateY(-50%) translateX(calc((var(--i) % 2 == 0 ? -1 : 1) * (80px + (var(--i) * 60px)))) scale(1);
 }
 
 /* Responsive */
@@ -290,3 +290,4 @@ footer {
     height: 100px;
   }
 }
+
