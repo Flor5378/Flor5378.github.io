@@ -6,13 +6,12 @@ function positionNodes() {
   const avatarRect = avatarContainer.getBoundingClientRect();
   const centerY = avatarRect.height / 2;
 
-  const baseSpacingLeft = 250;   // Distance horizontale de base à gauche
-  const baseSpacingRight = 150;  // Distance horizontale de base à droite
+  const baseSpacingLeft = 250;
+  const baseSpacingRight = 150;
+  const nodeGap = 150;
 
-  const nodeGap = 150;  // Espace horizontal entre niveaux
-
-  const verticalGapLeft = 60;    // Espace vertical à gauche (plus serré)
-  const verticalGapRight = 100;  // Espace vertical à droite (plus large)
+  const verticalGapLeft = 60;
+  const verticalGapRight = 100;
 
   nodes.forEach((node, index) => {
     const isLeft = index % 2 === 0;
@@ -20,18 +19,23 @@ function positionNodes() {
 
     const baseSpacing = isLeft ? baseSpacingLeft : baseSpacingRight;
     const offsetX = baseSpacing + (level * nodeGap);
-
     const verticalGap = isLeft ? verticalGapLeft : verticalGapRight;
     const offsetY = centerY + (level * verticalGap * (isLeft ? -1 : 1));
 
-    node.style.left = `${avatarRect.width / 2}px`;
     node.style.top = `${offsetY}px`;
 
-    const translateX = isLeft ? -offsetX : offsetX;
-    node.style.transform = `translate(${translateX}px, -50%) scale(0)`;
+    if (isLeft) {
+      node.style.left = `calc(50% - ${offsetX}px)`;
+      node.style.transform = `translateX(-100%) translateY(-50%) scale(0)`;
+    } else {
+      node.style.left = `calc(50% + ${offsetX}px)`;
+      node.style.transform = `translateX(0%) translateY(-50%) scale(0)`;
+    }
+
     node.style.opacity = '0';
   });
 }
+
 
 function updateLines() {
   svg.innerHTML = ''; // Clear previous lines
@@ -79,4 +83,5 @@ window.addEventListener('scroll', updateLines);
 document.addEventListener('DOMContentLoaded', () => {
   positionNodes();  // Position initiale des nodes (cachée en scale(0))
 });
+
 
