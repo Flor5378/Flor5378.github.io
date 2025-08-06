@@ -1,19 +1,17 @@
 const avatarContainer = document.querySelector('.avatar-container');
 const nodes = document.querySelectorAll('.node');
 const svg = document.querySelector('.connection-lines');
-
 function positionNodes() {
   const avatarRect = avatarContainer.getBoundingClientRect();
   const centerY = avatarRect.height / 2;
 
-  const baseSpacing = 140; // Distance initiale depuis le bord de l'avatar
-  const nodeGap = 100;     // Espace constant entre chaque node
+  const baseSpacing = 200; // augmente la distance initiale
+  const nodeGap = 150;     // augmente l’écart entre nodes
 
   nodes.forEach((node, index) => {
-    const isLeft = index % 2 === 0; // Alternance gauche/droite
-    const level = Math.floor(index / 2); // Rangée à gauche/droite
-    
-    const offsetX = baseSpacing + (level * nodeGap); // Progression régulière
+    const isLeft = index % 2 === 0;
+    const level = Math.floor(index / 2);
+    const offsetX = baseSpacing + (level * nodeGap);
 
     node.style.top = `${centerY}px`;
     node.style.left = `${avatarRect.width / 2}px`;
@@ -23,6 +21,7 @@ function positionNodes() {
     node.style.opacity = '0';
   });
 }
+
 
 
 function updateLines() {
@@ -69,5 +68,6 @@ avatarContainer.addEventListener('mouseenter', () => {
 
 window.addEventListener('resize', updateLines);
 window.addEventListener('scroll', updateLines);
+
 
 
