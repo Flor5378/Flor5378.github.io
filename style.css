@@ -241,7 +241,7 @@ footer {
   transition: stroke-dashoffset 0.8s ease;
 }
 
-.avatar-container:hover ~ .connection-lines line {
+.avatar-container:hover + .connection-lines line {
   stroke-dashoffset: 0;
 }
 
@@ -291,3 +291,4 @@ footer {
     height: 100px;
   }
 }
+
