@@ -185,13 +185,35 @@ footer {
   text-decoration: underline;
 }
 
+/* Avatar and Nodes */
+.avatar-network {
+  position: relative;
+  display: inline-block;
+}
+
+.connection-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
 .avatar {
   width: 150px;
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #004080;
-  margin: 0 auto 1.5rem; /* centré avec marge dessous */
+  margin: 0 auto 1.5rem;
   display: block;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
@@ -199,6 +221,38 @@ footer {
 
 .avatar:hover {
   transform: scale(1.05);
+}
+
+.node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  transition-delay: calc(var(--i) * 0.1s);
+  background: #004080;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.avatar-container:hover .node {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(calc(var(--i) * 60deg)) translate(160px) rotate(calc(var(--i) * -60deg));
+}
+
+/* SVG Line Animation */
+.connection-lines line {
+  stroke-dasharray: 4 4;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.avatar-container:hover ~ .connection-lines line {
+  stroke-dashoffset: 0;
 }
 
 /* Responsive */
@@ -247,44 +301,3 @@ footer {
     height: 100px;
   }
 }
-
-.avatar-network {
-  position: relative;
-  display: inline-block;
-}
-
-.connection-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.node {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.6s ease, opacity 0.6s ease;
-  transition-delay: calc(var(--i) * 0.1s);
-}
-
-.avatar-container:hover .node {
-  opacity: 1;
-  transform: translate(-50%, -50%) rotate(calc(var(--i) * 60deg)) translate(160px) rotate(calc(var(--i) * -60deg));
-}
-
-.avatar-container::before {
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.5s ease;
-}
-
-.avatar-container:hover::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-
-
-
-
-
