@@ -6,16 +6,24 @@ function positionNodes() {
   const avatarRect = avatarContainer.getBoundingClientRect();
   const centerY = avatarRect.height / 2;
 
+  const baseSpacing = 140; // Distance initiale depuis le bord de l'avatar
+  const nodeGap = 100;     // Espace constant entre chaque node
+
   nodes.forEach((node, index) => {
-    const direction = index % 2 === 0 ? -1 : 1; // Alternate left/right
-    const offsetX = 120 + (Math.floor(index / 2) * 100); // Spread nodes further out for each pair
+    const isLeft = index % 2 === 0; // Alternance gauche/droite
+    const level = Math.floor(index / 2); // Rangée à gauche/droite
+    
+    const offsetX = baseSpacing + (level * nodeGap); // Progression régulière
 
     node.style.top = `${centerY}px`;
     node.style.left = `${avatarRect.width / 2}px`;
-    node.style.transform = `translate(${direction * offsetX}px, -50%) scale(0)`;
+
+    const translateX = isLeft ? -offsetX : offsetX;
+    node.style.transform = `translate(${translateX}px, -50%) scale(0)`;
     node.style.opacity = '0';
   });
 }
+
 
 function updateLines() {
   svg.innerHTML = ''; // Clear previous lines
@@ -61,4 +69,5 @@ avatarContainer.addEventListener('mouseenter', () => {
 
 window.addEventListener('resize', updateLines);
 window.addEventListener('scroll', updateLines);
+
 
