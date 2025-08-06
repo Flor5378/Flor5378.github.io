@@ -79,7 +79,6 @@ body {
   display: block;
 }
 
-/* Tooltip */
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
@@ -136,7 +135,6 @@ body {
   width: 100%;
 }
 
-/* Burger menu */
 #menu-toggle {
   display: none;
 }
@@ -148,7 +146,7 @@ body {
   color: #fff;
 }
 
-/* Hero Section */
+/* Hero */
 .hero {
   padding: 4rem 2rem;
   text-align: center;
@@ -236,10 +234,15 @@ footer {
   white-space: nowrap;
 }
 
-/* When hovering, position nodes left and right alternately */
-.avatar-container:hover .node {
-  opacity: 1;
-  transform: translateY(-50%) translateX(calc((var(--i) % 2 == 0 ? -1 : 1) * (80px + (var(--i) * 60px)))) scale(1);
+/* SVG Line Animation */
+.connection-lines line {
+  stroke-dasharray: 4 4;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.avatar-container:hover ~ .connection-lines line {
+  stroke-dashoffset: 0;
 }
 
 /* Responsive */
@@ -288,5 +291,3 @@ footer {
     height: 100px;
   }
 }
-
-
