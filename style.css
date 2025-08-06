@@ -148,7 +148,7 @@ body {
   color: #fff;
 }
 
-/* Hero */
+/* Hero Section */
 .hero {
   padding: 4rem 2rem;
   text-align: center;
@@ -242,17 +242,6 @@ footer {
 .avatar-container:hover .node {
   opacity: 1;
   transform: translate(-50%, -50%) rotate(calc(var(--i) * 60deg)) translate(160px) rotate(calc(var(--i) * -60deg));
-}
-
-/* SVG Line Animation */
-.connection-lines line {
-  stroke-dasharray: 4 4;
-  stroke-dashoffset: 100;
-  transition: stroke-dashoffset 0.8s ease;
-}
-
-.avatar-container:hover ~ .connection-lines line {
-  stroke-dashoffset: 0;
 }
 
 /* Responsive */
