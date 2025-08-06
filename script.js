@@ -2,6 +2,32 @@ const avatarContainer = document.querySelector('.avatar-container');
 const nodes = document.querySelectorAll('.node');
 const svg = document.querySelector('.connection-lines');
 
+function positionNodes() {
+  const avatarRect = avatarContainer.getBoundingClientRect();
+  const centerY = avatarRect.height / 2;
+
+  nodes.forEach((node, index) => {
+    const direction = index % 2 === 0 ? -1 : 1; // Alternating left/right
+    const offsetX = 120 + (Math.floor(index / 2) * 100); // Spread further out for each pair
+
+    node.style.top = `${centerY}px`;
+    node.style.left = `${avatarRect.width / 2}px`;
+    node.style.transform = `translate(${direction * offsetX}px, -50%) scale(0)`;
+  });
+}
+
+avatarContainer.addEventListener('mouseenter', () => {
+  positionNodes(); // Position nodes
+  setTimeout(() => {
+    nodes.forEach(node => {
+      node.style.transform += ' scale(1)';
+      node.style.opacity = '1';
+    });
+    updateLines();
+  }, 400);
+});
+
+
 function updateLines() {
   svg.innerHTML = ''; // Clear previous lines
   const avatarRect = avatarContainer.getBoundingClientRect();
@@ -35,3 +61,4 @@ avatarContainer.addEventListener('mouseenter', () => {
 
 window.addEventListener('resize', updateLines);
 window.addEventListener('scroll', updateLines);
+
