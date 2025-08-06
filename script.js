@@ -52,9 +52,13 @@ avatarContainer.addEventListener('mouseenter', () => {
       node.style.transform = node.style.transform.replace('scale(0)', 'scale(1)');
       node.style.opacity = '1';
     });
-    updateLines();
+
+    // Wait for CSS transition before updating lines
+    setTimeout(updateLines, 600);  // Wait for transform transition (0.6s)
   }, 400);
 });
 
+
 window.addEventListener('resize', updateLines);
 window.addEventListener('scroll', updateLines);
+
