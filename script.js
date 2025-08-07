@@ -8,12 +8,12 @@ function positionNodes() {
 
   // Valeurs spécifiques d'espacement par index
   const nodeOffsets = {
-  0: 200, // Data Science
+  0: 120, // Data Science
   1: 300, // Machine Learning
-  2: 220, // AI Ethics
-  3: 350, // Digital Humanities
+  2: 180, // AI Ethics
+  3: 450, // Digital Humanities
   4: 250, // Python
-  5: 420  // Visualization
+  5: 520  // Visualization
 };
 
 
@@ -84,6 +84,7 @@ window.addEventListener('scroll', updateLines);
 document.addEventListener('DOMContentLoaded', () => {
   positionNodes();  // Position initiale des nodes (cachée en scale(0))
 });
+
 
 
 
