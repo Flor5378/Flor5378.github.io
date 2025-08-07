@@ -186,7 +186,10 @@ footer {
 /* Avatar and Nodes */
 .avatar-network {
   position: relative;
-  display: inline-block;
+  display: block;
+  width: 100%;
+  max-width: 1000px; /* Ajustable selon ton design */
+  margin: 0 auto;
 }
 
 .connection-lines {
@@ -291,5 +294,6 @@ footer {
     height: 100px;
   }
 }
+
 
 
