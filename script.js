@@ -11,8 +11,8 @@ function positionNodes() {
   // Définis un écart personnalisé pour chaque nœud par index (par exemple, index 1, 3, 5)
   const customNodeGap = {
     1: 200, // Machine Learning
-    3: 230, // Digital Humanities
-    5: 250  // Visualization
+    3: 280, // Digital Humanities
+    5: 350  // Visualization
   };
 
   let leftIndex = 0;
@@ -88,6 +88,7 @@ window.addEventListener('scroll', updateLines);
 document.addEventListener('DOMContentLoaded', () => {
   positionNodes();  // Position initiale des nodes (cachée en scale(0))
 });
+
 
 
 
