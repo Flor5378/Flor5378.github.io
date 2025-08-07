@@ -6,366 +6,6 @@
   <title>MyWebsite</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* Base */
-    body {
-      font-family: 'Merriweather', serif;
-      background: #fff;
-      color: #2c3e50;
-      line-height: 1.6;
-    }
-
-    .logo,
-    .hero h1 {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    /* Navbar */
-    .navbar {
-      display: flex;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: #004080;
-      color: #fff;
-    }
-
-    .logo-group {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #fff;
-      text-decoration: none;
-      position: relative;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .logo::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #fff;
-      transition: width 0.3s;
-    }
-
-    .logo:hover::after {
-      width: 100%;
-    }
-
-    /* Language flags */
-    .language-flags {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .flag-tooltip {
-      position: relative;
-      cursor: pointer;
-      height: 30px;
-    }
-
-    .flag-tooltip img {
-      height: 100%;
-      width: auto;
-      border-radius: 4px;
-      transition: transform 0.3s ease;
-      display: block;
-    }
-
-    .tooltip-text {
-      visibility: hidden;
-      opacity: 0;
-      position: absolute;
-      top: 110%;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #004080;
-      color: white;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      white-space: nowrap;
-      font-size: 0.8rem;
-      z-index: 10;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .flag-tooltip:hover .tooltip-text {
-      visibility: visible;
-      opacity: 1;
-      transform: translateX(-50%) translateY(5px);
-    }
-
-    /* Navigation links */
-    .nav-links {
-      display: flex;
-      list-style: none;
-      margin-left: auto;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: #fff;
-      font-weight: 500;
-      text-decoration: none;
-      position: relative;
-      padding-bottom: 2px;
-      transition: color 0.3s;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #fff;
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    #menu-toggle {
-      display: none;
-    }
-
-    .menu-icon {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #fff;
-    }
-
-    /* Hero */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 4rem 2rem;
-      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
-      overflow: visible;
-      width: 100%;
-    }
-
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: #333;
-      max-width: 600px;
-      text-align: center;
-    }
-
-    /* Footer */
-    footer {
-      background: #f0f0f0;
-      padding: 1.5rem 2rem;
-      text-align: center;
-    }
-
-    .footer-content a {
-      margin: 0 0.5rem;
-      color: #004080;
-      font-weight: 500;
-      text-decoration: none;
-      transition: text-decoration 0.3s;
-    }
-
-    .footer-content a:hover {
-      text-decoration: underline;
-    }
-
-    /* Avatar and Nodes */
-    .avatar-network {
-      position: relative;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto 3rem;
-      height: 450px;
-    }
-
-    .avatar-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      width: 410px;
-      height: 410px;
-    }
-
-    .avatar {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #004080;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      cursor: default;
-      display: block;
-    }
-
-    .avatar:hover {
-      transform: scale(1.05);
-    }
-
-    .node {
-      position: absolute;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      background-color: #004080;
-      color: #fff;
-      font-size: 1rem;
-      white-space: nowrap;
-      opacity: 0;
-      transform-origin: center;
-      transition: transform 0.6s ease, opacity 0.6s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      cursor: default;
-      user-select: none;
-    }
-
-    /* Sizes différentes selon data-size */
-    .node[data-size="small"] {
-      font-size: 0.8rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 16px;
-    }
-
-    .node[data-size="medium"] {
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-    }
-
-    .node[data-size="large"] {
-      font-size: 1.2rem;
-      padding: 0.7rem 1.4rem;
-      border-radius: 24px;
-    }
-
-    /* Lignes SVG */
-    svg.connection-lines {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    svg.connection-lines line {
-      stroke: #004080;
-      stroke-width: 2;
-      stroke-dasharray: 4 4;
-      stroke-dashoffset: 100;
-      transition: stroke-dashoffset 0.8s ease;
-    }
-
-    .avatar-container:hover ~ svg.connection-lines line {
-      stroke-dashoffset: 0;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .menu-icon {
-        display: block;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #004080;
-        flex-direction: column;
-        align-items: center;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        gap: 0;
-      }
-
-      #menu-toggle:checked + .menu-icon + .nav-links {
-        max-height: 300px;
-      }
-
-      .nav-links li {
-        margin: 1rem 0;
-      }
-
-      .language-flags {
-        gap: 0.3rem;
-      }
-
-      .flag-tooltip img {
-        width: 20px;
-        height: auto;
-      }
-
-      .tooltip-text {
-        top: 120%;
-      }
-
-      .avatar-network {
-        height: 300px;
-      }
-
-      .avatar-container {
-        width: 150px;
-        height: 150px;
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        margin: 0 auto 2rem;
-      }
-
-      .avatar {
-        width: 150px;
-        height: 150px;
-      }
-
-      .node {
-        font-size: 0.75rem !important;
-        padding: 0.3rem 0.6rem !important;
-        position: relative !important;
-        opacity: 1 !important;
-        transform: none !important;
-        margin: 0.3rem auto;
-        display: inline-block;
-        position: static !important;
-      }
-
-      svg.connection-lines {
-        display: none;
-      }
-    }
-  </style>
 </head>
 <body>
   <header>
@@ -406,16 +46,46 @@
 
         <div class="avatar-container">
           <img src="sources/florian.jpeg" alt="Florian Grolleau" class="avatar" />
-          <!-- Bulles (nodes) -->
-          <div class="node" data-size="large" data-side="left">Data Science</div>
-          <div class="node" data-size="medium" data-side="right">Machine Learning</div>
-          <div class="node" data-size="medium" data-side="left">AI Ethics</div>
-          <div class="node" data-size="large" data-side="right">Digital Humanities</div>
-          <div class="node" data-size="small" data-side="left">Python</div>
-          <div class="node" data-size="small" data-side="right">Visualization</div>
+         <!-- Bulle des nodes <div class="node" style="--i:0;">Data Science</div>
+          <div class="node" style="--i:1;">Machine Learning</div>
+          <div class="node" style="--i:2;">AI Ethics</div>
+          <div class="node" style="--i:3;">Digital Humanities</div>
+          <div class="node" style="--i:4;">Python</div>
+          <div class="node" style="--i:5;">Visualization</div>  Bulle des nodes -->
         </div>
-
-        <!-- Ligne SVG -->
-        <svg class="connection-lines" xmlns="http://www.w3.org/2000/svg"></svg>
+        <!-- Ligne SVG <svg class="connection-lines" xmlns="http://www.w3.org/2000/svg"></svg> <!-- Ligne SVG -->
       </div>
 
+      <h1>Welcome to my website!</h1>
+      <p>
+        I am a 21-year-old French student, enrolled in a dual master's degree at
+        <a href="https://www.sciencespo-saintgermainenlaye.fr/en/" target="_blank" rel="noopener noreferrer" style="color:#0066cc; text-decoration: underline;">
+          Sciences Po Saint-Germain-en-Laye
+        </a>
+        and
+        <a href="https://cytech.cyu.fr/" target="_blank" rel="noopener noreferrer" style="color:#0066cc; text-decoration: underline;">
+          CY Tech
+        </a>.
+      </p>
+      <p>
+        Here is an overview of my Data Science program, combining engineering and digital humanities:<br />
+        <a href="https://www.sciencespo-saintgermainenlaye.fr/formations/double-diplome-ingenieur-data-et-humanites-digitales/" target="_blank" rel="noopener noreferrer" style="color:#0066cc; text-decoration: underline;">
+          Double Degree in Engineering, Data, and Digital Humanities — Sciences Po Saint-Germain-en-Laye
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <span>Contact me:</span>
+      <a href="mailto:f.grolleau@netc.fr">f.grolleau@netc.fr</a>
+      <a href="https://github.com/Flor5378" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/florian-grolleau-3a7a22274" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="tel:+33781007553">+33 7 81 00 75 53</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
