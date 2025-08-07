@@ -148,11 +148,15 @@ body {
 
 /* Hero */
 .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 4rem 2rem;
-  text-align: center;
-  background: linear-gradient(to bottom, #e0f0ff, #fff);
-  color: #004080;
+  background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+  overflow: visible;
+  width: 100%;
 }
+
 
 .hero h1 {
   font-size: 2.5rem;
@@ -188,8 +192,9 @@ footer {
   position: relative;
   display: block;
   width: 100%;
-  max-width: 1000px; /* Ajustable selon ton design */
+  max-width: 1200px; /* tu peux augmenter à 1400px si besoin */
   margin: 0 auto;
+  height: auto;
 }
 
 .connection-lines {
@@ -297,6 +302,7 @@ footer {
     height: 100px;
   }
 }
+
 
 
 
