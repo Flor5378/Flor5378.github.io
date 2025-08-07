@@ -32,6 +32,7 @@ function positionNodes() {
   });
 }
 
+
 function updateLines() {
   svg.innerHTML = ''; // Clear previous lines
   const avatarRect = avatarContainer.getBoundingClientRect();
@@ -78,6 +79,7 @@ window.addEventListener('scroll', updateLines);
 document.addEventListener('DOMContentLoaded', () => {
   positionNodes();  // Position initiale des nodes (cachée en scale(0))
 });
+
 
 
 
