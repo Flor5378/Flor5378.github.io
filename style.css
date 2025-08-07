@@ -204,9 +204,12 @@ footer {
 
 .avatar-container {
   position: relative;
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
   z-index: 1;
 }
+
 
 .avatar {
   width: 150px;
@@ -294,6 +297,7 @@ footer {
     height: 100px;
   }
 }
+
 
 
 
