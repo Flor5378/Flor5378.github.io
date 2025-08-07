@@ -6,23 +6,19 @@ function positionNodes() {
   const avatarRect = avatarContainer.getBoundingClientRect();
   const centerY = avatarRect.height / 2;
 
-  const baseSpacingLeft = 250;
-  const baseSpacingRight = 150;
-  const nodeGap = 150;
+  const baseSpacing = 180; // distance minimale horizontale entre avatar et nodes
+  const nodeGap = 150; // écart horizontal entre les nodes successifs
 
-  const verticalGapLeft = 60;
-  const verticalGapRight = 100;
+  let leftIndex = 0;
+  let rightIndex = 0;
 
   nodes.forEach((node, index) => {
     const isLeft = index % 2 === 0;
-    const level = Math.floor(index / 2);
 
-    const baseSpacing = isLeft ? baseSpacingLeft : baseSpacingRight;
+    const level = isLeft ? leftIndex++ : rightIndex++;
     const offsetX = baseSpacing + (level * nodeGap);
-    const verticalGap = isLeft ? verticalGapLeft : verticalGapRight;
-    const offsetY = centerY + (level * verticalGap * (isLeft ? -1 : 1));
 
-    node.style.top = `${offsetY}px`;
+    node.style.top = `${centerY}px`; // Aligne tous les nodes à la même hauteur (verticalement centré)
 
     if (isLeft) {
       node.style.left = `calc(50% - ${offsetX}px)`;
@@ -35,7 +31,6 @@ function positionNodes() {
     node.style.opacity = '0';
   });
 }
-
 
 function updateLines() {
   svg.innerHTML = ''; // Clear previous lines
@@ -83,5 +78,6 @@ window.addEventListener('scroll', updateLines);
 document.addEventListener('DOMContentLoaded', () => {
   positionNodes();  // Position initiale des nodes (cachée en scale(0))
 });
+
 
 
