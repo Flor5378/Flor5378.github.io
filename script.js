@@ -1,6 +1,6 @@
-const avatarContainer = document.querySelector('.avatar-container');
-const nodes = document.querySelectorAll('.node');
-const svg = document.querySelector('.connection-lines');
+//const avatarContainer = document.querySelector('.avatar-container');
+//const nodes = document.querySelectorAll('.node');
+// const svg = document.querySelector('.connection-lines');
 
 function positionNodes() {
   const avatarRect = avatarContainer.getBoundingClientRect();
@@ -84,6 +84,7 @@ window.addEventListener('scroll', updateLines);
 document.addEventListener('DOMContentLoaded', () => {
   positionNodes();  // Position initiale des nodes (cachée en scale(0))
 });
+
 
 
 
