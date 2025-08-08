@@ -218,8 +218,8 @@ footer {
 
 
 .avatar {
-  width: 410px;
-  height: 410px;
+  width: 310px;
+  height: 310px;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #004080;
@@ -303,6 +303,7 @@ footer {
     height: 100px;
   }
 }
+
 
 
 
