@@ -8,7 +8,6 @@
 /* Base */
 body {
   font-family: 'Merriweather', serif;
-  background: url('/sources/pexels-googledeepmind-17483867.jpg') no-repeat center center fixed;
   background-size: cover;
   color: #2c3e50;
   line-height: 1.6;
@@ -303,6 +302,7 @@ footer {
     height: 100px;
   }
 }
+
 
 
 
