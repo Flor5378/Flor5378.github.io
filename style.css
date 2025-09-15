@@ -188,14 +188,15 @@ footer {
 }
 
 .avatar-network {
-  display: flex; /* ← FLEX au lieu de block */
-  justify-content: space-between; /* logos à gauche et à droite */
-  align-items: center; /* aligne verticalement */
+  display: flex;
+  justify-content: center; /* ✅ centre tout le groupe */
+  align-items: center;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 2rem;
-  gap: 20px; /* petit espace entre les colonnes */
+  gap: 40px; /* un peu plus d’espace entre les logos et l’avatar */
 }
+
 
 
 .connection-lines {
@@ -317,6 +318,7 @@ footer {
   align-items: center;
   gap: 10px;
 }
+
 
 
 
