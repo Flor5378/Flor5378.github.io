@@ -188,14 +188,15 @@ footer {
 }
 
 .avatar-network {
-  display: flex;
-  justify-content: center; /* ✅ centre tout le groupe */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* ✅ 3 colonnes : gauche - centre - droite */
   align-items: center;
+  justify-items: center;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 2rem;
-  gap: 40px; /* un peu plus d’espace entre les logos et l’avatar */
 }
+
 
 
 
@@ -318,6 +319,7 @@ footer {
   align-items: center;
   gap: 10px;
 }
+
 
 
 
