@@ -187,15 +187,16 @@ footer {
   text-decoration: underline;
 }
 
-/* Avatar and Nodes */
 .avatar-network {
-  position: relative;
-  display: block;
+  display: flex; /* ← FLEX au lieu de block */
+  justify-content: space-between; /* logos à gauche et à droite */
+  align-items: center; /* aligne verticalement */
   width: 100%;
-  max-width: 1200px; /* tu peux augmenter à 1400px si besoin */
-  margin: 0 auto;
-  height: auto;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  gap: 20px; /* petit espace entre les colonnes */
 }
+
 
 .connection-lines {
   position: absolute;
@@ -208,11 +209,9 @@ footer {
 }
 
 .avatar-container {
-  position: relative;
-  display: block;
-  width: fit-content;
-  margin: 0 auto;
-  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -304,12 +303,19 @@ footer {
 }
 
 .school-logos img {
-  height: 80px; /* ← change cette valeur */
-  max-width: 120px; /* tu peux l’ajuster si besoin */
+  height: 80px;
+  max-width: 120px;
   object-fit: contain;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+
+.school-logos {
+  display: flex;
+  flex-direction: column; /* si tu as plusieurs logos, ils se superposent */
+  align-items: center;
+  gap: 10px;
+}
 
 
 
