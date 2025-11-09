@@ -385,6 +385,8 @@ footer {
 .desc p {
   color: #333;
   line-height: 1.4;
+  text-align: justify;
+
 }
 
 /* Responsive */
@@ -405,6 +407,7 @@ footer {
     margin-top: 1rem;
   }
 }
+
 
 
 
