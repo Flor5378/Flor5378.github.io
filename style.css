@@ -349,14 +349,15 @@ footer {
   display: flex;
   align-items: center;
   gap: 2rem;
-  transform: rotate(-2deg); /* petite diagonale */
   transition: transform 0.4s ease;
+  transform: none; /* ✅ Supprime l’inclinaison */
 }
 
 .gallery-item:nth-child(even) {
   flex-direction: row-reverse;
-  transform: rotate(2deg);
+  transform: none; /* ✅ Supprime aussi ici */
 }
+
 
 .gallery-item img {
   width: 300px;
@@ -404,6 +405,7 @@ footer {
     margin-top: 1rem;
   }
 }
+
 
 
 
