@@ -148,10 +148,33 @@ mark {
 /* ------------------------------- structure ------------------------------ */
 
 .layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: var(--rail) minmax(0, 1fr);
   align-items: start;
 }
+
+/* ------------------------------- filigrane ------------------------------ */
+
+/* Arbre au crayon, dessiné par assets/tree.py. Décor seul, jamais lu. */
+.backdrop {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: min(94vh, 1040px);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.backdrop img {
+  display: block;
+  height: 100%;
+  width: auto;
+  opacity: .07;
+}
+[data-theme="dark"] .backdrop img { opacity: .1; filter: invert(1); }
 
 main {
   padding: 76px 48px 120px;
@@ -538,6 +561,7 @@ p.hero__intro {
   font-size: .78rem;
   color: var(--ink-3);
 }
+.footer__license { margin-left: auto; }   /* calée à droite, face au copyright */
 
 /* ------------------------------ responsive ------------------------------- */
 
@@ -549,6 +573,9 @@ p.hero__intro {
 
 @media (max-width: 860px) {
   .layout { grid-template-columns: 1fr; }
+
+  .backdrop { display: none; }   /* le texte occupe toute la largeur */
+  .footer__license { margin-left: 0; }
 
   .rail {
     position: sticky;
@@ -603,7 +630,7 @@ p.hero__intro {
 }
 
 @media print {
-  .rail, .skip, .copy, .footer, .preview { display: none; }
+  .rail, .skip, .copy, .footer, .preview, .backdrop { display: none; }
   .layout { display: block; }
   main { padding: 0; max-width: none; }
   body { font-size: 10.5pt; line-height: 1.4; color: #000; background: #fff; }

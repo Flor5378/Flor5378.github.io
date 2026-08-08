@@ -221,9 +221,9 @@
       c.sections.map((s) => sectionBlock(s, c)).join('') +
       `<footer class="footer">
          <span>© ${new Date().getFullYear()} Florian Grolleau</span>
-         <a href="https://github.com/Flor5378/Flor5378.github.io" target="_blank" rel="noopener">${
-           lang === 'fr' ? 'Code source' : 'Source code'
-         }</a>
+         <a href="https://github.com/Flor5378/Flor5378.github.io" target="_blank" rel="noopener">${c.ui.source}</a>
+         <a class="footer__license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.${lang}"
+            target="_blank" rel="license noopener" title="${c.ui.licenseTitle}">${c.ui.license}</a>
        </footer>`;
 
     toc.innerHTML =

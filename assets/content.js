@@ -84,7 +84,10 @@ const CONTENT = {
       toc: 'Sommaire',
       copy: 'Copier',
       copied: 'Copié',
-      themeLabel: 'Basculer le thème'
+      themeLabel: 'Basculer le thème',
+      source: 'Code source',
+      license: 'Contenu sous licence CC BY-NC-SA 4.0',
+      licenseTitle: 'Attribution, pas d’utilisation commerciale, partage dans les mêmes conditions'
     },
     hero: {
       role: 'Science politique et ingénierie data · Double diplôme Sciences Po et CY Tech',
@@ -222,16 +225,20 @@ const CONTENT = {
             chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend', 'Selenium|selenium', 'BeautifulSoup']
           },
           {
+            label: 'Intelligence artificielle et données',
+            chips: ['Machine learning', 'Deep learning', 'Text mining', 'Big data', 'Cloud computing']
+          },
+          {
             label: 'Géomatique et data visualisation',
             chips: ['QGIS', 'ArcGIS', 'ArcPy', 'GeoPandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistiques']
           },
           {
             label: 'Science politique',
-            chips: ['Relations internationales', 'Analyse des politiques publiques', 'Afrique centrale et golfe de Guinée', 'Europe occidentale', 'Scandinavie', 'Économie', 'Veille scientifique']
+            chips: ['Relations internationales', 'Géopolitique', 'Analyse des politiques publiques', 'Politiques de la donnée publique', 'Sciences sociales computationnelles', 'Controverses de l’IA', 'Afrique centrale et golfe de Guinée', 'Europe occidentale', 'Scandinavie', 'Économie', 'Veille scientifique']
           },
           {
             label: 'Langues',
-            chips: ['Français, langue maternelle', 'Anglais, C1', 'Allemand, B2']
+            chips: ['Français, langue maternelle', 'Anglais, C1', 'Allemand, B2', 'Russe, notions']
           }
         ]
       },
@@ -292,7 +299,10 @@ const CONTENT = {
       toc: 'Contents',
       copy: 'Copy',
       copied: 'Copied',
-      themeLabel: 'Toggle theme'
+      themeLabel: 'Toggle theme',
+      source: 'Source code',
+      license: 'Content under a CC BY-NC-SA 4.0 licence',
+      licenseTitle: 'Attribution, non-commercial, share alike'
     },
     hero: {
       role: 'Political science and data engineering · Dual degree, Sciences Po and CY Tech',
@@ -430,16 +440,20 @@ const CONTENT = {
             chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend', 'Selenium|selenium', 'BeautifulSoup']
           },
           {
+            label: 'Artificial intelligence and data',
+            chips: ['Machine learning', 'Deep learning', 'Text mining', 'Big data', 'Cloud computing']
+          },
+          {
             label: 'Geospatial and data visualisation',
             chips: ['QGIS', 'ArcGIS', 'ArcPy', 'GeoPandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistics']
           },
           {
             label: 'Political science',
-            chips: ['International relations', 'Policy analysis', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia', 'Economics', 'Research monitoring']
+            chips: ['International relations', 'Geopolitics', 'Policy analysis', 'Public data policy', 'Computational social science', 'AI controversies', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia', 'Economics', 'Research monitoring']
           },
           {
             label: 'Languages',
-            chips: ['French, native', 'English, C1', 'German, B2']
+            chips: ['French, native', 'English, C1', 'German, B2', 'Russian, basics']
           }
         ]
       },
