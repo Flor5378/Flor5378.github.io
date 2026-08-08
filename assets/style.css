@@ -572,7 +572,9 @@ p.hero__intro {
 }
 
 @media (max-width: 860px) {
-  .layout { grid-template-columns: 1fr; }
+  /* minmax(0, …) et non 1fr : sans cela le sommaire, dont les entrées ne se
+     coupent pas, impose sa largeur à la grille et toute la page déborde. */
+  .layout { grid-template-columns: minmax(0, 1fr); }
 
   .backdrop { display: none; }   /* le texte occupe toute la largeur */
   .footer__license { margin-left: 0; }
