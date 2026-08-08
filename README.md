@@ -11,6 +11,8 @@ assets/
   content.js                TOUT le contenu FR et EN. Seul fichier à modifier au quotidien
   app.js                    rendu, sommaire actif, langue, thème, aperçus GitHub
   style.css                 mise en page, typographie, thèmes clair et sombre, impression
+  tree.svg                  arbre au crayon, filigrane de fond à droite
+  tree.py                   générateur de tree.svg, à relancer seulement pour le redessiner
   fonts/                    Newsreader et IBM Plex Sans, auto-hébergés
   logos/                    logos fournis (BAED, Passés composés)
   logos/tech/               icônes des technologies (Devicon)
@@ -100,6 +102,25 @@ react scikitlearn selenium streamlit ubuntu
 
 Une icône absente ou mal nommée disparaît sans casser la mise en page, le libellé reste affiché. Pour ajouter une icône, récupérez le SVG depuis devicon.dev et déposez-le sous le nom voulu.
 
+## Filigrane
+
+Le fond de page porte un arbre dessiné au trait, discret, calé en bas à droite et masqué
+sous 860 px comme à l’impression. Il est purement décoratif : `aria-hidden`, hors flux,
+insensible au pointeur.
+
+`assets/tree.py` le redessine. Chaque graine donne un arbre différent :
+
+```bash
+python3 assets/tree.py 3 assets/tree.svg   # 3 est la graine du dessin en place
+```
+
+Pour le rendre plus ou moins présent, ajustez la seule opacité, dans `style.css` :
+
+```css
+.backdrop img { opacity: .07; }                        /* thème clair */
+[data-theme="dark"] .backdrop img { opacity: .1; }     /* thème sombre */
+```
+
 ## Fonctionnement
 
 - Langue : `?lang=fr` ou `?lang=en` dans l’URL, sinon la langue du navigateur, puis mémorisation du choix.
@@ -107,6 +128,13 @@ Une icône absente ou mal nommée disparaît sans casser la mise en page, le lib
 - Aperçus de projets : image sociale générée par GitHub, chargée au survol uniquement, sur écran non tactile.
 - Impression : `Ctrl + P` produit une version CV propre, sans barre latérale.
 
+## Licence
+
+Le contenu du site est publié sous [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr) :
+réutilisation libre avec attribution, hors usage commercial, et partage aux mêmes conditions.
+Le lien figure en pied de page, dans les deux langues. Pour en changer, modifiez `ui.license`
+et `ui.licenseTitle` dans `content.js` ainsi que l’URL du lien dans `app.js`.
+
 ## Crédits
 
-Newsreader et IBM Plex Sans sous licence SIL Open Font License. Devicon sous licence MIT. Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0.
+Newsreader et IBM Plex Sans sous licence SIL Open Font License. Devicon sous licence MIT. Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0. Les logos affichés restent la propriété de leurs détenteurs.
