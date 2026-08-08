@@ -90,7 +90,7 @@ const CONTENT = {
       role: 'Science politique et ingénierie data · Double diplôme Sciences Po et CY Tech',
       intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Actuellement en stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement ou la sécurité.',
       meta: [
-        ['Statut', 'Disponible à partir de septembre 2026'],
+        ['Statut', 'Disponible de septembre 2026 à février 2027'],
         ['Actuellement', 'Libreville, Gabon'],
         ['Base', 'Région parisienne, France']
       ]
@@ -279,7 +279,7 @@ const CONTENT = {
         id: 'contact',
         title: 'Contact',
         kind: 'contact',
-        body: 'Je cherche un premier poste en analyse de données, intelligence économique ou affaires internationales, à partir de septembre 2026. Le plus simple reste le courriel.'
+        body: 'Je cherche un premier poste en analyse de données, intelligence économique ou affaires internationales, de septembre 2026 à février 2027. Le plus simple reste le courriel.'
       }
     ]
   },
@@ -298,7 +298,7 @@ const CONTENT = {
       role: 'Political science and data engineering · Dual degree, Sciences Po and CY Tech',
       intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. Currently interning with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development or security.',
       meta: [
-        ['Status', 'Available from September 2026'],
+        ['Status', 'Available from September 2026 to February 2027'],
         ['Currently', 'Libreville, Gabon'],
         ['Based in', 'Paris area, France']
       ]
@@ -487,7 +487,7 @@ const CONTENT = {
         id: 'contact',
         title: 'Contact',
         kind: 'contact',
-        body: 'I am looking for a first role in data analysis, competitive intelligence or international affairs, from September 2026. Email is the surest way to reach me.'
+        body: 'I am looking for a first role in data analysis, competitive intelligence or international affairs, from September 2026 to February 2027. Email is the surest way to reach me.'
       }
     ]
   }
