@@ -116,9 +116,9 @@ const CONTENT = {
             title: 'CY Tech (ex-EISTI)',
             url: 'https://cytech.cyu.fr/',
             logo: 'cytech.cyu.fr',
-            sub: 'Diplôme d’ingénieur en data science · double diplôme avec Sciences Po',
+            sub: 'Ingénieur mathématiques et informatique, spécialité data science et IA · double diplôme avec Sciences Po',
             meta: ['09/2022 → aujourd’hui', 'Cergy'],
-            body: 'Formation d’ingénieur menée en parallèle du cursus de Sciences Po. Machine learning et statistiques appliquées sous Python et R, conception de bases de données, pratique régulière du SIG et de la visualisation.'
+            body: 'Cursus mené en parallèle de celui de Sciences Po. Machine learning, deep learning et statistiques appliquées sous Python et R, conception de bases de données, pratique régulière du SIG et de la visualisation.'
           },
           {
             title: 'Université de Bergen',
@@ -141,7 +141,7 @@ const CONTENT = {
             logo: 'defense.gouv.fr',
             sub: 'Stagiaire data science et analyse',
             meta: ['04/2026 → 08/2026', 'Libreville, Gabon'],
-            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle, sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone.',
+            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle, sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone : plus de 21 millions d’utilisateurs suivis, plusieurs dizaines de milliers de publications et plusieurs milliards de vues chaque semaine.',
             tags: ['Python|python', 'DuckDB|duckdb', 'Streamlit|streamlit', 'NLP', 'OSINT']
           },
           {
@@ -331,9 +331,9 @@ const CONTENT = {
             title: 'CY Tech (formerly EISTI)',
             url: 'https://cytech.cyu.fr/',
             logo: 'cytech.cyu.fr',
-            sub: 'Master’s degree in engineering, data science · dual degree with Sciences Po',
+            sub: 'Engineering degree in mathematics and computer science, data science and AI track · dual degree with Sciences Po',
             meta: ['09/2022 → present', 'Cergy'],
-            body: 'Engineering degree taken in parallel with the Sciences Po track. Machine learning and applied statistics in Python and R, database design, regular GIS and visualisation work.'
+            body: 'Taken in parallel with the Sciences Po track. Machine learning, deep learning and applied statistics in Python and R, database design, regular GIS and visualisation work.'
           },
           {
             title: 'University of Bergen',
@@ -356,7 +356,7 @@ const CONTENT = {
             logo: 'defense.gouv.fr',
             sub: 'Data science and analysis intern',
             meta: ['04/2026 → 08/2026', 'Libreville, Gabon'],
-            body: 'Analyst within the Joint Liaison Detachment and the Influence and Information Warfare Office, covering the French permanent area of responsibility in Central Africa. I built a <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">predictive dashboard</a> of regional socio-economic dynamics, then a <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">media sentiment pipeline</a> that continuously processes regional press and social media.',
+            body: 'Analyst within the Joint Liaison Detachment and the Influence and Information Warfare Office, covering the French permanent area of responsibility in Central Africa. I built a <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">predictive dashboard</a> of regional socio-economic dynamics, then a <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">media sentiment pipeline</a> that continuously processes regional press and social media: over 21 million users monitored, tens of thousands of posts and several billion views every week.',
             tags: ['Python|python', 'DuckDB|duckdb', 'Streamlit|streamlit', 'NLP', 'OSINT']
           },
           {
