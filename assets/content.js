@@ -238,7 +238,7 @@ const CONTENT = {
           },
           {
             label: 'Langues',
-            chips: ['Français, langue maternelle', 'Anglais, C1', 'Allemand, B2', 'Russe, notions']
+            chips: ['Français, langue maternelle', 'Anglais, C1', 'Allemand, B2']
           }
         ]
       },
@@ -453,7 +453,7 @@ const CONTENT = {
           },
           {
             label: 'Languages',
-            chips: ['French, native', 'English, C1', 'German, B2', 'Russian, basics']
+            chips: ['French, native', 'English, C1', 'German, B2']
           }
         ]
       },
