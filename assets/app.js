@@ -81,12 +81,15 @@
     return 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(v) + '&sz=128';
   }
 
+  // Décoratif : le nom de l'organisation est toujours écrit à côté.
   function logoTile(name, logo, extra, short) {
     const src = logoSrc(logo);
     const img = src
       ? `<img src="${src}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
       : '';
-    return `<span class="logo ${extra || ''}"><span class="logo__fallback">${short || initials(name)}</span>${img}</span>`;
+    const label = short || initials(name);
+    const long = label.length > 4 ? ' logo__fallback--long' : '';
+    return `<span class="logo ${extra || ''}" aria-hidden="true"><span class="logo__fallback${long}">${label}</span>${img}</span>`;
   }
 
   function chip(str) {
@@ -224,7 +227,7 @@
           : '';
         return `
           <div class="card interest reveal"${delay(i)}>
-            <span class="eyebrow">${b.meta.join(' · ')}</span>
+            <h3 class="eyebrow">${b.meta.join(' · ')}</h3>
             <p>${b.body}</p>
             ${logos}
           </div>`;
@@ -302,10 +305,15 @@
            target="_blank" rel="license noopener" title="${c.ui.licenseTitle}">${c.ui.license}</a>
       </div>`;
 
-    nav.innerHTML =
-      '<span class="nav__pill" aria-hidden="true"></span>' +
-      c.sections.map((s) => `<a href="#${s.id}" data-id="${s.id}">${s.navTitle || s.title}</a>`).join('');
-    pill = nav.querySelector('.nav__pill');
+    if (!pill) {
+      pill = document.createElement('span');
+      pill.className = 'nav__pill';
+      pill.setAttribute('aria-hidden', 'true');
+    }
+    nav.innerHTML = c.sections
+      .map((s) => `<a href="#${s.id}" data-id="${s.id}">${s.navTitle || s.title}</a>`)
+      .join('');
+    nav.prepend(pill);
 
     langSwitch.querySelectorAll('.seg__btn').forEach((b) => {
       const on = b.dataset.lang === lang;
@@ -321,6 +329,19 @@
   /* ------------------------- en-tête et navigation ------------------------ */
 
   let activeId;
+  let navLock = null;
+  let lockY = null;
+
+  function unlock() {
+    navLock = null;
+    lockY = null;
+  }
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((t) =>
+    addEventListener(t, unlock, { passive: true, capture: true })
+  );
+  addEventListener('scrollend', () => {
+    if (navLock) lockY = scrollY;
+  });
 
   function measureHeader() {
     root.style.setProperty('--head-h', header.offsetHeight + 'px');
@@ -328,8 +349,10 @@
 
   function movePill(link) {
     if (!pill) return;
+    const smooth = media('(prefers-reduced-motion: reduce)') ? 'auto' : 'smooth';
     if (!link) {
       pill.classList.remove('is-on');
+      if (nav.scrollLeft) nav.scrollTo({ left: 0, behavior: smooth });
       return;
     }
     pill.style.width = link.offsetWidth + 'px';
@@ -340,7 +363,7 @@
     // Navigation défilante sur petit écran : garder le lien actif visible.
     if (nav.scrollWidth > nav.clientWidth) {
       const left = link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2;
-      nav.scrollTo({ left: Math.max(0, left), behavior: media('(prefers-reduced-motion: reduce)') ? 'auto' : 'smooth' });
+      nav.scrollTo({ left: Math.max(0, left), behavior: smooth });
     }
   }
 
@@ -355,6 +378,8 @@
     if (sections.length && innerHeight + scrollY >= doc.scrollHeight - 4) {
       active = sections[sections.length - 1].id;
     }
+    if (navLock && lockY !== null && Math.abs(scrollY - lockY) > 48) unlock();
+    if (navLock) active = navLock;
     if (active === activeId) return;
     activeId = active;
     let current = null;
@@ -396,8 +421,8 @@
 
   addEventListener('resize', () => {
     measureHeader();
-    const current = navLinks.find((a) => a.classList.contains('is-active'));
-    if (current) movePill(current);
+    activeId = undefined;
+    spy();
   });
 
   /* ------------------------- apparition au défilement --------------------- */
@@ -424,7 +449,7 @@
           el.classList.add('is-in');
         });
       },
-      { rootMargin: '0px 0px -6% 0px', threshold: 0.06 }
+      { rootMargin: '0px', threshold: 0 }
     );
   }
 
@@ -449,6 +474,8 @@
     card.className = 'preview';
     card.setAttribute('aria-hidden', 'true');
     card.innerHTML = '<img alt=""><span class="preview__repo"></span>';
+    card.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    card.addEventListener('mouseleave', hidePreview);
     document.body.appendChild(card);
     return card;
   }
@@ -468,8 +495,13 @@
     const w = 340;
     const h = 220;
     const left = Math.min(r.left, innerWidth - w - 16);
+    const minTop = header.getBoundingClientRect().bottom + 8;
     let top = r.bottom + 10;
-    if (top + h > innerHeight) top = Math.max(12, r.top - h - 10);
+    if (top + h > innerHeight) top = r.top - h - 10;
+    if (top < minTop) {
+      hidePreview();
+      return;
+    }
     el.style.left = Math.max(12, left) + 'px';
     el.style.top = top + 'px';
     el.classList.add('is-on');
@@ -493,23 +525,32 @@
       clearTimeout(showTimer);
       hideTimer = setTimeout(hidePreview, 120);
     });
-    el.addEventListener('focusin', (e) => {
-      const a = e.target.closest('a[data-repo]');
-      if (a) showPreview(a);
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      clearTimeout(showTimer);
+      hidePreview();
     });
-    el.addEventListener('focusout', hidePreview);
   }
 
   /* ------------------------------ interactions ---------------------------- */
 
   function syncThemeColor() {
-    if (metaTheme) metaTheme.setAttribute('content', root.dataset.theme === 'dark' ? '#0A0D13' : '#F7F8FA');
+    const dark = root.dataset.theme === 'dark';
+    if (metaTheme) metaTheme.setAttribute('content', dark ? '#0A0D13' : '#F7F8FA');
+    themeBtn.setAttribute('aria-pressed', String(dark));
   }
 
   langSwitch.addEventListener('click', (e) => {
     const btn = e.target.closest('.seg__btn');
     if (!btn || btn.dataset.lang === lang) return;
-    const anchor = activeId;
+    // Repère : première carte encore visible sous l'en-tête (les titres de
+    // section, collants, ne bougent pas et ne peuvent servir de repère).
+    // FR et EN ont la même structure : on la retrouve par son rang.
+    const blocks = () => Array.from(main.querySelectorAll('.card'));
+    const edge = header.getBoundingClientRect().bottom;
+    const before = blocks();
+    const idx = scrollY > 10 ? before.findIndex((el) => el.getBoundingClientRect().bottom > edge) : -1;
+    const offset = idx >= 0 ? before[idx].getBoundingClientRect().top : 0;
     lang = btn.dataset.lang;
     store.set('fg-lang', lang);
     const url = new URL(location.href);
@@ -517,10 +558,8 @@
     history.replaceState(null, '', url);
     render();
     reveal(true);
-    if (anchor) {
-      const target = document.getElementById(anchor);
-      if (target && target.scrollIntoView) target.scrollIntoView({ block: 'start' });
-    }
+    const mark = idx >= 0 ? blocks()[idx] : null;
+    if (mark) scrollTo({ top: scrollY + mark.getBoundingClientRect().top - offset, behavior: 'instant' });
     onScroll();
   });
 
@@ -540,22 +579,35 @@
       : Promise.reject();
     write
       .then(() => {
+        clearTimeout(btn._t);
         label.textContent = btn.dataset.done;
         btn.classList.add('is-done');
         btn.querySelector('svg').outerHTML = ICON.check();
-        setTimeout(() => {
+        btn._t = setTimeout(() => {
           label.textContent = btn.dataset.label;
           btn.classList.remove('is-done');
           btn.querySelector('svg').outerHTML = ICON.copy();
         }, 1600);
       })
-      .catch(() => {});
+      .catch(() => {
+        const address = btn.previousElementSibling && btn.previousElementSibling.querySelector('span');
+        if (address) getSelection().selectAllChildren(address);
+      });
   });
 
-  // Clic dans la navigation : la pastille suit tout de suite.
+  // Clic dans la navigation : la pastille va droit à la section visée.
   nav.addEventListener('click', (e) => {
     const a = e.target.closest('a[data-id]');
-    if (a) movePill(a);
+    if (!a) return;
+    navLock = a.dataset.id;
+    lockY = null;
+    spy();
+  });
+
+  // Au clavier, le lien qui reçoit le focus reste visible dans la barre défilante.
+  nav.addEventListener('focusin', (e) => {
+    const a = e.target.closest('a');
+    if (a && nav.scrollWidth > nav.clientWidth) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   });
 
   /* -------------------------------- démarrage ----------------------------- */
@@ -567,18 +619,27 @@
   reveal(false);
   onScroll();
 
-  // L'ancre de l'URL vise un contenu rendu après le chargement : on la rejoint.
-  if (location.hash.length > 1) {
-    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-    if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
-  }
+  // L'ancre de l'URL vise un contenu rendu après le chargement : on la rejoint
+  // sans animation, puis à nouveau une fois les polices chargées, sauf si
+  // l'utilisateur a déjà fait défiler la page.
+  const hashTarget =
+    location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+  let userMoved = false;
+  ['wheel', 'touchstart', 'keydown'].forEach((t) =>
+    addEventListener(t, () => { userMoved = true; }, { passive: true, once: true })
+  );
+  const toHash = () => {
+    if (hashTarget && !userMoved) hashTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+  };
+  if (hashTarget) requestAnimationFrame(toHash);
 
-  // Les polices modifient la largeur des liens : on recale la pastille.
+  // Les polices modifient la largeur des liens et la hauteur des blocs.
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(() => {
       measureHeader();
-      const current = navLinks.find((a) => a.classList.contains('is-active'));
-      if (current) movePill(current);
+      activeId = undefined;
+      toHash();
+      spy();
     });
   }
 })();
