@@ -27,8 +27,8 @@
 
   /* Libellés d'interface propres à la mise en page, hors contenu. */
   const UI = {
-    fr: { skip: 'Aller au contenu', cta: 'Me contacter', write: 'Écrire' },
-    en: { skip: 'Skip to content', cta: 'Get in touch', write: 'Get in touch' }
+    fr: { skip: 'Aller au contenu', cta: 'Me contacter', write: 'Écrire', dark: 'Thème sombre' },
+    en: { skip: 'Skip to content', cta: 'Get in touch', write: 'Get in touch', dark: 'Dark theme' }
   };
 
   /* Icônes au trait, 24 × 24. */
@@ -240,7 +240,7 @@
     return `
       <div class="card contact reveal">
         <div>
-          <span class="eyebrow">${ui.write}</span>
+          <h3 class="eyebrow">${ui.write}</h3>
           <p class="contact__lead">${s.body}</p>
         </div>
         <div class="contact__actions">
@@ -291,7 +291,8 @@
     root.lang = lang;
     document.title = c.docTitle;
     document.getElementById('meta-description').setAttribute('content', c.description);
-    themeBtn.setAttribute('aria-label', c.ui.themeLabel);
+    themeBtn.setAttribute('aria-label', ui.dark);
+    themeBtn.title = c.ui.themeLabel;
     nav.setAttribute('aria-label', c.ui.toc);
     skip.textContent = ui.skip;
 
@@ -340,7 +341,7 @@
     addEventListener(t, unlock, { passive: true, capture: true })
   );
   addEventListener('scrollend', () => {
-    if (navLock) lockY = scrollY;
+    if (navLock && lockY === null) lockY = scrollY;
   });
 
   function measureHeader() {
@@ -419,8 +420,14 @@
     { passive: true }
   );
 
+  let lastW = innerWidth;
   addEventListener('resize', () => {
     measureHeader();
+    // La barre d'adresse mobile change la hauteur : seul un changement de largeur libère le verrou.
+    if (innerWidth !== lastW) {
+      lastW = innerWidth;
+      unlock();
+    }
     activeId = undefined;
     spy();
   });
@@ -474,8 +481,6 @@
     card.className = 'preview';
     card.setAttribute('aria-hidden', 'true');
     card.innerHTML = '<img alt=""><span class="preview__repo"></span>';
-    card.addEventListener('mouseenter', () => clearTimeout(hideTimer));
-    card.addEventListener('mouseleave', hidePreview);
     document.body.appendChild(card);
     return card;
   }
@@ -546,11 +551,12 @@
     // Repère : première carte encore visible sous l'en-tête (les titres de
     // section, collants, ne bougent pas et ne peuvent servir de repère).
     // FR et EN ont la même structure : on la retrouve par son rang.
-    const blocks = () => Array.from(main.querySelectorAll('.card'));
+    const blocks = () => Array.from(main.querySelectorAll('.hero__role, .hero__intro, .card'));
     const edge = header.getBoundingClientRect().bottom;
     const before = blocks();
     const idx = scrollY > 10 ? before.findIndex((el) => el.getBoundingClientRect().bottom > edge) : -1;
     const offset = idx >= 0 ? before[idx].getBoundingClientRect().top : 0;
+    const was = activeId;
     lang = btn.dataset.lang;
     store.set('fg-lang', lang);
     const url = new URL(location.href);
@@ -560,6 +566,10 @@
     reveal(true);
     const mark = idx >= 0 ? blocks()[idx] : null;
     if (mark) scrollTo({ top: scrollY + mark.getBoundingClientRect().top - offset, behavior: 'instant' });
+    if (was) {
+      navLock = was;
+      lockY = scrollY;
+    }
     onScroll();
   });
 
@@ -629,7 +639,9 @@
     addEventListener(t, () => { userMoved = true; }, { passive: true, once: true })
   );
   const toHash = () => {
-    if (hashTarget && !userMoved) hashTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+    if (!hashTarget || userMoved) return;
+    hashTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+    if (navLinks.some((a) => a.dataset.id === hashTarget.id)) navLock = hashTarget.id;
   };
   if (hashTarget) requestAnimationFrame(toHash);
 

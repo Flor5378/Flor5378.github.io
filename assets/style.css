@@ -50,7 +50,7 @@
   --ok:        #12B76A;
   --mark:      #D6E2FF;
   --tile:      #FFFFFF;
-  --header:    rgba(247, 248, 250, .9);
+  --header:    rgba(247, 248, 250, .93);
   --shadow-sm: 0 1px 2px rgba(16, 24, 40, .05);
   --shadow:    0 1px 2px rgba(16, 24, 40, .04), 0 12px 28px -10px rgba(16, 24, 40, .14);
   --shadow-lg: 0 24px 48px -12px rgba(16, 24, 40, .24);
@@ -80,7 +80,7 @@
   --ok:        #32D583;
   --mark:      rgba(126, 162, 255, .26);
   --tile:      #F4F5F7;
-  --header:    rgba(10, 13, 19, .76);
+  --header:    rgba(10, 13, 19, .9);
   --shadow-sm: 0 0 #0000;   /* et non none : sinon les listes d'ombres qui l'incluent sont invalides */
   --shadow:    0 14px 32px -12px rgba(0, 0, 0, .7);
   --shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, .75);
@@ -276,6 +276,8 @@ mark {
   transition: transform .4s var(--ease), width .4s var(--ease), opacity .2s ease;
 }
 .nav__pill.is-on { opacity: 1; }
+[data-theme="dark"] .nav__pill,
+[data-theme="dark"] .seg__btn.is-on { box-shadow: 0 0 0 1px #667085; }
 
 .controls { display: flex; align-items: center; gap: 8px; flex: none; }
 
@@ -771,7 +773,7 @@ mark {
   line-height: 1.3;
   color: var(--ink-3);
 }
-.proj__repo span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.proj__repo span { min-width: 0; overflow-wrap: anywhere; }
 
 /* ------------------------------ compétences ------------------------------ */
 
@@ -913,7 +915,7 @@ mark {
   transition: opacity .2s ease, transform .25s var(--ease), visibility .2s;
   pointer-events: none;
 }
-.preview.is-on { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+.preview.is-on { opacity: 1; visibility: visible; transform: none; }
 .preview img {
   display: block;
   width: 100%;
@@ -954,9 +956,9 @@ mark {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas: "brand controls" "nav nav";
-    row-gap: 4px;
+    row-gap: 0;
     height: auto;
-    padding-top: 4px;
+    padding-top: 8px;
   }
   .brand { grid-area: brand; justify-self: start; }
   .controls { grid-area: controls; }
@@ -1013,7 +1015,7 @@ mark {
 
 @media (max-width: 359px) {
   .header__inner { column-gap: 8px; }
-  .brand { gap: 8px; }
+  .brand { gap: 6px; }
   .brand__name { font-size: 13px; }
   .controls { gap: 6px; }
 }
@@ -1049,6 +1051,8 @@ mark {
   }
   .btn--primary { background: none; color: #000; border-color: #999; }
   .section__head, .group__head, .skill__head { break-after: avoid; page-break-after: avoid; }
+  .section__grid { display: block !important; }
+  .section__head { margin-bottom: 8pt; break-inside: avoid; }
   .header, .progress, .skip, .actions, .copy, .preview, .footer__license { display: none !important; }
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
   .reveal { opacity: 1 !important; transform: none !important; }
