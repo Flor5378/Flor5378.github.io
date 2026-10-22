@@ -5,15 +5,13 @@ Site personnel statique, bilingue français / anglais. Aucune dépendance, aucun
 ## Arborescence
 
 ```
-index.html                  coquille HTML, métadonnées, barre latérale
+index.html                  coquille HTML, métadonnées, en-tête et navigation
 README.md
 assets/
   content.js                TOUT le contenu FR et EN. Seul fichier à modifier au quotidien
-  app.js                    rendu, sommaire actif, langue, thème, aperçus GitHub
+  app.js                    rendu, navigation active, langue, thème, aperçus GitHub, animations
   style.css                 mise en page, typographie, thèmes clair et sombre, impression
-  tree.svg                  arbre au crayon, filigrane de fond à droite
-  tree.py                   générateur de tree.svg, à relancer seulement pour le redessiner
-  fonts/                    Newsreader et IBM Plex Sans, auto-hébergés
+  fonts/                    Geist et Geist Mono, auto-hébergées
   logos/                    logos fournis (BAED, Passés composés)
   logos/tech/               icônes des technologies (Devicon)
   logos/sport/              pictogrammes de sport (Material Design Icons)
@@ -57,7 +55,9 @@ Ajouter un projet, dans `groups[].items` :
 { title: 'Titre du projet', lang: 'FR', repo: 'Flor5378/nom-du-depot' },
 ```
 
-Le lien et l’aperçu au survol sont déduits de `repo`. Le sommaire et les compteurs se régénèrent seuls.
+Le lien et l’aperçu au survol sont déduits de `repo`. La navigation, la numérotation des sections et les compteurs se régénèrent seuls.
+
+Dans `hero.meta`, la première ligne (le statut) s’affiche en pastille au-dessus du nom, les suivantes sous l’introduction avec une icône de lieu puis de maison.
 
 ## Logos
 
@@ -102,31 +102,19 @@ react scikitlearn selenium streamlit ubuntu
 
 Une icône absente ou mal nommée disparaît sans casser la mise en page, le libellé reste affiché. Pour ajouter une icône, récupérez le SVG depuis devicon.dev et déposez-le sous le nom voulu.
 
-## Filigrane
+## Design
 
-Le fond de page porte un arbre dessiné au trait, discret, calé en bas à droite et masqué
-sous 860 px comme à l’impression. Il est purement décoratif : `aria-hidden`, hors flux,
-insensible au pointeur.
+Une seule colonne de lecture, un en-tête collant et une navigation dont la pastille suit la section lue. Chaque section affiche son titre à gauche, collant sur grand écran, et son contenu en cartes à droite. Les jetons de couleur (fond, surfaces, filets, encres, accent) sont déclarés en tête de `style.css`, une fois pour le thème clair et une fois pour le thème sombre : changer l’accent revient à modifier `--accent` dans les deux blocs.
 
-`assets/tree.py` le redessine. Chaque graine donne un arbre différent :
-
-```bash
-python3 assets/tree.py 3 assets/tree.svg   # 3 est la graine du dessin en place
-```
-
-Pour le rendre plus ou moins présent, ajustez la seule opacité, dans `style.css` :
-
-```css
-.backdrop img { opacity: .07; }                        /* thème clair */
-[data-theme="dark"] .backdrop img { opacity: .1; }     /* thème sombre */
-```
+Les cartes apparaissent en fondu au défilement. L’animation est désactivée si le système demande de réduire les mouvements, et le contenu reste toujours visible sans elle.
 
 ## Fonctionnement
 
 - Langue : `?lang=fr` ou `?lang=en` dans l’URL, sinon la langue du navigateur, puis mémorisation du choix.
 - Thème : préférence système au premier chargement, puis mémorisation du choix.
 - Aperçus de projets : image sociale générée par GitHub, chargée au survol uniquement, sur écran non tactile.
-- Impression : `Ctrl + P` produit une version CV propre, sans barre latérale.
+- Navigation : la pastille de l’en-tête suit la section lue ; sur mobile, la barre défile horizontalement et garde le lien actif visible.
+- Impression : `Ctrl + P` produit une version CV propre, sans en-tête ni boutons.
 
 ## Licence
 
@@ -137,4 +125,4 @@ et `ui.licenseTitle` dans `content.js` ainsi que l’URL du lien dans `app.js`.
 
 ## Crédits
 
-Newsreader et IBM Plex Sans sous licence SIL Open Font License. Devicon sous licence MIT. Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0. Les logos affichés restent la propriété de leurs détenteurs.
+Geist et Geist Mono sous licence SIL Open Font License. Devicon sous licence MIT. Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0. Les logos affichés restent la propriété de leurs détenteurs.
