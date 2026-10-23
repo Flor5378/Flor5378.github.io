@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Florian Grolleau · Curriculum vitae</title>
+<meta name="author" content="Florian Grolleau">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#E9E3DA">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%236E1527'/%3E%3Cpath d='M44 15c6 5 9 12 7 20-3 10-13 16-22 14-8-2-13-9-12-18 1-10 10-19 19-19 3 0 6 1 8 3z' fill='%23A63D53'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/cv.css">
+<style>
+  /* Écran : pages posées sur un fond neutre, comme sur la planche du canevas. */
+  @media screen { body { margin: 0; padding: 28px 0; background: #E9E3DA; } }
+  @media screen and (max-width: 820px) { body { padding: 0; overflow-x: auto; } }
+</style>
+</head>
+<body>
+<main id="cv"></main>
+<script src="assets/content.js"></script>
+<script type="module">
+  import { renderCV, fit } from './assets/js/cv.js';
+
+  // Français par défaut, anglais avec ?lang=en (passation 8.1).
+  const lang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'fr';
+  const c = CONTENT[lang];
+  document.documentElement.lang = lang;
+  document.title = `${c.docTitle} · ${c.ui.cv}`;
+  const root = document.getElementById('cv');
+
+  let gh = null;
+  const draw = () => renderCV(root, lang, gh);
+  draw();
+  fetch('assets/github.json', { cache: 'no-cache' })
+    .then((r) => (r.ok ? r.json() : null))
+    .catch(() => null)
+    .then((data) => { gh = data; draw(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fit(root));
+</script>
+</body>
+</html>

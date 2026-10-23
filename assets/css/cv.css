@@ -1,0 +1,94 @@
+/* =========================================================================
+   cv.css
+   Version imprimable façon CV (passation, section 8) : deux pages A4,
+   794 × 1123 px à 96 ppp. Partagée par cv.html et par l'impression du site.
+   Valeurs reprises de la planche « CV imprimable » du canevas.
+   ========================================================================= */
+
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 900;
+  src: url('../fonts/figtree-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 900;
+  src: url('../fonts/figtree-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.cv{--ink:#241316;--ink-2:#6B5A5C;--ink-3:#9A8B8C;--wine:#6E1527;--wine-soft:#F4E9EA;--rule:#E4DAD0;--paper:#FFFFFF;font-size:16px;line-height:normal;letter-spacing:normal;text-align:left;font-family:'Figtree',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cv *,.cv *::before,.cv *::after{box-sizing:border-box}
+.cv a{color:inherit;text-decoration:none}
+.cv-page{position:relative;width:794px;height:1123px;margin:0 auto;padding:46px 52px 0;background:var(--paper);overflow:hidden;display:flex;flex-direction:column}
+.cv-gap{height:28px}
+.cv-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;padding-bottom:20px;border-bottom:2px solid var(--wine)}
+.cv-name{margin:0;font-size:50px;font-weight:300;line-height:.92;letter-spacing:-.048em}
+.cv-role{margin:12px 0 0;font-size:13px;font-weight:600;line-height:1.4}
+.cv-role .b{display:block;font-weight:450;color:var(--ink-2)}
+.cv-contact{margin:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;font-size:11.5px;line-height:1.35;text-align:right;color:var(--ink-2)}
+.cv-contact .m{font-size:13px;font-weight:650;color:var(--ink)}
+.cv-status{display:inline-block;margin-bottom:8px;padding:4px 10px;border-radius:999px;background:var(--wine);color:#fff;font-size:10.5px;font-weight:650;letter-spacing:.01em}
+.cv-mini{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--wine)}
+.cv-mini .n{font-size:22px;font-weight:350;letter-spacing:-.03em}
+.cv-mini .r{font-size:11px;color:var(--ink-2)}
+.cv-body{flex:1;display:grid;grid-template-columns:170px minmax(0,1fr);gap:26px;padding-top:20px;min-height:0}
+.cv-side{display:flex;flex-direction:column;gap:18px;padding-right:20px;border-right:1px solid var(--rule)}
+.cv-main{display:flex;flex-direction:column;gap:18px;min-width:0}
+.cv-h{display:flex;align-items:baseline;gap:8px;margin:0 0 10px;font-size:18px;font-weight:400;letter-spacing:-.02em;line-height:1.1}
+.cv-h .k{font-size:10.5px;font-weight:750;letter-spacing:.02em;color:var(--wine);font-variant-numeric:tabular-nums}
+.cv-side .cv-h{font-size:15px;margin-bottom:8px}
+.cv-intro{margin:16px 0 0;font-size:12.8px;line-height:1.55;text-wrap:pretty}
+.cv-intro mark{background:var(--wine-soft);color:var(--wine);border-radius:3px;padding:0 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cv-e{padding:8px 0;border-top:1px solid var(--rule);break-inside:avoid}
+.cv-e:first-of-type{border-top:0;padding-top:0}
+.cv-when{display:flex;justify-content:space-between;gap:10px;margin:0;font-size:10.8px;font-weight:700;font-variant-numeric:tabular-nums}
+.cv-when .p{font-weight:500;color:var(--ink-2)}
+.cv-org{margin:2px 0 0;font-size:14px;font-weight:550;letter-spacing:-.012em;line-height:1.25}
+.cv-sub{margin:1px 0 0;font-size:11.3px;color:var(--ink-2);line-height:1.4}
+.cv-txt{margin:4px 0 0;font-size:11.5px;line-height:1.48;text-wrap:pretty}
+.cv-txt .lk{color:var(--wine);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-decoration-color:rgba(110,21,39,.35)}
+.cv-tags{margin:5px 0 0;font-size:10.6px;font-weight:650;color:var(--wine)}
+.cv-sg{margin:0 0 9px}
+.cv-sg:last-child{margin-bottom:0}
+.cv-sl{margin:0 0 2px;font-size:11px;font-weight:700}
+.cv-sv{margin:0;font-size:11px;line-height:1.5;color:var(--ink-2);text-wrap:pretty}
+.cv-pg{margin:0 0 4px}
+.cv-pl{margin:8px 0 3px;font-size:10.5px;font-weight:750;color:var(--wine)}
+.cv-pl:first-of-type{margin-top:0}
+.cv-p{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:1px 8px;padding:4px 0;border-top:1px solid var(--rule);break-inside:avoid}
+.cv-p .n{font-size:10px;font-weight:700;color:var(--ink-3);font-variant-numeric:tabular-nums;padding-top:2px}
+.cv-p .t{font-size:12px;font-weight:500;line-height:1.3}
+.cv-p .l{font-size:9.5px;font-weight:700;color:var(--ink-2);border:1px solid var(--rule);border-radius:999px;padding:1px 6px;align-self:start}
+.cv-p .s{grid-column:2 / -1;font-size:9.6px;line-height:1.3;color:var(--ink-3);overflow-wrap:anywhere}
+.cv-foot{display:flex;justify-content:space-between;align-items:center;height:40px;margin-top:auto;border-top:1px solid var(--rule);font-size:10px;color:var(--ink-3)}
+.cv-foot .u{color:var(--wine);font-weight:650}
+.cv-orgs{margin:0;font-size:11px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.cv-nb{white-space:nowrap}
+
+/* Contenu qui grandit : le texte des entrées passe d'abord de 11,5 à 11 px (8.2). */
+.cv.tight .cv-txt{font-size:11px}
+
+@page{size:A4;margin:0}
+@media print{
+  html,body{background:#fff !important}
+  .cv-gap{display:none}
+  .cv-page{margin:0;break-after:page;width:210mm;height:297mm}
+  .cv-page:last-child{break-after:auto}
+}
+
+/* Sur le site : le CV n'existe qu'à l'impression (8.1, règle 2). Il reste
+   mesurable à l'écran, hors champ et masqué aux lecteurs d'écran. */
+@media screen{
+  .v-cvprint{position:absolute;left:-10000px;top:0;visibility:hidden;pointer-events:none}
+}
+@media print{
+  body.v{background:#fff !important}
+  body.v > :not(.v-cvprint){display:none !important}
+  .v-cvprint{position:static;visibility:visible}
+}
