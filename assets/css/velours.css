@@ -7,7 +7,10 @@
    · la classe .v est portée par <body> ;
    · data-seen="1" rejoue l'arrivée d'une feuille, data-seen="2" la montre
      sans animation (feuille déjà vue avant un changement de langue) ;
-   · le mouvement réduit suit la requête media (passation 5.9).
+   · le mouvement réduit suit la requête media (passation 5.9) ;
+   · avant son arrivée, une feuille attend en opacité nulle, pas en
+     visibility: hidden, pour rester atteignable au clavier et lisible par
+     les lecteurs d'écran (6.1).
    Figtree auto-hébergée dans assets/fonts, aucune requête externe.
    ========================================================================= */
 
@@ -119,6 +122,10 @@ main:focus{outline:none}
 .v-bar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:calc(12px + env(safe-area-inset-top,0px)) var(--pad) 12px}
 .v-sig{font-size:17px;font-weight:650;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
 .v-nav{position:relative;display:flex;padding:4px;border-radius:999px;background:var(--wine-soft)}
+/* Liens injectés par app.js : la capsule réserve leur hauteur (4 + 38 + 4) pour que la barre ne grandisse pas au chargement (CLS). */
+.v-nav{min-height:46px}
+/* Avant le premier rendu, l'accueil et la capsule attendent masqués : ils apparaissent remplis, sans décalage. */
+:root:not([data-ready]) .v-hero > :not(.v-blob),:root:not([data-ready]) .v-nav{visibility:hidden}
 .v-nav a{position:relative;z-index:1;display:block;padding:8px 14px;border-radius:999px;font-size:14px;font-weight:560;text-decoration:none;white-space:nowrap;color:var(--ink-2);transition:color 220ms ease}
 .v-nav a[aria-current]{color:var(--paper)}
 .v-navpill{position:absolute;top:4px;left:0;height:calc(100% - 8px);width:0;border-radius:999px;background:var(--wine);opacity:0;transition:opacity 200ms ease}
@@ -219,14 +226,14 @@ main:focus{outline:none}
 .v-sheet.alt{background:var(--paper-2)}
 .v-sheet.first{margin-top:0}
 .v-sheet.after-hero{margin-top:28px}
-.v-sheet:not([data-seen]) .v-reveal{visibility:hidden}
+.v-sheet:not([data-seen]) .v-reveal{opacity:0}
 .v-sheet[data-seen="1"] .v-reveal{animation:v-soft 1000ms var(--ease-out) backwards;animation-delay:calc(var(--i,0) * 80ms + 160ms)}
 .v-sheet[data-seen="1"]{animation:v-arrive 1000ms var(--ease-out) backwards}
 .v-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px 24px;margin-bottom:38px}
 .v-num{margin:0 0 10px;font-size:14px;font-weight:700;color:var(--wine);font-variant-numeric:tabular-nums}
 .v-h2{margin:0;font-size:clamp(52px,7.4vw,112px);font-weight:300;line-height:.95;letter-spacing:-.05em;text-wrap:balance}
 .v-h2 .in{display:inline-block}
-.v-sheet:not([data-seen]) .v-h2 .in{visibility:hidden}
+.v-sheet:not([data-seen]) .v-h2 .in{opacity:0}
 .v-sheet[data-seen="1"] .v-h2 .in{animation:v-rise-soft 1200ms var(--spring) backwards}
 .v-note{margin:0;max-width:36ch;font-size:15px;color:var(--ink-2)}
 .v-note .touch{display:none}
@@ -377,7 +384,8 @@ img.v-ico{background:none;object-fit:contain}
 .v-mail{position:relative;z-index:1;display:inline-block;max-width:100%;margin:18px 0 30px;font-size:clamp(24px,min(9.6vw,calc(100cqi / (var(--mail-ch,18) * .47))),148px);overflow-wrap:anywhere;font-weight:300;letter-spacing:-.055em;line-height:1;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-size:0% .045em;background-position:100% 100%;transition:background-size 620ms var(--ease-out)}
 .v-mail .ln{display:block;overflow:hidden;padding:.06em .02em .12em;margin:-.06em -.02em -.12em}
 .v-mail .in{display:block}
-.v-sheet:not([data-seen]) .v-mail .in{visibility:hidden}
+.v-mail .dom,.v-copy .dom{display:inline-block;max-width:100%}
+.v-sheet:not([data-seen]) .v-mail .in{opacity:0}
 .v-sheet[data-seen="1"] .v-mail .in{animation:v-rise 1300ms var(--spring) 220ms backwards}
 .v-cside{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .v-chipbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:var(--on-wine-3);color:var(--on-wine);font:650 14px/1 var(--sans);cursor:pointer;transition:transform 140ms var(--ease-out),background-color 200ms ease}

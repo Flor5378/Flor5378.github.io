@@ -28,9 +28,7 @@ const CONFIG = {
   github: 'https://github.com/Flor5378',
   githubLabel: 'github.com/Flor5378',
   linkedin: 'https://www.linkedin.com/in/florian-grolleau-3a7a22274',
-  site: 'https://flor5378.github.io',   // adresse publique, au pied du CV
-  photo: 'assets/photo.jpg', // n’est plus utilisé (design Velours)
-  initials: 'FG'             // n’est plus utilisé (design Velours)
+  site: 'https://flor5378.github.io'   // adresse publique, au pied du CV
 };
 
 /* Organisations visées, communes aux deux langues. */
@@ -62,7 +60,7 @@ const ORGS = {
     { fr: 'Naval Group', en: 'Naval Group', logo: 'naval-group.com', url: 'https://www.naval-group.com' },
     { fr: 'MBDA', en: 'MBDA', logo: 'mbda-systems.com', url: 'https://www.mbda-systems.com' },
     { fr: 'ArianeGroup', en: 'ArianeGroup', logo: 'ariane.group', url: 'https://www.ariane.group' },
-    { fr: 'Hadit', en: 'Hadit', logo: 'assets/logos/hadit.png', short: 'HADIT' },
+    { fr: 'Hadit', en: 'Hadit', short: 'HADIT' },   // déposer assets/logos/hadit.png puis ajouter logo
     { fr: 'LVMH', en: 'LVMH', logo: 'lvmh.com', url: 'https://www.lvmh.com' },
     { fr: 'Sopra Steria', en: 'Sopra Steria', logo: 'soprasteria.com', url: 'https://www.soprasteria.com' },
     { fr: 'Deloitte', en: 'Deloitte', logo: 'assets/logos/deloitte.png', url: 'https://www.deloitte.com' },
@@ -203,7 +201,6 @@ const CONTENT = {
           },
           {
             title: 'MUN Saint-Germain',
-            logo: 'assets/logos/mun.png',
             short: 'MUN',
             sub: 'Trésorier · association de 100 membres',
             meta: ['09/2023 → 12/2024', 'Saint-Germain-en-Laye'],
@@ -436,7 +433,6 @@ const CONTENT = {
           },
           {
             title: 'MUN Saint-Germain',
-            logo: 'assets/logos/mun.png',
             short: 'MUN',
             sub: 'Treasurer · 100-member association',
             meta: ['09/2023 → 12/2024', 'Saint-Germain-en-Laye'],

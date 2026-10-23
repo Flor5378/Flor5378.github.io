@@ -19,35 +19,36 @@ const compounds = (text) => String(text || '').split(' ')
 const bare = (url) => String(url).replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 
 // Liens de dépôt : soulignés en accent, sans URL développée (8.2).
-function body(html, gh) {
+function body(html, gh, cfg) {
   const box = document.createElement('div');
   box.innerHTML = html || '';
   box.querySelectorAll('a[data-repo]').forEach((a) => {
     const missing = gh && gh.repos && gh.repos[a.dataset.repo] && gh.repos[a.dataset.repo].missing;
     a.className = 'lk';
-    a.setAttribute('href', missing ? CONFIG.github : 'https://github.com/' + a.dataset.repo);
+    a.setAttribute('href', missing ? cfg.github : 'https://github.com/' + a.dataset.repo);
     a.removeAttribute('target');
     a.removeAttribute('data-repo');
   });
   return box.innerHTML;
 }
 
-function entry(e, gh) {
+function entry(e, gh, cfg) {
   const [period, place] = e.meta || [];
   const tags = e.tags && e.tags.length
     ? `<p class="cv-tags">${e.tags.map((t) => esc(String(t).split('|')[0])).join(' · ')}</p>` : '';
   return `<div class="cv-e"><p class="cv-when"><span>${esc(period || '')}</span>${place ? `<span class="p">${compounds(place)}</span>` : ''}</p>` +
     `<h3 class="cv-org">${esc(e.title)}</h3>${e.sub ? `<p class="cv-sub">${esc(e.sub)}</p>` : ''}` +
-    `<p class="cv-txt">${body(e.body, gh)}</p>${tags}</div>`;
+    `<p class="cv-txt">${body(e.body, gh, cfg)}</p>${tags}</div>`;
 }
 
-function foot(c, n) {
+function foot(c, n, cfg) {
   return `<footer class="cv-foot"><span>Florian Grolleau · ${esc(c.ui.cv)}</span>` +
-    `<a class="u" href="${esc(CONFIG.site)}">${esc(bare(CONFIG.site))}</a><span>${n} / 2</span></footer>`;
+    `<a class="u" href="${esc(cfg.site)}">${esc(bare(cfg.site))}</a><span>${n} / 2</span></footer>`;
 }
 
-export function renderCV(root, lang, gh) {
-  const c = CONTENT[lang];
+export function renderCV(root, lang, gh, data) {
+  const cfg = (data && data.config) || CONFIG;
+  const c = ((data && data.content) || CONTENT)[lang];
   const find = (labels) => c.hero.meta.find((m) => labels.includes(lower(m[0])));
   const status = find(STATUS);
   const now = find(NOW);
@@ -77,7 +78,7 @@ export function renderCV(root, lang, gh) {
     (langRow ? `<section><h2 class="cv-h">${esc(langRow.label)}</h2><p class="cv-sv">${chipNames(langRow.chips).join(' · ')}</p></section>` : '');
 
   const main1 = exp
-    ? `<section><h2 class="cv-h"><span class="k">${num()}</span>${esc(exp.title)}</h2>${exp.entries.map((e) => entry(e, gh)).join('')}</section>` : '';
+    ? `<section><h2 class="cv-h"><span class="k">${num()}</span>${esc(exp.title)}</h2>${exp.entries.map((e) => entry(e, gh, cfg)).join('')}</section>` : '';
 
   const intro = String(c.hero.intro);
   const page1 = `<article class="cv-page" aria-label="${esc(c.ui.cv)}, 1 / 2">
@@ -85,14 +86,14 @@ export function renderCV(root, lang, gh) {
         <div><h1 class="cv-name">Florian<br>Grolleau</h1>
           <p class="cv-role">${esc(roleA.trim())}<span class="b">${esc(roleB.join('·').trim())}</span></p></div>
         <p class="cv-contact">${status ? `<span class="cv-status">${esc(status[1])}</span>` : ''}` +
-    `<a class="m" href="mailto:${esc(CONFIG.email)}">${esc(CONFIG.email)}</a>` +
-    `<a href="${esc(CONFIG.github)}">${esc(CONFIG.githubLabel)}</a>` +
-    `<a href="${esc(CONFIG.linkedin)}">${esc(bare(CONFIG.linkedin))}</a>` +
+    `<a class="m" href="mailto:${esc(cfg.email)}">${esc(cfg.email)}</a>` +
+    `<a href="${esc(cfg.github)}">${esc(cfg.githubLabel)}</a>` +
+    `<a href="${esc(cfg.linkedin)}">${esc(bare(cfg.linkedin))}</a>` +
     `${now ? `<span>${compounds(now[1])}</span>` : ''}</p>
       </header>
       <p class="cv-intro">${intro}</p>
       <div class="cv-body"><aside class="cv-side">${side1}</aside><div class="cv-main">${main1}</div></div>
-      ${foot(c, 1)}
+      ${foot(c, 1, cfg)}
     </article>`;
 
   const side2 = (prose
@@ -104,7 +105,7 @@ export function renderCV(root, lang, gh) {
 
   // Formation avant Projets : les numéros suivent l'ordre de lecture (02, 03).
   const eduHTML = edu
-    ? `<section><h2 class="cv-h"><span class="k">${num()}</span>${esc(edu.title)}</h2>${edu.entries.map((e) => entry(e, gh)).join('')}</section>` : '';
+    ? `<section><h2 class="cv-h"><span class="k">${num()}</span>${esc(edu.title)}</h2>${edu.entries.map((e) => entry(e, gh, cfg)).join('')}</section>` : '';
   let n = 0;
   const projHTML = projects
     ? `<section><h2 class="cv-h"><span class="k">${num()}</span>${esc(projects.title)}</h2>${projects.groups.filter((g) => g.items.length).map((g) =>
@@ -117,9 +118,9 @@ export function renderCV(root, lang, gh) {
 
   const nowText = now ? ` · ${esc(now[1])}` : '';
   const page2 = `<article class="cv-page" aria-label="${esc(c.ui.cv)}, 2 / 2">
-      <header class="cv-mini"><span class="n">Florian Grolleau</span><span class="r">${esc(CONFIG.email)}${nowText}</span></header>
+      <header class="cv-mini"><span class="n">Florian Grolleau</span><span class="r">${esc(cfg.email)}${nowText}</span></header>
       <div class="cv-body"><aside class="cv-side">${side2}</aside><div class="cv-main">${eduHTML}${projHTML}</div></div>
-      ${foot(c, 2)}
+      ${foot(c, 2, cfg)}
     </article>`;
 
   root.classList.add('cv');

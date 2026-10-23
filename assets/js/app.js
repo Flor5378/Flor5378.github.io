@@ -7,6 +7,15 @@
 import { reducedMotion, liquidBlob, contactBlobPath, navPill, glide, springHeight } from './motion.js';
 import { renderCV } from './cv.js';
 
+// Données : content.js, ou un jeu de la passe break-ui (?data=worst|empty),
+// seulement quand le site tourne en local (passation 9.1).
+const LOCAL = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+const DEV_SET = LOCAL ? new URLSearchParams(location.search).get('data') : null;
+const DATA = DEV_SET === 'worst' || DEV_SET === 'empty'
+  ? await import('./dev-data.js').then((m) => m.dataset(DEV_SET))
+  : { content: CONTENT, config: CONFIG, gh: null };
+const CFG = DATA.config;
+
 const root = document.documentElement;
 const $ = (sel, el = document) => el.querySelector(sel);
 const $$ = (sel, el = document) => Array.from(el.querySelectorAll(sel));
@@ -31,10 +40,11 @@ const PIN = '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 
 const keepCompounds = (text) => String(text || '').split(' ')
   .map((w) => `<span class="nb">${esc(w)}</span>`).join(' ');
 
-// Courriel : coupure prioritaire après « @ » (annexe H).
+// Courriel : coupure prioritaire après « @ » (annexe H). Le domaine forme un
+// bloc en ligne : il ne se coupe à son trait d'union que s'il ne tient pas seul.
 const mailHTML = (email) => {
   const at = email.indexOf('@');
-  return `${esc(email.slice(0, at + 1))}<wbr>${esc(email.slice(at + 1))}`;
+  return `${esc(email.slice(0, at + 1))}<wbr><span class="dom">${esc(email.slice(at + 1))}</span>`;
 };
 
 const fine = () => typeof matchMedia === 'function' && matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -63,16 +73,30 @@ const logoSrc = (v) => (!v ? null
 const FALLBACK = "this.parentNode.classList.replace('img','none');this.remove()";
 
 // variant : 'row' (carré 56), 's40' (tuiles, intérêts) ou 'wide' (120 × 44).
-function logoHTML(name, logo, short, variant) {
+// wide : logo large placé dans le carré d'une entrée, toujours contenu (3.5).
+function logoHTML(name, logo, short, variant, wide) {
   const src = logoSrc(logo);
   const size = variant === 's40' ? ' s40' : variant === 'wide' ? ' wide' : '';
   const ini = `<span class="ini">${esc(short || initials(name))}</span>`;
   if (!src) return `<span class="v-logo${size} none" aria-hidden="true">${ini}</span>`;
-  // Un logo local sans transparence a son propre fond : plein cadre dans une entrée.
-  const cover = variant === 'row' && /\.(jpe?g|png)$/i.test(logo) && !/\/tech\//.test(logo) ? ' cover' : '';
-  return `<span class="v-logo${size} img${cover}" aria-hidden="true">${ini}` +
+  // Logo local d'une entrée : plein cadre s'il a son propre fond, vérifié au chargement.
+  const fit = variant === 'row' && !wide && /^assets\/.*\.(jpe?g|png|webp)$/i.test(logo) && !/\/tech\//.test(logo) ? ' fit' : '';
+  return `<span class="v-logo${size} img${fit}" aria-hidden="true">${ini}` +
     `<img src="${esc(src)}" alt="" loading="lazy" decoding="async" onerror="${FALLBACK}"></span>`;
 }
+
+// Coin opaque : le logo a son propre fond (plein cadre). Coin transparent : contenu.
+document.addEventListener('load', (ev) => {
+  const img = ev.target;
+  if (!(img instanceof HTMLImageElement) || !img.parentNode.classList.contains('fit')) return;
+  try {
+    const c = document.createElement('canvas');
+    c.width = c.height = 1;
+    const x = c.getContext('2d', { willReadFrequently: true });
+    x.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, img.naturalWidth, img.naturalHeight);
+    if (x.getImageData(0, 0, 1, 1).data[3] > 250) img.parentNode.classList.add('cover');
+  } catch (e) { /* lecture impossible : le logo reste contenu */ }
+}, true);
 
 // 'Nom|icone' : icône 14 px tirée de assets/logos/tech.
 function tagHTML(str, cls) {
@@ -87,7 +111,7 @@ function tagHTML(str, cls) {
 
 let GH = null;   // assets/github.json, chargé après le premier affichage (7.4)
 const repoMissing = (id) => !!(GH && GH.repos && GH.repos[id] && GH.repos[id].missing);
-const repoHref = (id) => (repoMissing(id) ? CONFIG.github : 'https://github.com/' + id);
+const repoHref = (id) => (repoMissing(id) ? CFG.github : 'https://github.com/' + id);
 
 // Les liens de dépôt du texte deviennent des pastilles (3.5).
 function repoLinks(html) {
@@ -113,7 +137,7 @@ function initialLang() {
 }
 
 let lang = initialLang();
-const T = () => CONTENT[lang];
+const T = () => DATA.content[lang];
 
 const STATUS = ['statut', 'status'];
 const NOW = ['actuellement', 'currently'];
@@ -151,9 +175,9 @@ function fillHero() {
     `<span class="a">${esc(rest.join('·').trim())}</span>` +
     (now ? `<span class="b">${PIN}<span class="pl">${keepCompounds(now[1])}</span></span>` : '');
   $('#hero-ctas').innerHTML =
-    `<a class="v-cta" href="mailto:${esc(CONFIG.email)}">${esc(c.ui.write)}${ARROW}</a>` +
-    `<a class="v-ghost" href="${esc(CONFIG.github)}" target="_blank" rel="noopener">GitHub${ARROW}</a>` +
-    `<a class="v-ghost" href="${esc(CONFIG.linkedin)}" target="_blank" rel="noopener">LinkedIn${ARROW}</a>`;
+    `<a class="v-cta" href="mailto:${esc(CFG.email)}">${esc(c.ui.write)}${ARROW}</a>` +
+    `<a class="v-ghost" href="${esc(CFG.github)}" target="_blank" rel="noopener">GitHub${ARROW}</a>` +
+    `<a class="v-ghost" href="${esc(CFG.linkedin)}" target="_blank" rel="noopener">LinkedIn${ARROW}</a>`;
 }
 
 /* --------------------------------- feuilles -------------------------------- */
@@ -175,7 +199,7 @@ function profileHTML() {
         <p class="v-k lx" style="--k:2">${esc(c.ui.profile)}</p>
         <dl class="v-meta">${meta.map((m, i) =>
           `<div><dt class="lx" style="--k:${i + 3}">${esc(m[0])}</dt><dd class="lx" style="--k:${i + 3}">${keepCompounds(m[1])}</dd></div>`).join('')}</dl>
-        <button type="button" class="v-copy" data-copy aria-live="polite">${COPY_ICON}<span class="lbl">${mailHTML(CONFIG.email)}</span></button>
+        <button type="button" class="v-copy" data-copy aria-live="polite">${COPY_ICON}<span class="lbl">${mailHTML(CFG.email)}</span></button>
       </div>
       <p class="v-intro v-reveal lx" style="--i:1;--k:3">${intro}</p>
     </div>`;
@@ -194,7 +218,7 @@ function entryHTML(e, i) {
       <div class="v-w">${period ? `<p class="v-period">${esc(period)}</p>` : ''}${place ? `<p class="v-place lx" style="--k:2">${keepCompounds(place)}</p>` : ''}</div>
       <div class="v-o"><h3 class="v-org lx" style="--k:3">${title}</h3>${e.sub ? `<p class="v-sub lx" style="--k:4">${esc(e.sub)}</p>` : ''}</div>
       <div class="v-textc"><p class="v-body lx" style="--k:5">${repoLinks(e.body || '')}</p>${tags}${pop}</div>
-      ${logoHTML(e.title, e.logo, e.short, 'row')}
+      ${logoHTML(e.title, e.logo, e.short, 'row', e.wide)}
     </article>`;
 }
 let popSeq = 0;
@@ -251,7 +275,7 @@ function previewHTML(id, where) {
     if (where === 'panel' && info && info.lng) chips.push(`<span class="v-gchip">${esc(c.ui.writtenIn)} ${esc(info.lng)}</span>`);
     if (chips.length) html += `<p class="v-gm${sw(3)}">${chips.join('')}</p>`;
   }
-  const href = ok ? 'https://github.com/' + id : CONFIG.github;
+  const href = ok ? 'https://github.com/' + id : CFG.github;
   const cta = ok ? c.ui.openRepo : c.ui.profileGh;
   if (where === 'sheet') {
     return html + `<div class="v-sheet-acts"><a class="v-cta" href="${esc(href)}" target="_blank" rel="noopener">${esc(cta)}${ARROW}</a>` +
@@ -563,7 +587,10 @@ function trapFocus(e, box) {
 function loadGitHub() {
   fetch('assets/github.json', { cache: 'no-cache' })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
-    .then((data) => { GH = data && data.repos ? data : { repos: {} }; })
+    .then((data) => {
+      GH = data && data.repos ? data : { repos: {} };
+      if (DATA.gh) GH = { repos: Object.assign({}, GH.repos, DATA.gh) };
+    })
     .catch(() => { GH = { repos: {}, failed: true }; })
     .then(() => {
       $$('.v-repo, .v-prow').forEach((a) => {
@@ -655,11 +682,11 @@ function contactHTML(s, num) {
   const body = s.body ? `<p class="v-cbody v-reveal lx" style="--i:0;--k:3">${esc(s.body)}</p>` : '';
   return `<svg class="v-cblob" viewBox="0 0 400 400" aria-hidden="true"><path d="${contactBlobPath()}" style="fill:var(--wine-blob)"/></svg>
     <div class="v-in" style="position:relative;z-index:1">${sectionHead(s, num, body)}
-      <a class="v-mail" href="mailto:${esc(CONFIG.email)}" style="--mail-ch:${Array.from(CONFIG.email).length}"><span class="ln"><span class="in">${mailHTML(CONFIG.email)}</span></span></a>
+      <a class="v-mail" href="mailto:${esc(CFG.email)}" style="--mail-ch:${Array.from(CFG.email).length}"><span class="ln"><span class="in">${mailHTML(CFG.email)}</span></span></a>
       <div class="v-cside v-reveal" style="--i:2">
         <button type="button" class="v-chipbtn" data-copy aria-live="polite">${COPY_ICON}<span class="lbl">${esc(c.ui.copy)}</span></button>
-        <a class="v-ghost" href="${esc(CONFIG.github)}" target="_blank" rel="noopener">${esc(CONFIG.githubLabel)}${ARROW}</a>
-        <a class="v-ghost" href="${esc(CONFIG.linkedin)}" target="_blank" rel="noopener">LinkedIn${ARROW}</a>
+        <a class="v-ghost" href="${esc(CFG.github)}" target="_blank" rel="noopener">${esc(CFG.githubLabel)}${ARROW}</a>
+        <a class="v-ghost" href="${esc(CFG.linkedin)}" target="_blank" rel="noopener">LinkedIn${ARROW}</a>
       </div>
       <div class="v-foot"><span>Florian Grolleau</span><span><a href="https://github.com/Flor5378/Flor5378.github.io" target="_blank" rel="noopener">${esc(c.ui.source)}</a> · <abbr title="${esc(c.ui.licenseTitle)}">${esc(c.ui.license)}</abbr></span></div>
     </div>`;
@@ -731,6 +758,14 @@ function watchSheets() {
   });
 }
 
+// Clavier : une feuille atteinte avant son arrivée s'affiche aussitôt (6.1).
+document.addEventListener('focusin', (ev) => {
+  const el = ev.target instanceof Element ? ev.target.closest('.v-sheet') : null;
+  if (!el || el.dataset.seen) return;
+  el.dataset.seen = '2';
+  if (seenIO) seenIO.unobserve(el);
+});
+
 // Avant un nouveau rendu : une feuille déjà vue s'affiche sans rejouer son arrivée.
 function settleSheets() {
   sheets.forEach((el) => { if (el.dataset.seen === '1') el.dataset.seen = '2'; });
@@ -774,11 +809,11 @@ document.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-copy]');
   if (!btn) return;
   try {
-    const p = navigator.clipboard && navigator.clipboard.writeText(CONFIG.email);
+    const p = navigator.clipboard && navigator.clipboard.writeText(CFG.email);
     if (p && p.catch) p.catch(() => {});
   } catch (err) {}
   const restore = () => $$('[data-copy]').forEach((b) => {
-    $('.lbl', b).outerHTML = `<span class="lbl">${b.classList.contains('v-copy') ? mailHTML(CONFIG.email) : esc(T().ui.copy)}</span>`;
+    $('.lbl', b).outerHTML = `<span class="lbl">${b.classList.contains('v-copy') ? mailHTML(CFG.email) : esc(T().ui.copy)}</span>`;
   });
   $('.lbl', btn).outerHTML = `<span class="lbl">${esc(T().ui.copied)}</span>`;
   clearTimeout(copyTimer);
@@ -1027,6 +1062,7 @@ liquidBlob(hero, $('#blob'));
 activeId = readSection();
 fillWhere();
 paintNav(true);
+root.dataset.ready = '1';   // accueil et capsule visibles une fois remplis (CLS)
 recede();
 
 addEventListener('resize', () => {
@@ -1053,7 +1089,7 @@ requestAnimationFrame(() => setTimeout(loadGitHub, 0));
 
 // Impression : le site imprime le CV, dans la langue affichée (8.1).
 const cvRoot = $('#cvprint');
-const printCV = () => renderCV(cvRoot, lang, GH);
+const printCV = () => renderCV(cvRoot, lang, GH, DATA);
 addEventListener('beforeprint', printCV);
 addEventListener('afterprint', () => { cvRoot.innerHTML = ''; });
 if (typeof matchMedia === 'function') {
