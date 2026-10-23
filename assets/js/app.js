@@ -4,7 +4,7 @@
    langue, espion de section. Aucune dépendance externe.
    ========================================================================= */
 
-import { reducedMotion, liquidBlob, navPill, glide } from './motion.js';
+import { reducedMotion, liquidBlob, navPill, glide, springHeight } from './motion.js';
 
 const root = document.documentElement;
 const $ = (sel, el = document) => el.querySelector(sel);
@@ -187,12 +187,392 @@ function entryHTML(e, i) {
     : esc(e.title);
   const tags = e.tags && e.tags.length
     ? `<ul class="v-tags">${e.tags.map((t) => tagHTML(t, 'v-tag')).join('')}</ul>` : '';
+  const pop = /data-repo=/.test(e.body || '')
+    ? `<div class="v-pop" data-open="0" aria-hidden="true" id="pop-${popSeq++}"></div>` : '';
   return `<article class="v-row v-reveal" style="--i:${i}">
       <div class="v-w">${period ? `<p class="v-period">${esc(period)}</p>` : ''}${place ? `<p class="v-place lx" style="--k:2">${keepCompounds(place)}</p>` : ''}</div>
       <div class="v-o"><h3 class="v-org lx" style="--k:3">${title}</h3>${e.sub ? `<p class="v-sub lx" style="--k:4">${esc(e.sub)}</p>` : ''}</div>
-      <div class="v-textc"><p class="v-body lx" style="--k:5">${repoLinks(e.body || '')}</p>${tags}</div>
+      <div class="v-textc"><p class="v-body lx" style="--k:5">${repoLinks(e.body || '')}</p>${tags}${pop}</div>
       ${logoHTML(e.title, e.logo, e.short, 'row')}
     </article>`;
+}
+let popSeq = 0;
+
+/* --------------------------------- projets --------------------------------- */
+
+// Projet décrit dans content.js : titre, langue de rédaction et groupe (4.3, règle 1).
+function projectInfo(id) {
+  for (const s of T().sections) {
+    if (s.kind !== 'projects') continue;
+    for (const g of s.groups) {
+      const it = g.items.find((p) => p.repo === id);
+      if (it) return { title: it.title, lng: it.lang, group: g.label };
+    }
+  }
+  return null;
+}
+
+const LANG_COLORS = { Python: '#3572A5', 'Jupyter Notebook': '#DA5B0B', R: '#198CE7', SQL: '#8A7F7A' };
+
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  return new Intl.DateTimeFormat(lang === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+}
+
+// Un même contenu pour le panneau, le popover et la feuille basse (4.3).
+// where : 'panel' (blocs en cascade), 'pop' ou 'sheet'.
+function previewHTML(id, where) {
+  const c = T();
+  const info = projectInfo(id);
+  const slug = id.split('/').pop();
+  const title = info ? info.title : slug;
+  const sw = (j) => (where === 'panel' ? ` v-swap" style="--j:${j}` : '');
+  const kicker = `GitHub · Flor5378${where !== 'pop' && info ? ' · ' + info.group : ''}`;
+  let html = `<p class="v-gk${sw(0)}">${esc(kicker)}</p>` +
+    `<p class="v-gt${sw(1)}"${where === 'sheet' ? ' tabindex="-1" data-sheet-title' : ''}>${esc(title)}</p>` +
+    (info ? `<p class="v-gk v-slug${sw(1)}">${esc(slug)}</p>` : '');
+
+  if (!GH) {   // chargement
+    return html + `<div class="v-skels${sw(2)}" aria-hidden="true"><span class="v-skel" style="width:92%"></span><span class="v-skel" style="width:58%"></span></div>` +
+      `<p class="v-gm${sw(3)}" aria-hidden="true"><span class="v-skel v-skel-chip" style="width:96px"></span><span class="v-skel v-skel-chip" style="width:150px"></span></p>`;
+  }
+  const g = GH.repos && GH.repos[id];
+  const ok = !!(g && !g.missing);
+  const desc = ok ? (g.description || c.ui.noDesc) : c.ui.missing;
+  html += `<p class="v-gd${ok && g.description ? '' : ' none'}${sw(2)}">${esc(desc)}</p>`;
+  if (ok) {
+    const date = fmtDate(g.pushedAt);
+    const chips = [];
+    if (g.language) chips.push(`<span class="v-gchip"><span class="v-ldot" style="background:${LANG_COLORS[g.language] || 'var(--on-wine-2)'}" aria-hidden="true"></span>${esc(g.language)}</span>`);
+    if (date) chips.push(`<span class="v-gchip">${esc(c.ui.updated)} ${esc(date)}</span>`);
+    if (where === 'panel' && info && info.lng) chips.push(`<span class="v-gchip">${esc(c.ui.writtenIn)} ${esc(info.lng)}</span>`);
+    if (chips.length) html += `<p class="v-gm${sw(3)}">${chips.join('')}</p>`;
+  }
+  const href = ok ? 'https://github.com/' + id : CONFIG.github;
+  const cta = ok ? c.ui.openRepo : c.ui.profileGh;
+  if (where === 'sheet') {
+    return html + `<div class="v-sheet-acts"><a class="v-cta" href="${esc(href)}" target="_blank" rel="noopener">${esc(cta)}${ARROW}</a>` +
+      `<button type="button" class="v-chipbtn" data-sheet-close>${esc(c.ui.close)}</button></div>`;
+  }
+  const tab = where === 'pop' ? ' tabindex="-1"' : '';
+  return html + `<a class="v-ga${sw(4)}" href="${esc(href)}" target="_blank" rel="noopener"${tab}>${esc(cta)}${ARROW}</a>`;
+}
+
+function projectsHTML(s, num) {
+  const c = T();
+  let n = 0;
+  const groups = s.groups.filter((g) => g.items.length).map((g, gi) =>
+    `<div class="v-group v-reveal" style="--i:${gi}">
+        <p class="v-glabel lx" style="--k:3">${esc(g.label)}<span class="c">${g.items.length}</span></p>
+        ${g.items.map((p) => {
+          n += 1;
+          return `<a class="v-prow${p.repo === selId ? ' sel' : ''}" href="${esc(repoHref(p.repo))}" target="_blank" rel="noopener" data-proj="${esc(p.repo)}">` +
+            `<span class="n">${pad2(n)}</span><span class="t lx" style="--k:4">${esc(p.title)}</span><span class="l">${esc(p.lang)}</span>${ARROW}</a>`;
+        }).join('')}
+      </div>`).join('');
+  const note = s.note
+    ? `<p class="v-note lx" style="--k:2"><span class="hover">${esc(s.note)}</span><span class="touch">${esc(c.ui.noteTouch)}</span></p>` : '';
+  return `<div class="v-in">${sectionHead(s, num, note)}
+      <div class="v-proj">
+        <div class="v-list" data-list="projets"><span class="v-glide" aria-hidden="true"></span>${groups}</div>
+        <div class="v-panelW v-reveal" style="--i:${s.groups.length}">
+          <div class="v-panel" data-k="${panelK}" aria-live="polite"><div class="v-panel-in">${panelInner()}</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+let selId = null;     // projet affiché dans le panneau
+let panelK = 'a';     // alterné à chaque changement pour rejouer la cascade
+
+function panelInner() {
+  if (selId) return previewHTML(selId, 'panel');
+  const s = T().sections.find((x) => x.kind === 'projects');
+  return `<div class="v-panel-empty"><p class="v-gk v-swap" style="--j:0">GitHub · Flor5378</p>` +
+    `<p class="big v-swap" style="--j:1">${esc(s ? s.note : '')}</p>` +
+    `<span class="v-ghostrow v-swap" style="--j:2" aria-hidden="true"><span></span><span></span><span></span></span></div>`;
+}
+
+// Hauteur du panneau à ressort (0,42 s, ζ 0,9), réglée sur le contenu mesuré.
+let panelHeight = null;
+let panelEl = null;
+function refreshPanel(animate) {
+  const panel = $('.v-panel');
+  if (!panel) return;
+  if (panel !== panelEl) {
+    panelEl = panel;
+    panelHeight = springHeight(panel, 'panel');
+  }
+  if (animate) panelK = panelK === 'a' ? 'b' : 'a';
+  panel.dataset.k = panelK;
+  $('.v-panel-in', panel).innerHTML = panelInner();
+  const h = $('.v-panel-in', panel).offsetHeight;
+  if (animate) panelHeight(h);
+  else panel.style.height = '';
+}
+
+function selectProject(row) {
+  const id = row.dataset.proj;
+  if (id === selId) return;
+  selId = id;
+  $$('.v-prow').forEach((r) => r.classList.toggle('sel', r === row));
+  refreshPanel(true);
+}
+
+// Survol et focus remplissent le panneau ; la sélection reste au départ du pointeur.
+document.addEventListener('mouseover', (e) => {
+  if (!fine()) return;
+  const row = e.target.closest('.v-prow');
+  if (row) selectProject(row);
+});
+document.addEventListener('focusin', (e) => {
+  const row = e.target.closest('.v-prow');
+  if (!row) return;
+  selectProject(row);
+  // Surbrillance au clavier seulement : aucun état de survol au toucher (6.3).
+  if (row.matches(':focus-visible')) glideTo(row);
+});
+
+const narrow = () => matchMedia('(max-width: 980px)').matches;
+const coarse = () => matchMedia('(hover: none), (pointer: coarse)').matches;
+
+document.addEventListener('click', (e) => {
+  const row = e.target.closest('.v-prow');
+  if (!row) return;
+  if (narrow()) {   // sous 980 px : la feuille basse remplace le panneau
+    e.preventDefault();
+    openSheet(row.dataset.proj, row);
+    return;
+  }
+  // Tablette tactile : premier appui pour l'aperçu, second pour le dépôt.
+  if (coarse() && !row.classList.contains('sel')) {
+    e.preventDefault();
+    selectProject(row);
+  }
+});
+
+/* ------------------------------ popover de dépôt ----------------------------- */
+
+const pop = { link: null, openT: 0, closeT: 0, lastClose: 0 };
+
+// Placement de l'annexe F : sous la dernière ligne du lien, ou au-dessus de la
+// première quand un autre lien de dépôt suit dans le même paragraphe.
+function placePopover(link, host) {
+  const rects = link.getClientRects();
+  const hr = host.getBoundingClientRect();
+  const links = $$('[data-repo]', host);
+  const up = links.indexOf(link) < links.length - 1;
+  const first = rects[0], last = rects[rects.length - 1];
+  const anchor = up ? first : last;
+  return {
+    up,
+    left: Math.max(0, Math.min(anchor.left - hr.left, hr.width - 380)),
+    top: up ? first.top - hr.top - 10 : last.bottom - hr.top + 10
+  };
+}
+
+function showPop(link) {
+  const host = link.closest('.v-textc');
+  const card = host && $('.v-pop', host);
+  if (!card) return;
+  if (pop.link && pop.link !== link) unmarkLink(pop.link);
+  pop.link = link;
+  const pos = placePopover(link, host);
+  card.innerHTML = previewHTML(link.dataset.repo, 'pop');
+  $('.v-ga', card).removeAttribute('tabindex');
+  card.classList.toggle('up', pos.up);
+  card.style.left = `${Math.round(pos.left)}px`;
+  card.style.top = `${Math.round(pos.top)}px`;
+  card.setAttribute('aria-hidden', 'false');
+  link.classList.add('on');
+  link.setAttribute('aria-describedby', card.id);
+  requestAnimationFrame(() => { card.dataset.open = '1'; });
+}
+
+function unmarkLink(link) {
+  link.classList.remove('on');
+  link.removeAttribute('aria-describedby');
+}
+
+function hidePop() {
+  clearTimeout(pop.openT);
+  clearTimeout(pop.closeT);
+  if (!pop.link) return;
+  const card = $('.v-pop', pop.link.closest('.v-textc'));
+  unmarkLink(pop.link);
+  pop.link = null;
+  pop.lastClose = Date.now();
+  if (!card) return;
+  card.dataset.open = '0';
+  card.setAttribute('aria-hidden', 'true');
+  const ga = $('.v-ga', card);
+  if (ga) ga.setAttribute('tabindex', '-1');
+}
+
+// Intention : 160 ms, immédiat si un aperçu est ouvert ou fermé depuis moins de 500 ms.
+function wantPop(link, now) {
+  clearTimeout(pop.closeT);
+  clearTimeout(pop.openT);
+  if (pop.link === link) return;
+  const quick = now || pop.link || Date.now() - pop.lastClose < 500;
+  pop.openT = setTimeout(() => showPop(link), quick ? 0 : 160);
+}
+function leavePop() {
+  clearTimeout(pop.openT);
+  clearTimeout(pop.closeT);
+  pop.closeT = setTimeout(hidePop, 150);
+}
+
+document.addEventListener('mouseover', (e) => {
+  if (!fine()) return;
+  const link = e.target.closest('.v-repo');
+  if (link) wantPop(link);
+  else if (e.target.closest('.v-pop')) clearTimeout(pop.closeT);
+});
+document.addEventListener('mouseout', (e) => {
+  if (!fine() || !pop.link && !pop.openT) return;
+  const from = e.target.closest('.v-repo, .v-pop');
+  const to = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.v-repo, .v-pop');
+  if (from && from !== to) leavePop();
+});
+document.addEventListener('focusin', (e) => {
+  const link = e.target.closest('.v-repo');
+  if (link) wantPop(link);
+  else if (e.target.closest('.v-pop')) clearTimeout(pop.closeT);
+});
+document.addEventListener('focusout', (e) => {
+  if (!e.target.closest('.v-repo, .v-pop')) return;
+  const to = e.relatedTarget;
+  if (to && to.closest && to.closest('.v-pop, .v-repo')) return;
+  leavePop();
+});
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('.v-repo');
+  if (!link) return;
+  if (narrow()) {
+    e.preventDefault();
+    openSheet(link.dataset.repo, link);
+    return;
+  }
+  // Toucher au-dessus de 980 px : premier appui pour l'aperçu, second pour le lien.
+  if (coarse() && pop.link !== link) {
+    e.preventDefault();
+    wantPop(link, true);
+  }
+});
+// Un appui ailleurs ferme l'aperçu.
+document.addEventListener('pointerdown', (e) => {
+  if (pop.link && !e.target.closest('.v-pop, .v-repo')) hidePop();
+});
+
+/* -------------------------------- feuille basse ------------------------------ */
+
+const sheetEl = $('#psheet');
+const scrimEl = $('#scrim');
+const sheet = { id: null, trigger: null, drag: null };
+
+// Pendant une fenêtre modale, le reste de la page est inerte (6.1, règle 4).
+function setInert(on) {
+  ['#skip', '#bar', '#main'].forEach((sel) => { $(sel).inert = on; });
+}
+
+function fillSheet(id) {
+  $('#psheet-in').innerHTML = previewHTML(id, 'sheet');
+}
+
+function openSheet(id, trigger) {
+  hidePop();
+  sheet.id = id;
+  sheet.trigger = trigger;
+  fillSheet(id);
+  sheetEl.setAttribute('aria-label', T().ui.sheetLabel);
+  sheetEl.setAttribute('aria-hidden', 'false');
+  sheetEl.dataset.open = '1';
+  scrimEl.dataset.open = '1';
+  setInert(true);
+  const title = $('[data-sheet-title]', sheetEl);
+  if (title) title.focus({ preventScroll: true });
+}
+
+function closeSheet() {
+  if (!sheet.id) return;
+  sheet.id = null;
+  sheetEl.dataset.open = '0';
+  sheetEl.setAttribute('aria-hidden', 'true');
+  scrimEl.dataset.open = '0';
+  setInert(false);
+  if (sheet.trigger && sheet.trigger.isConnected) sheet.trigger.focus({ preventScroll: true });
+  sheet.trigger = null;
+}
+
+scrimEl.addEventListener('click', closeSheet);
+sheetEl.addEventListener('click', (e) => { if (e.target.closest('[data-sheet-close]')) closeSheet(); });
+
+// Glisser pour fermer, avec résistance vers le haut (5.6, annexe G).
+sheetEl.addEventListener('pointerdown', (e) => {
+  if (!sheet.id || e.target.closest('a, button')) return;
+  sheet.drag = { id: e.pointerId, y0: e.clientY, dy: 0, samples: [[performance.now(), e.clientY]] };
+  sheetEl.setPointerCapture(e.pointerId);
+});
+sheetEl.addEventListener('pointermove', (e) => {
+  const d = sheet.drag;
+  if (!d || e.pointerId !== d.id) return;
+  let dy = e.clientY - d.y0;
+  if (dy < 0) { const u = -dy; dy = -(u * 40) / (40 + u); }
+  d.dy = dy;
+  d.samples.push([performance.now(), e.clientY]);
+  sheetEl.style.transition = 'none';
+  sheetEl.style.transform = `translateY(${dy.toFixed(1)}px)`;
+});
+function endDrag() {
+  const d = sheet.drag;
+  if (!d) return;
+  sheet.drag = null;
+  const now = performance.now();
+  const recent = d.samples.filter(([t]) => now - t < 100);
+  const [t0, y0] = recent[0] || d.samples[0];
+  const v = (d.samples[d.samples.length - 1][1] - y0) / Math.max(1, now - t0);   // px/ms sur 100 ms
+  sheetEl.style.transition = '';
+  sheetEl.style.transform = '';
+  if (d.dy > 120 || (v > 0.11 && d.dy > 12)) closeSheet();
+}
+sheetEl.addEventListener('pointerup', endDrag);
+sheetEl.addEventListener('pointercancel', endDrag);
+
+// Focus piégé dans une fenêtre modale ouverte.
+function trapFocus(e, box) {
+  const items = $$('a[href], button:not([disabled]), [tabindex="0"]', box).filter((el) => el.offsetParent !== null);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && (document.activeElement === first || !box.contains(document.activeElement))) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+/* ------------------------------ données GitHub ------------------------------ */
+
+// Chargées une fois, après le premier affichage (7.4). Fichier introuvable :
+// état « Indisponible » partout, liens conservés.
+function loadGitHub() {
+  fetch('assets/github.json', { cache: 'no-cache' })
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
+    .then((data) => { GH = data && data.repos ? data : { repos: {} }; })
+    .catch(() => { GH = { repos: {}, failed: true }; })
+    .then(() => {
+      $$('.v-repo, .v-prow').forEach((a) => {
+        const id = a.dataset.repo || a.dataset.proj;
+        a.setAttribute('href', repoHref(id));
+      });
+      refreshPanel(!!selId);
+      if (pop.link) showPop(pop.link);
+      if (sheet.id) fillSheet(sheet.id);
+    });
 }
 
 function entriesHTML(s, num) {
@@ -201,7 +581,7 @@ function entriesHTML(s, num) {
     </div>`;
 }
 
-const KINDS = { entries: entriesHTML };
+const KINDS = { entries: entriesHTML, projects: (s, num) => projectsHTML(s, num) };
 
 // Feuilles créées une fois (l'état « vue » et l'observateur y restent attachés).
 function ensureSheets() {
@@ -235,6 +615,9 @@ function fillSheets() {
     el.innerHTML = el.hidden ? '' : build(s, pad2(i + 1));
   });
   glides.clear();
+  pop.link = null;
+  panelEl = null;
+  refreshPanel(false);
 }
 
 // Arrivée des feuilles : 4 % visible, une seule fois (5.2, 5.10).
@@ -343,6 +726,52 @@ function paintNav(jump) {
   pillShown = true;
 }
 
+/* --------------------------------- menu ---------------------------------- */
+
+const menuEl = $('#menu');
+const menuBtn = $('#menu-btn');
+const mscrimEl = $('#mscrim');
+const menuOpen = () => menuEl.dataset.open === '1';
+
+function fillMenu() {
+  const c = T();
+  menuEl.setAttribute('aria-label', c.ui.toc);
+  $('#menu-nav').setAttribute('aria-label', c.ui.toc);
+  $('#menu-close').setAttribute('aria-label', c.ui.close);
+  const tab = menuOpen() ? '' : ' tabindex="-1"';
+  $('#menu-nav').innerHTML = navSections().map((s, i) =>
+    `<a href="#${s.id}" data-id="${s.id}" style="--k:${i}"${s.id === activeId ? ' aria-current="location"' : ''}${tab}>` +
+    `<span class="n">${pad2(i + 1)}</span><span class="t">${esc(s.navTitle || s.title)}</span></a>`).join('');
+}
+
+// Le panneau naît du bouton Menu (clip-path, 5.6) ; focus sur Fermer à l'ouverture.
+function openMenu() {
+  hidePop();
+  menuEl.dataset.open = '1';
+  mscrimEl.dataset.open = '1';
+  menuEl.setAttribute('aria-hidden', 'false');
+  menuBtn.setAttribute('aria-expanded', 'true');
+  $$('a', menuEl).forEach((a) => a.removeAttribute('tabindex'));
+  setInert(true);
+  $('#menu-close').focus({ preventScroll: true });
+}
+
+function closeMenu(returnFocus = true) {
+  if (!menuOpen()) return;
+  menuEl.dataset.open = '0';
+  mscrimEl.dataset.open = '0';
+  menuEl.setAttribute('aria-hidden', 'true');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  $$('a', menuEl).forEach((a) => a.setAttribute('tabindex', '-1'));
+  setInert(false);
+  if (returnFocus) menuBtn.focus({ preventScroll: true });
+}
+
+menuBtn.addEventListener('click', openMenu);
+$('#menu-close').addEventListener('click', () => closeMenu());
+mscrimEl.addEventListener('click', () => closeMenu());
+$('#menu-nav').addEventListener('click', (e) => { if (e.target.closest('a')) closeMenu(false); });
+
 function fillWhere() {
   const list = navSections();
   const i = list.findIndex((s) => s.id === activeId);
@@ -379,6 +808,10 @@ function setActive(id) {
   root.dataset.ssw = root.dataset.ssw === 'a' ? 'b' : 'a';
   paintNav();
   fillWhere();
+  $$('a', $('#menu-nav')).forEach((a) => {
+    if (a.dataset.id === id) a.setAttribute('aria-current', 'location');
+    else a.removeAttribute('aria-current');
+  });
 }
 
 /* ---------------------------- recul de l'accueil ---------------------------- */
@@ -457,6 +890,7 @@ function render() {
   fillHero();
   fillSheets();
   fillNav();
+  fillMenu();
   fillWhere();
   paintNav(true);
 }
@@ -503,7 +937,24 @@ recede();
 addEventListener('resize', () => {
   measureBar();
   paintNav(true);
+  if (sheet.id && !narrow()) closeSheet();
 });
+
+// Échap ferme, par priorité : menu, feuille basse, popover (6.1, règle 3).
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (menuOpen()) closeMenu();
+    else if (sheet.id) closeSheet();
+    else if (pop.link) hidePop();
+    return;
+  }
+  if (e.key !== 'Tab') return;
+  if (menuOpen()) trapFocus(e, $('#menu'));
+  else if (sheet.id) trapFocus(e, sheetEl);
+});
+
+// Données GitHub chargées après le premier affichage.
+requestAnimationFrame(() => setTimeout(loadGitHub, 0));
 
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(() => {

@@ -1,0 +1,45 @@
+# Met à jour assets/github.json, lu par les aperçus GitHub du site (passation 7.4).
+# Le navigateur n'interroge jamais l'API : la limite anonyme est de 60 requêtes
+# par heure et par adresse IP.
+name: Données GitHub des aperçus
+
+on:
+  schedule:
+    - cron: '17 5 * * *'   # chaque jour à 5 h 17 UTC
+  push:
+    branches: [main]
+    paths:
+      - assets/content.js
+      - .github/scripts/github-data.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Lire les dépôts cités dans content.js
+        run: node .github/scripts/github-data.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publier si les données ont changé
+        run: |
+          if git diff --quiet -- assets/github.json && git ls-files --error-unmatch assets/github.json >/dev/null 2>&1; then
+            echo "Aucun changement."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/github.json
+          git commit -m "Met à jour les données GitHub des aperçus"
+          git push

@@ -311,6 +311,13 @@ img.v-ico{background:none;object-fit:contain}
 .v-ghostrow span{width:64px;height:26px;border-radius:999px;background:var(--on-wine-3)}
 .v-ghostrow span:nth-child(2){width:132px}
 .v-ghostrow span:nth-child(3){width:84px}
+/* Chargement : deux barres et deux pastilles en scintillement (4.3). */
+.v-skels{display:flex;flex-direction:column;gap:8px;margin:14px 0 0}
+.v-gm .v-skel-chip{height:26px}
+.v-slug{margin-top:6px;overflow-wrap:anywhere}
+.v-sheet-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.v-sheet-acts .v-chipbtn{min-height:52px}
+.v-psheet .v-gt:focus{outline:none}
 .v-skel{height:12px;border-radius:999px;background:linear-gradient(90deg,var(--on-wine-3) 0%,rgba(243,238,230,.26) 40%,var(--on-wine-3) 80%);background-size:300% 100%;animation:v-shimmer 1600ms linear infinite}
 .v-psheet{position:fixed;left:8px;right:8px;bottom:8px;z-index:70;padding:10px 22px calc(26px + env(safe-area-inset-bottom));border-radius:30px;background:var(--wine-hero);color:var(--on-wine);box-shadow:var(--shadow);transform:translateY(110%);visibility:hidden;transition:transform 520ms var(--ease-io),visibility 0s linear 520ms;touch-action:none;overscroll-behavior:contain}
 .v-psheet[data-open="1"]{transform:none;visibility:visible;transition:transform 640ms var(--spring),visibility 0s}
@@ -470,6 +477,8 @@ img.v-ico{background:none;object-fit:contain}
 .v-foot{margin-top:56px}
 }
 @media (max-width:400px){.v-tile .nm{font-size:13.5px}}
+/* Au toucher, même au-dessus de 980 px, la note parle d'appui (ui.noteTouch). */
+@media (hover:none),(pointer:coarse){.v-note .hover{display:none}.v-note .touch{display:inline}}
 @media (min-width:981px){.v-psheet,.v-scrim{display:none}}
 
 /* ------------------------------- états actifs -------------------------------- */

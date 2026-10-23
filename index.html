@@ -72,6 +72,29 @@
   <div id="sheets"></div>
 </main>
 
+<div class="v-mscrim" id="mscrim" data-open="0" aria-hidden="true"></div>
+<div class="v-sheetmenu" id="menu" data-open="0" role="dialog" aria-modal="true" aria-label="Sommaire" aria-hidden="true">
+  <div class="v-sm-top"><span class="k" data-ui="toc">Sommaire</span><button type="button" class="v-close" id="menu-close" aria-label="Fermer"><svg class="ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div>
+  <nav id="menu-nav" aria-label="Sommaire"></nav>
+  <div class="v-sm-tools">
+    <fieldset class="v-lang" data-lang-switch>
+      <legend class="sr" data-ui="langLegend">Langue</legend>
+      <span class="v-lang-bg" aria-hidden="true"></span>
+      <button type="button" lang="fr" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" lang="en" data-lang="en" aria-pressed="false">EN</button>
+    </fieldset>
+    <button type="button" class="v-ibtn" data-theme-btn aria-label="Basculer le thème" aria-pressed="false">
+      <svg class="v-sun" viewBox="0 0 20 20" aria-hidden="true"><defs><mask id="v-moon2"><rect x="0" y="0" width="20" height="20" fill="#fff"/><circle class="v-cut" cx="13.5" cy="6.5" r="5.6" fill="#000"/></mask></defs><path class="v-rays" d="M10 1.2v1.9M10 16.9v1.9M1.2 10h1.9M16.9 10h1.9M3.8 3.8l1.3 1.3M14.9 14.9l1.3 1.3M3.8 16.2l1.3-1.3M14.9 5.1l1.3-1.3"/><circle class="v-disc" cx="10" cy="10" r="6.2" mask="url(#v-moon2)"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="v-scrim" id="scrim" data-open="0" aria-hidden="true"></div>
+<div class="v-psheet" id="psheet" data-open="0" role="dialog" aria-modal="true" aria-label="Aperçu du dépôt GitHub" aria-hidden="true">
+  <span class="v-grab" aria-hidden="true"></span>
+  <div id="psheet-in"></div>
+</div>
+
 <script src="assets/content.js"></script>
 <script type="module" src="assets/js/app.js"></script>
 </body>
