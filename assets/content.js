@@ -11,7 +11,16 @@
    wide   : true                      → pastille allongée, pour un logo texte
    chips  : 'Nom'                     → texte seul
             'Nom|python'              → icône assets/logos/tech/python.svg
-   repo   : 'Flor5378/nom-du-depot'   → lien et aperçu GitHub au survol
+   repo   : 'Flor5378/nom-du-depot'   → lien et aperçu GitHub (assets/github.json)
+
+   Limites de saisie conseillées (au-delà, la mise en page souffre)
+   ----------------------------------------------------------------
+   Titre d’entrée 90 caractères · sous-titre 140 · corps d’entrée 600
+   Titre de projet 110 · puce ou étiquette 40 · nom d’organisation 70
+   Statut 90 · courriel sans limite (taille ajustée automatiquement)
+
+   Typographie française : espace fine insécable U+202F dans les nombres et
+   avant « % » (2 500, 21 millions, 90 %), espace insécable U+00A0 avant « : ».
    ========================================================================= */
 
 const CONFIG = {
@@ -54,7 +63,11 @@ const ORGS = {
     { fr: 'ArianeGroup', en: 'ArianeGroup', logo: 'ariane.group', url: 'https://www.ariane.group' },
     { fr: 'Hadit', en: 'Hadit', logo: 'assets/logos/hadit.png', short: 'HADIT' },
     { fr: 'LVMH', en: 'LVMH', logo: 'lvmh.com', url: 'https://www.lvmh.com' },
-    { fr: 'Sopra Steria', en: 'Sopra Steria', logo: 'soprasteria.com', url: 'https://www.soprasteria.com' }
+    { fr: 'Sopra Steria', en: 'Sopra Steria', logo: 'soprasteria.com', url: 'https://www.soprasteria.com' },
+    { fr: 'Deloitte', en: 'Deloitte', logo: 'deloitte.com', url: 'https://www.deloitte.com' },
+    { fr: 'EY', en: 'EY', logo: 'ey.com', url: 'https://www.ey.com' },
+    { fr: 'Capgemini Invent', en: 'Capgemini Invent', logo: 'capgemini.com', url: 'https://www.capgemini.com' },
+    { fr: 'Wavestone', en: 'Wavestone', logo: 'wavestone.com', url: 'https://www.wavestone.com' }
   ]
 };
 
@@ -82,8 +95,24 @@ const CONTENT = {
     description: 'Florian Grolleau, étudiant en science politique et ingénierie data science. Analyse d’influence, tableaux de bord prédictifs, géomatique.',
     ui: {
       toc: 'Sommaire',
-      copy: 'Copier',
-      copied: 'Copié',
+      copy: 'Copier l’adresse',
+      copied: 'Adresse copiée',
+      write: 'Écrire',
+      menu: 'Menu',
+      close: 'Fermer',
+      home: 'Accueil',
+      profile: 'Profil',
+      noteTouch: 'Touchez un projet pour afficher son aperçu GitHub.',
+      sheetLabel: 'Aperçu du dépôt GitHub',
+      updated: 'Mis à jour le',
+      noDesc: 'Pas de description sur GitHub.',
+      missing: 'Aperçu indisponible : dépôt privé ou introuvable.',
+      openRepo: 'Ouvrir le dépôt',
+      profileGh: 'Voir le profil GitHub',
+      writtenIn: 'Rédigé en',
+      langLegend: 'Langue',
+      skip: 'Aller au contenu',
+      cv: 'Curriculum vitae',
       themeLabel: 'Basculer le thème',
       source: 'Code source',
       license: 'Contenu sous licence CC BY-NC-SA 4.0',
@@ -91,10 +120,10 @@ const CONTENT = {
     },
     hero: {
       role: 'Science politique et ingénierie data · Double diplôme Sciences Po et CY Tech',
-      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Actuellement en stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement ou la sécurité.',
+      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement ou la sécurité.',
       meta: [
         ['Statut', 'Disponible à partir de février 2027'],
-        ['Actuellement', 'Libreville, Gabon'],
+        ['Actuellement', 'Versailles, France'],
         ['Base', 'Région parisienne, France']
       ]
     },
@@ -126,7 +155,7 @@ const CONTENT = {
             logo: 'uib.no',
             sub: 'Échange académique Erasmus',
             meta: ['01/2025 → 06/2025', 'Norvège'],
-            body: 'Un semestre consacré aux aires régionales et aux régimes politiques : droits des peuples autochtones, politique russe, analyse comparée des régimes latino-américains.'
+            body: 'Un semestre consacré aux aires régionales et aux régimes politiques : droits des peuples autochtones, politique russe, analyse comparée des régimes latino-américains.'
           }
         ]
       },
@@ -141,7 +170,7 @@ const CONTENT = {
             logo: 'defense.gouv.fr',
             sub: 'Stagiaire data science et analyse',
             meta: ['04/2026 → 08/2026', 'Libreville, Gabon'],
-            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle, sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone : plus de 21 millions d’utilisateurs suivis, plusieurs dizaines de milliers de publications et plusieurs milliards de vues chaque semaine.',
+            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle, sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone : plus de 21 millions d’utilisateurs suivis, plusieurs dizaines de milliers de publications et plusieurs milliards de vues chaque semaine.',
             tags: ['Python|python', 'DuckDB|duckdb', 'Streamlit|streamlit', 'NLP', 'OSINT']
           },
           {
@@ -149,7 +178,7 @@ const CONTENT = {
             url: 'https://www.linkedin.com/company/bureau-analyse-des-enjeux-de-la-d%C3%A9fense/',
             logo: 'assets/logos/baed.png',
             short: 'BAED',
-            sub: 'Pôle partenariats · association de 150 membres',
+            sub: 'Pôle partenariats · association de 150 membres',
             meta: ['04/2025 → 04/2026', 'France'],
             body: 'En charge des relations partenaires, des industriels de la défense aux autorités militaires. Présence au salon MILIPOL 2025 et aux cérémonies officielles, rédaction d’articles et de notes de synthèse pour les membres.'
           },
@@ -159,7 +188,7 @@ const CONTENT = {
             logo: 'interieur.gouv.fr',
             sub: 'Stagiaire · Agence numérique des forces de sécurité intérieure',
             meta: ['07/2025', 'France'],
-            body: 'Reprise des bases de données de drones de l’agence, trajectoires, coordonnées et identifiants, sous PostgreSQL et MongoDB. J’y ai ajouté un modèle de classification hybride combinant KNN, forêts aléatoires et XGBoost, qui atteint 90 % de précision.',
+            body: 'Reprise des bases de données de drones de l’agence, trajectoires, coordonnées et identifiants, sous PostgreSQL et MongoDB. J’y ai ajouté un modèle de classification hybride combinant KNN, forêts aléatoires et XGBoost, qui atteint 90 % de précision.',
             tags: ['PostgreSQL|postgresql', 'MongoDB|mongodb', 'scikit-learn|scikitlearn', 'XGBoost']
           },
           {
@@ -168,15 +197,15 @@ const CONTENT = {
             logo: 'youth.europa.eu',
             sub: 'Bénévole · refuge pour ours de Kuterevo',
             meta: ['08/2025', 'Croatie'],
-            body: 'Un mois de volontariat dans un refuge des montagnes croates : soins aux animaux, entretien du site et maintenance des enclos.'
+            body: 'Un mois de volontariat dans un refuge des montagnes croates : soins aux animaux, entretien du site et maintenance des enclos.'
           },
           {
             title: 'MUN Saint-Germain',
             logo: 'assets/logos/mun.png',
             short: 'MUN',
-            sub: 'Trésorier · association de 100 membres',
+            sub: 'Trésorier · association de 100 membres',
             meta: ['09/2023 → 12/2024', 'Saint-Germain-en-Laye'],
-            body: 'Gestion du budget, suivi des dépenses et reporting au conseil d’administration. J’ai également tenu la communication de l’association et animé une communauté de 2 500 abonnés.'
+            body: 'Gestion du budget, suivi des dépenses et reporting au conseil d’administration. J’ai également tenu la communication de l’association et animé une communauté de 2 500 abonnés.'
           }
         ]
       },
@@ -256,6 +285,7 @@ const CONTENT = {
       {
         id: 'interets',
         title: 'Centres d’intérêt',
+        navTitle: 'Intérêts',
         kind: 'prose',
         blocks: [
           {
@@ -275,7 +305,7 @@ const CONTENT = {
           },
           {
             meta: ['Jeu de stratégie'],
-            body: 'Joueur semi-professionnel d’Age of Empires II, 2 200 Elo et 150ᵉ place mondiale. Un entraînement quotidien à la décision rapide en information incomplète.',
+            body: 'Joueur semi-professionnel d’Age of Empires II, 2 200 Elo et 150ᵉ place mondiale. Un entraînement quotidien à la décision rapide en information incomplète.',
             logos: [
               { name: 'Age of Empires II', logo: 'ageofempires.com', url: 'https://www.ageofempires.com' }
             ]
@@ -297,8 +327,24 @@ const CONTENT = {
     description: 'Florian Grolleau, political science and data science engineering student. Influence analysis, predictive dashboards, geospatial work.',
     ui: {
       toc: 'Contents',
-      copy: 'Copy',
-      copied: 'Copied',
+      copy: 'Copy address',
+      copied: 'Address copied',
+      write: 'Write to me',
+      menu: 'Menu',
+      close: 'Close',
+      home: 'Home',
+      profile: 'Profile',
+      noteTouch: 'Tap a project to see its GitHub preview.',
+      sheetLabel: 'GitHub repository preview',
+      updated: 'Updated',
+      noDesc: 'No description on GitHub.',
+      missing: 'Preview unavailable: private or missing repository.',
+      openRepo: 'Open repository',
+      profileGh: 'View GitHub profile',
+      writtenIn: 'Written in',
+      langLegend: 'Language',
+      skip: 'Skip to content',
+      cv: 'Curriculum vitae',
       themeLabel: 'Toggle theme',
       source: 'Source code',
       license: 'Content under a CC BY-NC-SA 4.0 licence',
@@ -306,10 +352,10 @@ const CONTENT = {
     },
     hero: {
       role: 'Political science and data engineering · Dual degree, Sciences Po and CY Tech',
-      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. Currently interning with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development or security.',
+      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development or security.',
       meta: [
         ['Status', 'Available from February 2027'],
-        ['Currently', 'Libreville, Gabon'],
+        ['Currently', 'Versailles, France'],
         ['Based in', 'Paris area, France']
       ]
     },
@@ -471,6 +517,7 @@ const CONTENT = {
       {
         id: 'interets',
         title: 'Interests',
+        navTitle: 'Interests',
         kind: 'prose',
         blocks: [
           {
