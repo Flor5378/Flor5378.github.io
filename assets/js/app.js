@@ -4,7 +4,7 @@
    langue, espion de section. Aucune dépendance externe.
    ========================================================================= */
 
-import { reducedMotion, liquidBlob, navPill, glide, springHeight } from './motion.js';
+import { reducedMotion, liquidBlob, contactBlobPath, navPill, glide, springHeight } from './motion.js';
 
 const root = document.documentElement;
 const $ = (sel, el = document) => el.querySelector(sel);
@@ -581,7 +581,97 @@ function entriesHTML(s, num) {
     </div>`;
 }
 
-const KINDS = { entries: entriesHTML, projects: (s, num) => projectsHTML(s, num) };
+/* ------------------------------- compétences ------------------------------- */
+
+function skillsHTML(s, num) {
+  const rows = s.rows.map((r, i) =>
+    `<div class="v-srow v-reveal" style="--i:${i}"><p class="v-slabel lx" style="--k:3">${esc(r.label)}</p>` +
+    `<ul class="v-chips">${r.chips.map((c) => tagHTML(c, 'v-chip')).join('')}</ul></div>`).join('');
+  return `<div class="v-in">${sectionHead(s, num)}<div class="v-skills">${rows}</div></div>`;
+}
+
+/* ------------------------------ organisations ------------------------------ */
+
+function orgsHTML(s, num) {
+  const note = s.note ? `<p class="v-note lx" style="--k:2">${esc(s.note)}</p>` : '';
+  const groups = s.groups.filter((g) => g.items.length).map((g, gi) => {
+    const tiles = g.items.map((o) => {
+      const name = o[lang] || o.fr || o.name;
+      const inner = `${logoHTML(name, o.logo, o.short, 's40')}<span class="nm">${esc(name)}</span>`;
+      return o.url
+        ? `<li><a class="v-tile" href="${esc(o.url)}" target="_blank" rel="noopener">${inner}${ARROW}</a></li>`
+        : `<li><span class="v-tile">${inner}</span></li>`;
+    }).join('');
+    return `<div class="v-ogroup v-reveal" style="--i:${gi}"><p class="v-ohead lx" style="--k:3">${esc(g.label)}<span class="c">${g.items.length}</span></p>` +
+      `<ul class="v-tiles">${tiles}</ul></div>`;
+  }).join('');
+  return `<div class="v-in">${sectionHead(s, num, note)}${groups}</div>`;
+}
+
+/* --------------------------------- intérêts -------------------------------- */
+
+// Pictogrammes de sport (Material Design Icons), remplis en --wine.
+const SPORT_PATHS = {
+  handball: 'M15.83 10.43A6.93 6.93 0 0 1 18.39 14.86A6.64 6.64 0 0 1 17.5 19.5L15.78 18.5A5 5 0 0 0 16.44 16A5.22 5.22 0 0 0 15.46 13.06L9.18 23.93L7.44 22.95L10.44 17.75L8.71 16.76L7.21 19.34L5.5 18.36L10.63 9.45A7 7 0 0 1 8.8 5.46A6.91 6.91 0 0 1 9.69 1.1L11.43 2.13A4.84 4.84 0 0 0 10.91 5.9A4.74 4.74 0 0 0 13.21 8.93M16 5A2 2 0 1 0 18 7A2 2 0 0 0 16 5M13.5 1A1.5 1.5 0 1 0 15 2.5A1.5 1.5 0 0 0 13.5 1Z',
+  'table-tennis': 'M18.5,14C19.9,14 21,15.1 21,16.5C21,17.9 19.9,19 18.5,19C17.1,19 16,17.9 16,16.5C16,15.1 17.1,14 18.5,14M7,15C7,15 8,16 8,17V20.5C8,21.3 8.7,22 9.5,22C10.3,22 11,21.3 11,20.5V17C11,16 12,15 12,15H7M8,14H11C11,14 16,14 16,9C16,4 12,2 9.5,2C7,2 3,4 3,9C3,14 8,14 8,14Z',
+  bike: 'M5,20.5A3.5,3.5 0 0,1 1.5,17A3.5,3.5 0 0,1 5,13.5A3.5,3.5 0 0,1 8.5,17A3.5,3.5 0 0,1 5,20.5M5,12A5,5 0 0,0 0,17A5,5 0 0,0 5,22A5,5 0 0,0 10,17A5,5 0 0,0 5,12M14.8,10H19V8.2H15.8L13.86,4.93C13.57,4.43 13,4.1 12.4,4.1C11.93,4.1 11.5,4.29 11.2,4.6L7.5,8.29C7.19,8.6 7,9 7,9.5C7,10.13 7.33,10.66 7.85,10.97L11.2,13V18H13V11.5L10.75,9.85L13.07,7.5M19,20.5A3.5,3.5 0 0,1 15.5,17A3.5,3.5 0 0,1 19,13.5A3.5,3.5 0 0,1 22.5,17A3.5,3.5 0 0,1 19,20.5M19,12A5,5 0 0,0 14,17A5,5 0 0,0 19,22A5,5 0 0,0 24,17A5,5 0 0,0 19,12M16,4.8C17,4.8 17.8,4 17.8,3C17.8,2 17,1.2 16,1.2C15,1.2 14.2,2 14.2,3C14.2,4 15,4.8 16,4.8Z',
+  run: 'M13.5,5.5C14.59,5.5 15.5,4.58 15.5,3.5C15.5,2.38 14.59,1.5 13.5,1.5C12.39,1.5 11.5,2.38 11.5,3.5C11.5,4.58 12.39,5.5 13.5,5.5M9.89,19.38L10.89,15L13,17V23H15V15.5L12.89,13.5L13.5,10.5C14.79,12 16.79,13 19,13V11C17.09,11 15.5,10 14.69,8.58L13.69,7C13.29,6.38 12.69,6 12,6C11.69,6 11.5,6.08 11.19,6.08L6,8.28V13H8V9.58L9.79,8.88L8.19,17L3.29,16L2.89,18L9.89,19.38Z'
+};
+
+function interestLogos(logos) {
+  if (!logos || !logos.length) return '';
+  const sport = (l) => /\/sport\//.test(l.logo || '');
+  if (logos.every(sport)) {
+    return `<div class="v-ilogos">${logos.map((l) => {
+      const key = String(l.logo).split('/').pop().replace(/\.svg$/, '');
+      const path = SPORT_PATHS[key];
+      const pic = path ? `<svg class="pic" viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg>` : '';
+      return `<span class="v-sport">${pic}<span class="t">${esc(l.name)}</span></span>`;
+    }).join('')}</div>`;
+  }
+  // Un seul logo : logo carré et étiquette du nom (jeu de stratégie).
+  if (logos.length === 1) {
+    const l = logos[0];
+    return `<div class="v-ilogos">${logoHTML(l.name, l.logo, l.short, 's40')}<span class="v-tag v-itag">${esc(l.name)}</span></div>`;
+  }
+  // Rangée de logos (lectures) : le premier large s'il l'est, noms en texte masqué.
+  return `<div class="v-ilogos">${logos.map((l, i) =>
+    logoHTML(l.name, l.logo, l.short, i === 0 && l.wide ? 'wide' : 's40')).join('')}` +
+    `<span class="sr">${logos.map((l) => esc(l.name)).join(', ')}</span></div>`;
+}
+
+function proseHTML(s, num) {
+  const blocks = s.blocks.map((b, i) =>
+    `<div class="v-int v-reveal" style="--i:${i}"><span class="k lx" style="--k:2">${esc((b.meta || [])[0] || '')}</span>` +
+    `<p class="lx" style="--k:3">${b.body}</p>${interestLogos(b.logos)}</div>`).join('');
+  return `<div class="v-in">${sectionHead(s, num)}<div class="v-ints">${blocks}</div></div>`;
+}
+
+/* --------------------------------- contact --------------------------------- */
+
+function contactHTML(s, num) {
+  const c = T();
+  const body = s.body ? `<p class="v-cbody v-reveal lx" style="--i:0;--k:3">${esc(s.body)}</p>` : '';
+  return `<svg class="v-cblob" viewBox="0 0 400 400" aria-hidden="true"><path d="${contactBlobPath()}" style="fill:var(--wine-blob)"/></svg>
+    <div class="v-in" style="position:relative;z-index:1">${sectionHead(s, num, body)}
+      <a class="v-mail" href="mailto:${esc(CONFIG.email)}" style="--mail-ch:${Array.from(CONFIG.email).length}"><span class="ln"><span class="in">${mailHTML(CONFIG.email)}</span></span></a>
+      <div class="v-cside v-reveal" style="--i:2">
+        <button type="button" class="v-chipbtn" data-copy aria-live="polite">${COPY_ICON}<span class="lbl">${esc(c.ui.copy)}</span></button>
+        <a class="v-ghost" href="${esc(CONFIG.github)}" target="_blank" rel="noopener">${esc(CONFIG.githubLabel)}${ARROW}</a>
+        <a class="v-ghost" href="${esc(CONFIG.linkedin)}" target="_blank" rel="noopener">LinkedIn${ARROW}</a>
+      </div>
+      <div class="v-foot"><span>Florian Grolleau</span><span><a href="https://github.com/Flor5378/Flor5378.github.io" target="_blank" rel="noopener">${esc(c.ui.source)}</a> · <abbr title="${esc(c.ui.licenseTitle)}">${esc(c.ui.license)}</abbr></span></div>
+    </div>`;
+}
+
+const KINDS = {
+  entries: entriesHTML,
+  projects: (s, num) => projectsHTML(s, num),
+  skills: skillsHTML,
+  orgs: orgsHTML,
+  prose: proseHTML,
+  contact: contactHTML
+};
 
 // Feuilles créées une fois (l'état « vue » et l'observateur y restent attachés).
 function ensureSheets() {

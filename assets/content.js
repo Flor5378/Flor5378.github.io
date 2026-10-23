@@ -64,10 +64,10 @@ const ORGS = {
     { fr: 'Hadit', en: 'Hadit', logo: 'assets/logos/hadit.png', short: 'HADIT' },
     { fr: 'LVMH', en: 'LVMH', logo: 'lvmh.com', url: 'https://www.lvmh.com' },
     { fr: 'Sopra Steria', en: 'Sopra Steria', logo: 'soprasteria.com', url: 'https://www.soprasteria.com' },
-    { fr: 'Deloitte', en: 'Deloitte', logo: 'deloitte.com', url: 'https://www.deloitte.com' },
-    { fr: 'EY', en: 'EY', logo: 'ey.com', url: 'https://www.ey.com' },
-    { fr: 'Capgemini Invent', en: 'Capgemini Invent', logo: 'capgemini.com', url: 'https://www.capgemini.com' },
-    { fr: 'Wavestone', en: 'Wavestone', logo: 'wavestone.com', url: 'https://www.wavestone.com' }
+    { fr: 'Deloitte', en: 'Deloitte', logo: 'assets/logos/deloitte.png', url: 'https://www.deloitte.com' },
+    { fr: 'EY', en: 'EY', logo: 'assets/logos/ey.png', url: 'https://www.ey.com' },
+    { fr: 'Capgemini Invent', en: 'Capgemini Invent', logo: 'assets/logos/capgemini.png', url: 'https://www.capgemini.com' },
+    { fr: 'Wavestone', en: 'Wavestone', logo: 'assets/logos/wavestone.png', url: 'https://www.wavestone.com' }
   ]
 };
 

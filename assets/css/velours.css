@@ -354,6 +354,8 @@ img.v-ico{background:none;object-fit:contain}
 .v-ilogos{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:auto;padding-top:6px}
 .v-sport{display:inline-flex;align-items:center;gap:8px;padding:8px 12px 8px 10px;border-radius:999px;background:var(--paper);font-size:13.5px;font-weight:600;color:var(--wine)}
 .v-sport .t{color:var(--ink)}
+.v-int .v-itag{background:var(--paper)}
+.v-foot abbr{text-decoration:none}
 
 /* --------------------------------- contact --------------------------------- */
 
@@ -384,9 +386,9 @@ img.v-ico{background:none;object-fit:contain}
 .v-sheetmenu nav a:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
 .v-copy:hover{background:var(--wine);color:var(--paper)}
 .v-chip:hover{transform:translateY(-2px);background:var(--wine-soft);color:var(--wine)}
-.v-tile:hover{background:var(--tile);transform:translateY(-2px);border-radius:28px}
-.v-tile:hover .v-logo{border-radius:50%}
-.v-tile:hover .ic{opacity:1;transform:none}
+a.v-tile:hover{background:var(--tile);transform:translateY(-2px);border-radius:28px}
+a.v-tile:hover .v-logo{border-radius:50%}
+a.v-tile:hover .ic{opacity:1;transform:none}
 .v-mail:hover{background-size:100% .045em;background-position:0 100%}
 .v-chipbtn:hover{background:rgba(243,238,230,.24)}
 .v-foot a:hover{text-decoration-color:currentColor}
@@ -484,7 +486,7 @@ img.v-ico{background:none;object-fit:contain}
 /* ------------------------------- états actifs -------------------------------- */
 
 .v-prow:active{background:var(--wine-glide)}
-.v-tile:active{transform:scale(.98)}
+a.v-tile:active{transform:scale(.98)}
 .v-repo:active{background:var(--wine);color:var(--paper)}
 .v-org a:active,.v-mail:active,.v-ga:active,.v-foot a:active,.v-sig:active,.v-sheetmenu nav a:active{opacity:.62}
 
