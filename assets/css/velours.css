@@ -130,6 +130,11 @@ main:focus{outline:none}
 .v-where .n{color:var(--wine);font-weight:700;font-variant-numeric:tabular-nums}
 .v-where-l{display:block;overflow:hidden;height:1.4em}
 .v-where-l .in{display:block}
+/* Écran très étroit : le libellé cède la place plutôt que de déborder. */
+.v-tools{min-width:0}
+.v-where{min-width:0}
+.v-where-l{min-width:0}
+.v-where-l .in{overflow:hidden;text-overflow:ellipsis}
 :root[data-ssw="a"] .v-where-l .in{animation:v-flip-a 520ms var(--ease-out) backwards}
 :root[data-ssw="b"] .v-where-l .in{animation:v-flip-b 520ms var(--ease-out) backwards}
 .v-lang{position:relative;display:grid;grid-template-columns:42px 42px;padding:3px;margin:0;border:0;border-radius:999px;background:var(--wine-soft);min-width:0}
@@ -256,6 +261,18 @@ main:focus{outline:none}
 .v-row>.v-logo.wide{width:56px;height:56px;border-radius:18px}
 .v-logo.none{overflow:hidden;text-align:center;line-height:1.05;padding:0 4px}
 .v-logo.s40{width:40px;height:40px;border-radius:12px;font-size:10.5px}
+/* Logo réel : toujours sur une plaque claire, même en thème sombre (4.2, règle 1).
+   Une image qui échoue bascule sur les initiales (classe none). */
+.v-logo.img{position:relative;overflow:hidden;background-color:#fff;background-image:none}
+:root[data-theme="dark"] .v-logo.img{background-color:#F1E8DD}
+.v-logo .ini{display:none}
+.v-logo.none .ini{display:inline}
+.v-logo.img img{display:block;width:100%;height:100%;padding:6px;object-fit:contain}
+.v-logo.s40.img img{padding:8px}
+.v-logo.img.cover img{padding:0;object-fit:cover}
+/* Icône d'étiquette ou de puce : plaque claire en thème sombre pour les logos foncés. */
+img.v-ico{background:none;object-fit:contain}
+:root[data-theme="dark"] img.v-ico{background:#F1E8DD;padding:1px}
 .v-pop{position:absolute;z-index:6;width:min(370px,100%);padding:20px 20px 18px;border-radius:26px;background:var(--wine-hero);color:var(--on-wine);box-shadow:var(--shadow);clip-path:inset(0 calc(100% - 46px) calc(100% - 30px) 0 round 999px);opacity:0;pointer-events:none;transition:clip-path 300ms var(--ease-io),opacity 160ms ease 140ms}
 .v-pop[data-open="1"]{clip-path:inset(0 0 0 0 round 26px);opacity:1;pointer-events:auto;transition:clip-path 640ms var(--spring),opacity 120ms ease}
 .v-pop.up{transform:translateY(-100%);clip-path:inset(calc(100% - 30px) calc(100% - 46px) 0 0 round 999px)}
