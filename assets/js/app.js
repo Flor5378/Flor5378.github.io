@@ -5,6 +5,7 @@
    ========================================================================= */
 
 import { reducedMotion, liquidBlob, contactBlobPath, navPill, glide, springHeight } from './motion.js';
+import { renderCV } from './cv.js';
 
 const root = document.documentElement;
 const $ = (sel, el = document) => el.querySelector(sel);
@@ -1045,6 +1046,15 @@ document.addEventListener('keydown', (e) => {
 
 // Données GitHub chargées après le premier affichage.
 requestAnimationFrame(() => setTimeout(loadGitHub, 0));
+
+// Impression : le site imprime le CV, dans la langue affichée (8.1).
+const cvRoot = $('#cvprint');
+const printCV = () => renderCV(cvRoot, lang, GH);
+addEventListener('beforeprint', printCV);
+addEventListener('afterprint', () => { cvRoot.innerHTML = ''; });
+if (typeof matchMedia === 'function') {
+  matchMedia('print').addEventListener('change', (e) => { if (e.matches && !cvRoot.firstChild) printCV(); });
+}
 
 if (document.fonts && document.fonts.ready) {
   document.fonts.ready.then(() => {

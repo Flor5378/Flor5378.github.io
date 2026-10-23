@@ -28,8 +28,9 @@ const CONFIG = {
   github: 'https://github.com/Flor5378',
   githubLabel: 'github.com/Flor5378',
   linkedin: 'https://www.linkedin.com/in/florian-grolleau-3a7a22274',
-  photo: 'assets/photo.jpg', // optionnel : si le fichier n’existe pas, l’avatar disparaît
-  initials: 'FG'
+  site: 'https://flor5378.github.io',   // adresse publique, au pied du CV
+  photo: 'assets/photo.jpg', // n’est plus utilisé (design Velours)
+  initials: 'FG'             // n’est plus utilisé (design Velours)
 };
 
 /* Organisations visées, communes aux deux langues. */
@@ -113,6 +114,7 @@ const CONTENT = {
       langLegend: 'Langue',
       skip: 'Aller au contenu',
       cv: 'Curriculum vitae',
+      privateRepo: 'dépôt privé',
       themeLabel: 'Basculer le thème',
       source: 'Code source',
       license: 'Contenu sous licence CC BY-NC-SA 4.0',
@@ -345,6 +347,7 @@ const CONTENT = {
       langLegend: 'Language',
       skip: 'Skip to content',
       cv: 'Curriculum vitae',
+      privateRepo: 'private repository',
       themeLabel: 'Toggle theme',
       source: 'Source code',
       license: 'Content under a CC BY-NC-SA 4.0 licence',
