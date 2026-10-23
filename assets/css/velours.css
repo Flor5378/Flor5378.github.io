@@ -180,6 +180,17 @@ main:focus{outline:none}
 .v-heroW{position:sticky;top:76px;z-index:1;padding:0 12px}
 .v-hero{position:relative;overflow:hidden;border-radius:var(--r-sheet);background:var(--wine-hero);color:var(--on-wine);min-height:clamp(560px,52vw,760px);padding:52px var(--pad) 48px;display:flex;flex-direction:column;justify-content:space-between;transform-origin:50% 0;will-change:transform;animation:v-sheet-in 1100ms var(--ease-out) backwards}
 .v-dim{position:absolute;inset:0;background:#0B0506;opacity:0;pointer-events:none;z-index:3}
+/* Recul de l'accueil lié au défilement, hors du fil principal là où le
+   navigateur le permet (5.2, 5.10) ; ailleurs, app.js prend le relais.
+   Le recul porte sur l'enveloppe pour ne pas écraser l'entrée de l'accueil. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .v-heroW{transform-origin:50% 0;animation:v-recede linear both;animation-timeline:scroll(root);animation-range:0 calc(var(--hero-h, 700px) * .9)}
+    .v-dim{animation:v-dim linear both;animation-timeline:scroll(root);animation-range:0 calc(var(--hero-h, 700px) * .9)}
+  }
+}
+@keyframes v-recede{from{transform:none}to{transform:scale(.94)}}
+@keyframes v-dim{from{opacity:0}to{opacity:.42}}
 .v-blob{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .v-hero-top,.v-name,.v-hero-bot{position:relative;z-index:2}
 .v-hero-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:14px 20px}
@@ -235,7 +246,7 @@ main:focus{outline:none}
 
 /* --------------------------- formation, expérience -------------------------- */
 
-.v-list{position:relative}
+.v-list{position:relative;contain:layout}   /* layout seulement : la surbrillance déborde de 24 px */
 .v-glide{position:absolute;left:calc(-1 * min(24px, var(--pad)));right:calc(-1 * min(24px, var(--pad)));top:0;height:0;border-radius:28px;background:var(--wine-glide);opacity:0;pointer-events:none;transition:opacity 260ms ease;will-change:transform}
 .v-list[data-glide="1"] .v-glide{opacity:1}
 .v-row{position:relative;display:grid;grid-template-columns:170px minmax(0,1fr) minmax(0,1.25fr) 56px;gap:32px;padding:30px 0}
@@ -300,7 +311,7 @@ img.v-ico{background:none;object-fit:contain}
 .v-prow.sel .t{color:var(--wine)}
 .v-prow.sel .ic{opacity:1;transform:none}
 .v-panelW{position:sticky;top:96px}
-.v-panel{position:relative;overflow:hidden;border-radius:30px;background:var(--wine-hero);color:var(--on-wine);box-shadow:var(--shadow);will-change:height}
+.v-panel{position:relative;overflow:hidden;border-radius:30px;background:var(--wine-hero);color:var(--on-wine);box-shadow:var(--shadow);will-change:height;contain:layout paint}
 .v-panel-in{padding:26px 26px 24px}
 .v-panel[data-k="a"] .v-swap{animation:v-swap-a 520ms var(--ease-out) backwards;animation-delay:calc(var(--j,0) * 40ms)}
 .v-panel[data-k="b"] .v-swap{animation:v-swap-b 520ms var(--ease-out) backwards;animation-delay:calc(var(--j,0) * 40ms)}

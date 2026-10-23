@@ -722,10 +722,11 @@ const seenIO = typeof IntersectionObserver === 'function'
   }, { threshold: 0.04 })
   : null;
 
+// Mouvement réduit : rien n'attend le défilement, le contenu n'est jamais masqué (5.9).
 function watchSheets() {
   sheets.forEach((el) => {
     if (el.dataset.seen) return;
-    if (seenIO) seenIO.observe(el);
+    if (seenIO && !reducedMotion()) seenIO.observe(el);
     else el.dataset.seen = '1';
   });
 }
@@ -909,8 +910,10 @@ function setActive(id) {
 
 const hero = $('#hero');
 const dim = $('#dim');
+const scrollTimeline = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline: scroll()');
 
 function recede() {
+  if (scrollTimeline) return;   // la feuille de style s'en charge (velours.css)
   if (reducedMotion()) {
     hero.style.transform = '';
     dim.style.opacity = '';
@@ -1014,6 +1017,7 @@ document.addEventListener('click', (e) => {
 
 function measureBar() {
   root.style.setProperty('--bar-h', `${bar.offsetHeight}px`);
+  root.style.setProperty('--hero-h', `${hero.offsetHeight}px`);
 }
 
 render();
