@@ -12,6 +12,8 @@
    chips  : 'Nom'                     → texte seul
             'Nom|python'              → icône assets/logos/tech/python.svg
    repo   : 'Flor5378/nom-du-depot'   → lien et aperçu GitHub (assets/github.json)
+   image  : 'assets/previews/x.webp'  → image de l’aperçu de projet, format 16:9
+   alt    : 'Description de l’image'  → texte lu par les lecteurs d’écran
 
    Limites de saisie conseillées (au-delà, la mise en page souffre)
    ----------------------------------------------------------------
@@ -218,11 +220,11 @@ const CONTENT = {
           {
             label: 'Sciences sociales',
             items: [
-              { title: 'Drones et éthique dans la guerre moderne', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics' },
-              { title: 'Entreprises privées et politiques migratoires américaines', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay' },
-              { title: 'Challenge Données et Territoires', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories' },
-              { title: 'Formations en ligne et taux de réussite', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques' },
-              { title: 'Marchés prédictifs et concurrence de l’information', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle' }
+              { title: 'Drones et éthique dans la guerre moderne', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics', image: 'assets/previews/drones.webp', alt: 'Drone MQ-9 Reaper en vol au-dessus du désert' },
+              { title: 'Entreprises privées et politiques migratoires américaines', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay', image: 'assets/previews/digital-democracy.webp', alt: 'Page de titre du rapport « Digital Democracy », Sciences Po Saint-Germain-en-Laye et CY Cergy Paris Université' },
+              { title: 'Challenge Données et Territoires', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories', image: 'assets/previews/donnees-territoires.webp', alt: 'Graphique du taux de croissance annuel des effectifs bilingues en breton et en basque, de 2004 à 2024' },
+              { title: 'Formations en ligne et taux de réussite', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques', image: 'assets/previews/formations-en-ligne.webp', alt: 'Tableau des résultats d’une régression logistique sur la réussite à l’examen selon le genre et l’IDH' },
+              { title: 'Marchés prédictifs et concurrence de l’information', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle', image: 'assets/previews/marches-predictifs.webp', alt: 'Extrait du mémoire sur les droits asymétriques des marchés prédictifs' }
             ]
           },
           {
@@ -451,11 +453,11 @@ const CONTENT = {
           {
             label: 'Social sciences',
             items: [
-              { title: 'Modern warfare UAVs and ethics', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics' },
-              { title: 'Private companies and US immigration policies', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay' },
-              { title: 'Data and Territories Challenge', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories' },
-              { title: 'Online courses and success rates', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques' },
-              { title: 'Predictive markets and information competition', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle' }
+              { title: 'Modern warfare UAVs and ethics', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics', image: 'assets/previews/drones.webp', alt: 'MQ-9 Reaper drone flying over the desert' },
+              { title: 'Private companies and US immigration policies', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay', image: 'assets/previews/digital-democracy.webp', alt: 'Title page of the “Digital Democracy” report, Sciences Po Saint-Germain-en-Laye and CY Cergy Paris Université' },
+              { title: 'Data and Territories Challenge', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories', image: 'assets/previews/donnees-territoires.webp', alt: 'Chart of the annual growth of bilingual Breton and Basque enrolment, from 2004 to 2024' },
+              { title: 'Online courses and success rates', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques', image: 'assets/previews/formations-en-ligne.webp', alt: 'Results table of a logistic regression on exam success by gender and HDI' },
+              { title: 'Predictive markets and information competition', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle', image: 'assets/previews/marches-predictifs.webp', alt: 'Excerpt from the paper on asymmetric rights in prediction markets' }
             ]
           },
           {

@@ -20,6 +20,7 @@ assets/
   js/dev-data.js            jeux de données de test, chargé seulement en local
   fonts/                    Figtree variable, auto-hébergée (licence OFL)
   logos/                    logos locaux (BAED, Passés composés, Bergen, MUN, Deloitte, EY, Capgemini, Wavestone)
+  previews/                 images des aperçus de projets (WebP, 16:9)
   logos/tech/               icônes des technologies (Devicon)
   logos/sport/              pictogrammes de sport (Material Design Icons)
 .github/workflows/github-data.yml   action quotidienne qui met à jour github.json
@@ -58,7 +59,7 @@ Ajouter un projet, dans `groups[].items` :
 { title: 'Titre du projet', lang: 'FR', repo: 'Flor5378/nom-du-depot' },
 ```
 
-Le lien et l'aperçu sont déduits de `repo`. La navigation, la numérotation des sections et les compteurs se régénèrent seuls. Une section ou un groupe vide est masqué.
+Le lien et l'aperçu sont déduits de `repo`. Pour illustrer l'aperçu, ajoutez `image: 'assets/previews/x.webp'` (format 16:9, 1280 px de large conseillés) et `alt: 'Description de l’image'` dans chaque langue : l'image s'affiche en tête du panneau et de la feuille basse. La navigation, la numérotation des sections et les compteurs se régénèrent seuls. Une section ou un groupe vide est masqué.
 
 Dans `hero.meta`, la ligne « Statut » s'affiche en pastille dans l'accueil, la ligne « Actuellement » sous le rôle avec une icône de lieu.
 

@@ -231,7 +231,7 @@ function projectInfo(id) {
     if (s.kind !== 'projects') continue;
     for (const g of s.groups) {
       const it = g.items.find((p) => p.repo === id);
-      if (it) return { title: it.title, lng: it.lang, group: g.label };
+      if (it) return { title: it.title, lng: it.lang, group: g.label, image: it.image, alt: it.alt };
     }
   }
   return null;
@@ -255,7 +255,11 @@ function previewHTML(id, where) {
   const title = info ? info.title : slug;
   const sw = (j) => (where === 'panel' ? ` v-swap" style="--j:${j}` : '');
   const kicker = `GitHub · Flor5378${where !== 'pop' && info ? ' · ' + info.group : ''}`;
-  let html = `<p class="v-gk${sw(0)}">${esc(kicker)}</p>` +
+  // Image du projet (content.js) : panneau et feuille basse ; le popover reste compact.
+  const figure = where !== 'pop' && info && info.image
+    ? `<figure class="v-gimg${sw(0)}"><img src="${esc(info.image)}" alt="${esc(info.alt || '')}" width="1280" height="720" decoding="async"></figure>`
+    : '';
+  let html = figure + `<p class="v-gk${sw(0)}">${esc(kicker)}</p>` +
     `<p class="v-gt${sw(1)}"${where === 'sheet' ? ' tabindex="-1" data-sheet-title' : ''}>${esc(title)}</p>` +
     (info ? `<p class="v-gk v-slug${sw(1)}">${esc(slug)}</p>` : '');
 
@@ -736,7 +740,33 @@ function fillSheets() {
   pop.link = null;
   panelEl = null;
   refreshPanel(false);
+  T().sections.forEach((s) => {
+    const el = sheets.get(s.id);
+    if (s.kind !== 'projects' || el.hidden) return;
+    if (preIO) preIO.observe(el);
+    else preloadPreviews();
+  });
 }
+
+// Images d'aperçu : chargées quand les projets approchent, prêtes au premier survol.
+const preloaded = new Set();
+function preloadPreviews() {
+  T().sections.forEach((s) => {
+    if (s.kind !== 'projects') return;
+    s.groups.forEach((g) => g.items.forEach((p) => {
+      if (!p.image || preloaded.has(p.image)) return;
+      preloaded.add(p.image);
+      new Image().src = p.image;
+    }));
+  });
+}
+const preIO = typeof IntersectionObserver === 'function'
+  ? new IntersectionObserver((list) => {
+    if (!list.some((en) => en.isIntersecting)) return;
+    preIO.disconnect();
+    preloadPreviews();
+  }, { rootMargin: '800px 0px' })
+  : null;
 
 // Arrivée des feuilles : 4 % visible, une seule fois (5.2, 5.10).
 const seenIO = typeof IntersectionObserver === 'function'
