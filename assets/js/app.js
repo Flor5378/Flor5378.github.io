@@ -674,8 +674,10 @@ function interestLogos(logos) {
 
 function proseHTML(s, num) {
   const blocks = s.blocks.map((b, i) =>
-    `<div class="v-int v-reveal" style="--i:${i}"><span class="k lx" style="--k:2">${esc((b.meta || [])[0] || '')}</span>` +
-    `<p class="lx" style="--k:3">${b.body}</p>${interestLogos(b.logos)}</div>`).join('');
+    `<div class="v-int v-reveal${b.image ? ' wimg' : ''}" style="--i:${i}"><span class="k lx" style="--k:2">${esc((b.meta || [])[0] || '')}</span>` +
+    `<p class="lx" style="--k:3">${b.body}</p>${interestLogos(b.logos)}` +
+    (b.image ? `<figure class="v-gimg"><img src="${esc(b.image)}" alt="${esc(b.alt || '')}" width="1024" height="576" loading="lazy" decoding="async"></figure>` : '') +
+    `</div>`).join('');
   return `<div class="v-in">${sectionHead(s, num)}<div class="v-ints">${blocks}</div></div>`;
 }
 

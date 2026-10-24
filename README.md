@@ -59,7 +59,7 @@ Ajouter un projet, dans `groups[].items` :
 { title: 'Titre du projet', lang: 'FR', repo: 'Flor5378/nom-du-depot' },
 ```
 
-Le lien et l'aperçu sont déduits de `repo`. Pour illustrer l'aperçu, ajoutez `image: 'assets/previews/x.webp'` (format 16:9, 1280 px de large conseillés) et `alt: 'Description de l’image'` dans chaque langue : l'image s'affiche en tête du panneau et de la feuille basse. La navigation, la numérotation des sections et les compteurs se régénèrent seuls. Une section ou un groupe vide est masqué.
+Le lien et l'aperçu sont déduits de `repo`. Pour illustrer l'aperçu, ajoutez `image: 'assets/previews/x.webp'` (format 16:9, 1280 px de large conseillés) et `alt: 'Description de l’image'` dans chaque langue : l'image s'affiche en tête du panneau et de la feuille basse. Les mêmes champs sur un bloc des centres d'intérêt affichent l'image dans sa carte, qui passe alors en pleine largeur. La navigation, la numérotation des sections et les compteurs se régénèrent seuls. Une section ou un groupe vide est masqué.
 
 Dans `hero.meta`, la ligne « Statut » s'affiche en pastille dans l'accueil, la ligne « Actuellement » sous le rôle avec une icône de lieu.
 

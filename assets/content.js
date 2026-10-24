@@ -124,7 +124,7 @@ const CONTENT = {
       role: 'Science politique et Data Science · Étudiant en Double Diplôme Sciences Po & CY Tech (ex-EISTI)',
       intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement, la sécurité ou la finance.',
       meta: [
-        ['Statut', 'Disponible à partir de février 2027'],
+        ['Statut', 'Disponible à partir de février 2027 · Alternance & Stage'],
         ['Actuellement', 'Versailles, France'],
         ['Base', 'Île-de-France']
       ]
@@ -309,7 +309,9 @@ const CONTENT = {
             body: 'Joueur semi-professionnel d’Age of Empires II, 2 200 Elo et 150ᵉ place mondiale. Un entraînement quotidien à la décision rapide en information incomplète.',
             logos: [
               { name: 'Age of Empires II', logo: 'ageofempires.com', url: 'https://www.ageofempires.com' }
-            ]
+            ],
+            image: 'assets/previews/aoe-elo.webp',
+            alt: 'Historique du classement Elo d’Age of Empires II en 1 contre 1 classé, d’environ 1 100 en 2022 à plus de 2 200 en 2026'
           }
         ]
       },
@@ -317,7 +319,7 @@ const CONTENT = {
         id: 'contact',
         title: 'Contact',
         kind: 'contact',
-        body: 'Je cherche un premier poste en analyse de données, intelligence économique ou affaires internationales, à partir de février 2027. Le plus simple reste le courriel.'
+        body: 'Je cherche un stage ou une alternance en analyse de données, intelligence économique ou en finance, à partir de février 2027, pour 6 mois.'
       }
     ]
   },
@@ -356,7 +358,7 @@ const CONTENT = {
       role: 'Political Science and Data Science · Dual Degree Student, Sciences Po & CY Tech School of Engineering (formerly EISTI)',
       intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development, security or finance.',
       meta: [
-        ['Status', 'Available from February 2027'],
+        ['Status', 'Available from February 2027 · Work-study & Internship'],
         ['Currently', 'Versailles, France'],
         ['Based in', 'Île-de-France']
       ]
@@ -541,7 +543,9 @@ const CONTENT = {
             body: 'Semi-professional Age of Empires II player, 2,200 Elo and ranked 150th worldwide. Daily practice at fast decisions under incomplete information.',
             logos: [
               { name: 'Age of Empires II', logo: 'ageofempires.com', url: 'https://www.ageofempires.com' }
-            ]
+            ],
+            image: 'assets/previews/aoe-elo.webp',
+            alt: 'Age of Empires II ranked 1v1 Elo history, from about 1,100 in 2022 to over 2,200 in 2026'
           }
         ]
       },
@@ -549,7 +553,7 @@ const CONTENT = {
         id: 'contact',
         title: 'Contact',
         kind: 'contact',
-        body: 'I am looking for a first role in data analysis, competitive intelligence or international affairs, from February 2027. Email is the surest way to reach me.'
+        body: 'I am looking for an internship or a work-study placement in data analysis, competitive intelligence or finance, from February 2027, for 6 months.'
       }
     ]
   }
