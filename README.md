@@ -86,9 +86,9 @@ Les logos affichés appartiennent à leurs détenteurs et ne sont utilisés qu'�
 Chaque compétence s'écrit `'Nom'` ou `'Nom|icone'`, où `icone` correspond à un fichier de `assets/logos/tech/`. Les icônes disponibles :
 
 ```
-bash css3 docker duckdb git html5 java javascript jupyter keras latex
-matplotlib mongodb numpy pandas plotly postgresql powershell python r
-react scikitlearn selenium streamlit ubuntu
+arcgis bash css3 docker duckdb geopandas git html5 java javascript jupyter
+keras latex matplotlib mongodb numpy pandas plotly postgresql powershell
+python qgis r react scikitlearn selenium streamlit talend ubuntu
 ```
 
 Une icône absente ou mal nommée disparaît sans casser la mise en page, le libellé reste affiché.
@@ -116,4 +116,4 @@ Le contenu du site est publié sous [CC BY-NC-SA 4.0](https://creativecommons.or
 
 ## Crédits
 
-Figtree sous licence SIL Open Font License (`assets/fonts/figtree-OFL.txt`). Devicon sous licence MIT. Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0. Les logos affichés restent la propriété de leurs détenteurs.
+Figtree sous licence SIL Open Font License (`assets/fonts/figtree-OFL.txt`). Devicon sous licence MIT. Icônes QGIS, ArcGIS, GeoPandas et Talend issues de Simple Icons (CC0). Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0. Les logos affichés restent la propriété de leurs détenteurs.

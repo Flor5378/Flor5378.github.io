@@ -230,18 +230,17 @@ const CONTENT = {
           {
             label: 'Data science',
             items: [
-              { title: 'Classification de drones en Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA' },
-              { title: 'Études sur l’indice de qualité de l’air', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies' },
-              { title: 'Clustering des facteurs de criminalité aux États-Unis', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering' },
-              { title: 'Requêtes SQL et optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD' },
-              { title: 'Algorithmes de tri en Python', lang: 'FR', repo: 'Flor5378/-FR-ENG-SortingAlgorithmsinPython' }
+              { title: 'Classification de drones en Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine.webp', alt: 'Carte mentale de l’étude sur la classification de trajectoires par apprentissage profond' },
+              { title: 'Études sur l’indice de qualité de l’air', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies', image: 'assets/previews/air-quality.webp', alt: 'Page de titre du rapport « Predicting Air Quality Index with Data Science and Machine Learning »' },
+              { title: 'Clustering des facteurs de criminalité aux États-Unis', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering', image: 'assets/previews/clustering-criminalite.webp', alt: 'Analyse en composantes principales en trois dimensions des facteurs de criminalité' },
+              { title: 'Requêtes SQL et optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD', image: 'assets/previews/requetes-sql.webp', alt: 'Page de titre du projet de base de données sur la population française entre 1968 et 2020' }
             ]
           },
           {
             label: 'Terrain',
             items: [
-              { title: 'Plateforme de renseignement prédictif', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' },
-              { title: 'Gabon Monitor, veille presse et réseaux sociaux', lang: 'FR', repo: 'Flor5378/Gabon-Monitor' }
+              { title: 'Gabon Monitor, veille presse et réseaux sociaux', lang: 'FR', repo: 'Flor5378/Gabon-Monitor', image: 'assets/previews/gabon-monitor.webp', alt: 'Tableau de bord « Veille presse Gabon » : volume quotidien d’articles par source' },
+              { title: 'Plateforme de renseignement prédictif', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' }
             ]
           }
         ]
@@ -253,7 +252,7 @@ const CONTENT = {
         rows: [
           {
             label: 'Data science',
-            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend', 'Selenium|selenium', 'BeautifulSoup']
+            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend|talend', 'Selenium|selenium', 'BeautifulSoup']
           },
           {
             label: 'Intelligence artificielle et données',
@@ -261,11 +260,11 @@ const CONTENT = {
           },
           {
             label: 'Géomatique et data visualisation',
-            chips: ['QGIS', 'ArcGIS', 'ArcPy', 'GeoPandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistiques']
+            chips: ['QGIS|qgis', 'ArcGIS|arcgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistiques']
           },
           {
             label: 'Science politique',
-            chips: ['Relations internationales', 'Géopolitique', 'Analyse des politiques publiques', 'Politiques de la donnée publique', 'Sciences sociales computationnelles', 'Controverses de l’IA', 'Afrique centrale et golfe de Guinée', 'Europe occidentale', 'Scandinavie', 'Économie', 'Veille scientifique']
+            chips: ['Relations internationales', 'Géopolitique', 'Analyse des politiques publiques', 'Politiques de la donnée publique', 'Sciences sociales computationnelles', 'Controverses de l’IA', 'Afrique centrale et golfe de Guinée', 'Europe occidentale', 'Scandinavie', 'Économie', 'Intelligence économique', 'Finance', 'Veille scientifique']
           },
           {
             label: 'Langues',
@@ -463,18 +462,17 @@ const CONTENT = {
           {
             label: 'Data science',
             items: [
-              { title: 'Drone classification in Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA' },
-              { title: 'Air quality index studies', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies' },
-              { title: 'Clustering US crime determinants', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering' },
-              { title: 'SQL queries and optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD' },
-              { title: 'Sorting algorithms in Python', lang: 'FR', repo: 'Flor5378/-FR-ENG-SortingAlgorithmsinPython' }
+              { title: 'Drone classification in Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine.webp', alt: 'Mind map of the study on trajectory classification with deep learning' },
+              { title: 'Air quality index studies', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies', image: 'assets/previews/air-quality.webp', alt: 'Title page of the “Predicting Air Quality Index with Data Science and Machine Learning” report' },
+              { title: 'Clustering US crime determinants', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering', image: 'assets/previews/clustering-criminalite.webp', alt: 'Three-dimensional principal component analysis of crime factors' },
+              { title: 'SQL queries and optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD', image: 'assets/previews/requetes-sql.webp', alt: 'Title page of the database project on the French population between 1968 and 2020' }
             ]
           },
           {
             label: 'Field work',
             items: [
-              { title: 'Predictive intelligence platform', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' },
-              { title: 'Gabon Monitor, press and social media monitoring', lang: 'FR', repo: 'Flor5378/Gabon-Monitor' }
+              { title: 'Gabon Monitor, press and social media monitoring', lang: 'FR', repo: 'Flor5378/Gabon-Monitor', image: 'assets/previews/gabon-monitor.webp', alt: '“Veille presse Gabon” dashboard: daily article volume by source' },
+              { title: 'Predictive intelligence platform', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' }
             ]
           }
         ]
@@ -486,7 +484,7 @@ const CONTENT = {
         rows: [
           {
             label: 'Data science',
-            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend', 'Selenium|selenium', 'BeautifulSoup']
+            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend|talend', 'Selenium|selenium', 'BeautifulSoup']
           },
           {
             label: 'Artificial intelligence and data',
@@ -494,11 +492,11 @@ const CONTENT = {
           },
           {
             label: 'Geospatial and data visualisation',
-            chips: ['QGIS', 'ArcGIS', 'ArcPy', 'GeoPandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistics']
+            chips: ['QGIS|qgis', 'ArcGIS|arcgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistics']
           },
           {
             label: 'Political science',
-            chips: ['International relations', 'Geopolitics', 'Policy analysis', 'Public data policy', 'Computational social science', 'AI controversies', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia', 'Economics', 'Research monitoring']
+            chips: ['International relations', 'Geopolitics', 'Policy analysis', 'Public data policy', 'Computational social science', 'AI controversies', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia', 'Economics', 'Competitive intelligence', 'Finance', 'Research monitoring']
           },
           {
             label: 'Languages',
