@@ -19,7 +19,8 @@ assets/
   js/cv.js                  rendu du CV depuis content.js
   js/dev-data.js            jeux de données de test, chargé seulement en local
   fonts/                    Figtree variable, auto-hébergée (licence OFL)
-  logos/                    logos locaux (BAED, Passés composés, Deloitte, EY, Capgemini, Wavestone)
+  logos/                    logos locaux (BAED, Passés composés, Bergen, MUN, Deloitte, EY, Capgemini, Wavestone)
+  previews/                 images des aperçus de projets (WebP, 16:9)
   logos/tech/               icônes des technologies (Devicon)
   logos/sport/              pictogrammes de sport (Material Design Icons)
 .github/workflows/github-data.yml   action quotidienne qui met à jour github.json
@@ -58,7 +59,7 @@ Ajouter un projet, dans `groups[].items` :
 { title: 'Titre du projet', lang: 'FR', repo: 'Flor5378/nom-du-depot' },
 ```
 
-Le lien et l'aperçu sont déduits de `repo`. La navigation, la numérotation des sections et les compteurs se régénèrent seuls. Une section ou un groupe vide est masqué.
+Le lien et l'aperçu sont déduits de `repo`. Pour illustrer l'aperçu, ajoutez `image: 'assets/previews/x.webp'` (format 16:9, 1280 px de large conseillés) et `alt: 'Description de l’image'` dans chaque langue : l'image s'affiche en tête du panneau et de la feuille basse. Les mêmes champs sur un bloc des centres d'intérêt affichent l'image dans sa carte, qui passe alors en pleine largeur. La navigation, la numérotation des sections et les compteurs se régénèrent seuls. Une section ou un groupe vide est masqué.
 
 Dans `hero.meta`, la ligne « Statut » s'affiche en pastille dans l'accueil, la ligne « Actuellement » sous le rôle avec une icône de lieu.
 
@@ -76,7 +77,7 @@ Le navigateur n'interroge jamais l'API GitHub. L'action `github-data.yml` lit le
 
 Dans une entrée, un logo local qui a son propre fond (coin opaque) remplit le carré ; un logo transparent y est contenu avec une marge. `wide: true` signale un logo texte : pastille allongée dans les intérêts, image contenue dans le carré d'une entrée.
 
-Deux logos n'ont pas encore de fichier, leurs initiales s'affichent : Hadit (organisations) et MUN Saint-Germain (expérience). Pour les afficher, déposez `assets/logos/hadit.png` et `assets/logos/mun.png`, puis ajoutez `logo: 'assets/logos/hadit.png'` (ou `mun.png`) à l'élément correspondant. Format conseillé : PNG ou SVG carré, fond transparent, 128 px minimum.
+Hadit (organisations) n'a pas encore de fichier, ses initiales s'affichent. Pour afficher son logo, déposez `assets/logos/hadit.png` puis ajoutez `logo: 'assets/logos/hadit.png'` à l'élément correspondant. Format conseillé : PNG ou SVG carré, fond transparent, 128 px minimum.
 
 Les logos affichés appartiennent à leurs détenteurs et ne sont utilisés qu'à titre de référence.
 
@@ -85,9 +86,9 @@ Les logos affichés appartiennent à leurs détenteurs et ne sont utilisés qu'�
 Chaque compétence s'écrit `'Nom'` ou `'Nom|icone'`, où `icone` correspond à un fichier de `assets/logos/tech/`. Les icônes disponibles :
 
 ```
-bash css3 docker duckdb git html5 java javascript jupyter keras latex
-matplotlib mongodb numpy pandas plotly postgresql powershell python r
-react scikitlearn selenium streamlit ubuntu
+arcgis bash css3 docker duckdb geopandas git html5 java javascript jupyter
+keras latex matplotlib mongodb numpy pandas plotly postgresql powershell
+python qgis r react scikitlearn selenium streamlit talend ubuntu
 ```
 
 Une icône absente ou mal nommée disparaît sans casser la mise en page, le libellé reste affiché.
@@ -115,4 +116,4 @@ Le contenu du site est publié sous [CC BY-NC-SA 4.0](https://creativecommons.or
 
 ## Crédits
 
-Figtree sous licence SIL Open Font License (`assets/fonts/figtree-OFL.txt`). Devicon sous licence MIT. Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0. Les logos affichés restent la propriété de leurs détenteurs.
+Figtree sous licence SIL Open Font License (`assets/fonts/figtree-OFL.txt`). Devicon sous licence MIT. Icônes QGIS, ArcGIS, GeoPandas et Talend issues de Simple Icons (CC0). Pictogrammes de sport issus de Material Design Icons, licence Apache 2.0. Les logos affichés restent la propriété de leurs détenteurs.

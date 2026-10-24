@@ -12,6 +12,8 @@
    chips  : 'Nom'                     → texte seul
             'Nom|python'              → icône assets/logos/tech/python.svg
    repo   : 'Flor5378/nom-du-depot'   → lien et aperçu GitHub (assets/github.json)
+   image  : 'assets/previews/x.webp'  → image de l’aperçu de projet, format 16:9
+   alt    : 'Description de l’image'  → texte lu par les lecteurs d’écran
 
    Limites de saisie conseillées (au-delà, la mise en page souffre)
    ----------------------------------------------------------------
@@ -119,12 +121,12 @@ const CONTENT = {
       licenseTitle: 'Attribution, pas d’utilisation commerciale, partage dans les mêmes conditions'
     },
     hero: {
-      role: 'Science politique et ingénierie data · Double diplôme Sciences Po et CY Tech',
-      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement ou la sécurité.',
+      role: 'Science politique et Data Science · Étudiant en Double Diplôme Sciences Po & CY Tech (ex-EISTI)',
+      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement, la sécurité ou la finance.',
       meta: [
-        ['Statut', 'Disponible à partir de février 2027'],
+        ['Statut', 'Disponible à partir de février 2027 · Alternance & Stage'],
         ['Actuellement', 'Versailles, France'],
-        ['Base', 'Région parisienne, France']
+        ['Base', 'Île-de-France']
       ]
     },
     sections: [
@@ -152,7 +154,7 @@ const CONTENT = {
           {
             title: 'Université de Bergen',
             url: 'https://www.uib.no/en',
-            logo: 'uib.no',
+            logo: 'assets/logos/uib.png',
             sub: 'Échange académique Erasmus',
             meta: ['01/2025 → 06/2025', 'Norvège'],
             body: 'Un semestre consacré aux aires régionales et aux régimes politiques : droits des peuples autochtones, politique russe, analyse comparée des régimes latino-américains.'
@@ -168,9 +170,9 @@ const CONTENT = {
             title: 'Ministère des Armées',
             url: 'https://www.linkedin.com/company/commandement-pour-l-afrique-cpa/',
             logo: 'defense.gouv.fr',
-            sub: 'Stagiaire data science et analyse',
+            sub: 'Stagiaire Data Science et Relations Internationales',
             meta: ['04/2026 → 08/2026', 'Libreville, Gabon'],
-            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle, sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone : plus de 21 millions d’utilisateurs suivis, plusieurs dizaines de milliers de publications et plusieurs milliards de vues chaque semaine.',
+            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle (BILI), sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone : plus de 21 millions d’utilisateurs suivis, plusieurs dizaines de milliers de publications et plusieurs milliards de vues chaque semaine.',
             tags: ['Python|python', 'DuckDB|duckdb', 'Streamlit|streamlit', 'NLP', 'OSINT']
           },
           {
@@ -180,7 +182,7 @@ const CONTENT = {
             short: 'BAED',
             sub: 'Pôle partenariats · association de 150 membres',
             meta: ['04/2025 → 04/2026', 'France'],
-            body: 'En charge des relations partenaires, des industriels de la défense aux autorités militaires. Présence au salon MILIPOL 2025 et aux cérémonies officielles, rédaction d’articles et de notes de synthèse pour les membres.'
+            body: 'En charge des relations partenaires, des industriels de la défense aux autorités militaires. Présence au salon MILIPOL 2025 et aux cérémonies officielles (ravivage de la flamme, visite de la DGGN), rédaction d’articles et de notes de synthèse pour les membres.'
           },
           {
             title: 'ANFSI',
@@ -201,6 +203,7 @@ const CONTENT = {
           },
           {
             title: 'MUN Saint-Germain',
+            logo: 'assets/logos/mun.png',
             short: 'MUN',
             sub: 'Trésorier · association de 100 membres',
             meta: ['09/2023 → 12/2024', 'Saint-Germain-en-Laye'],
@@ -217,28 +220,27 @@ const CONTENT = {
           {
             label: 'Sciences sociales',
             items: [
-              { title: 'Drones et éthique dans la guerre moderne', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics' },
-              { title: 'Entreprises privées et politiques migratoires américaines', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay' },
-              { title: 'Challenge Données et Territoires', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories' },
-              { title: 'Formations en ligne et taux de réussite', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques' },
-              { title: 'Marchés prédictifs et concurrence de l’information', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle' }
+              { title: 'Drones et éthique dans la guerre moderne', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics', image: 'assets/previews/drones.webp', alt: 'Drone MQ-9 Reaper en vol au-dessus du désert' },
+              { title: 'Entreprises privées et politiques migratoires américaines', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay', image: 'assets/previews/digital-democracy.webp', alt: 'Page de titre du rapport « Digital Democracy », Sciences Po Saint-Germain-en-Laye et CY Cergy Paris Université' },
+              { title: 'Challenge Données et Territoires', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories', image: 'assets/previews/donnees-territoires.webp', alt: 'Graphique du taux de croissance annuel des effectifs bilingues en breton et en basque, de 2004 à 2024' },
+              { title: 'Formations en ligne et taux de réussite', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques', image: 'assets/previews/formations-en-ligne.webp', alt: 'Tableau des résultats d’une régression logistique sur la réussite à l’examen selon le genre et l’IDH' },
+              { title: 'Marchés prédictifs et concurrence de l’information', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle', image: 'assets/previews/marches-predictifs.webp', alt: 'Extrait du mémoire sur les droits asymétriques des marchés prédictifs' }
             ]
           },
           {
             label: 'Data science',
             items: [
-              { title: 'Classification de drones en Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA' },
-              { title: 'Études sur l’indice de qualité de l’air', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies' },
-              { title: 'Clustering des facteurs de criminalité aux États-Unis', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering' },
-              { title: 'Requêtes SQL et optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD' },
-              { title: 'Algorithmes de tri en Python', lang: 'FR', repo: 'Flor5378/-FR-ENG-SortingAlgorithmsinPython' }
+              { title: 'Classification de drones en Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine.webp', alt: 'Carte mentale de l’étude sur la classification de trajectoires par apprentissage profond' },
+              { title: 'Études sur l’indice de qualité de l’air', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies', image: 'assets/previews/air-quality.webp', alt: 'Page de titre du rapport « Predicting Air Quality Index with Data Science and Machine Learning »' },
+              { title: 'Clustering des facteurs de criminalité aux États-Unis', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering', image: 'assets/previews/clustering-criminalite.webp', alt: 'Analyse en composantes principales en trois dimensions des facteurs de criminalité' },
+              { title: 'Requêtes SQL et optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD', image: 'assets/previews/requetes-sql.webp', alt: 'Page de titre du projet de base de données sur la population française entre 1968 et 2020' }
             ]
           },
           {
             label: 'Terrain',
             items: [
-              { title: 'Plateforme de renseignement prédictif', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' },
-              { title: 'Gabon Monitor, veille presse et réseaux sociaux', lang: 'FR', repo: 'Flor5378/Gabon-Monitor' }
+              { title: 'Gabon Monitor, veille presse et réseaux sociaux', lang: 'FR', repo: 'Flor5378/Gabon-Monitor', image: 'assets/previews/gabon-monitor.webp', alt: 'Tableau de bord « Veille presse Gabon » : volume quotidien d’articles par source' },
+              { title: 'Plateforme de renseignement prédictif', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' }
             ]
           }
         ]
@@ -250,7 +252,7 @@ const CONTENT = {
         rows: [
           {
             label: 'Data science',
-            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend', 'Selenium|selenium', 'BeautifulSoup']
+            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend|talend', 'Selenium|selenium', 'BeautifulSoup']
           },
           {
             label: 'Intelligence artificielle et données',
@@ -258,11 +260,11 @@ const CONTENT = {
           },
           {
             label: 'Géomatique et data visualisation',
-            chips: ['QGIS', 'ArcGIS', 'ArcPy', 'GeoPandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistiques']
+            chips: ['QGIS|qgis', 'ArcGIS|arcgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistiques']
           },
           {
             label: 'Science politique',
-            chips: ['Relations internationales', 'Géopolitique', 'Analyse des politiques publiques', 'Politiques de la donnée publique', 'Sciences sociales computationnelles', 'Controverses de l’IA', 'Afrique centrale et golfe de Guinée', 'Europe occidentale', 'Scandinavie', 'Économie', 'Veille scientifique']
+            chips: ['Relations internationales', 'Géopolitique', 'Analyse des politiques publiques', 'Politiques de la donnée publique', 'Sciences sociales computationnelles', 'Controverses de l’IA', 'Afrique centrale et golfe de Guinée', 'Europe occidentale', 'Scandinavie', 'Économie', 'Intelligence économique', 'Finance', 'Veille scientifique']
           },
           {
             label: 'Langues',
@@ -307,7 +309,9 @@ const CONTENT = {
             body: 'Joueur semi-professionnel d’Age of Empires II, 2 200 Elo et 150ᵉ place mondiale. Un entraînement quotidien à la décision rapide en information incomplète.',
             logos: [
               { name: 'Age of Empires II', logo: 'ageofempires.com', url: 'https://www.ageofempires.com' }
-            ]
+            ],
+            image: 'assets/previews/aoe-elo.webp',
+            alt: 'Historique du classement Elo d’Age of Empires II en 1 contre 1 classé, d’environ 1 100 en 2022 à plus de 2 200 en 2026'
           }
         ]
       },
@@ -315,7 +319,7 @@ const CONTENT = {
         id: 'contact',
         title: 'Contact',
         kind: 'contact',
-        body: 'Je cherche un premier poste en analyse de données, intelligence économique ou affaires internationales, à partir de février 2027. Le plus simple reste le courriel.'
+        body: 'Je cherche un stage ou une alternance en analyse de données, intelligence économique ou en finance, à partir de février 2027, pour 6 mois.'
       }
     ]
   },
@@ -351,12 +355,12 @@ const CONTENT = {
       licenseTitle: 'Attribution, non-commercial, share alike'
     },
     hero: {
-      role: 'Political science and data engineering · Dual degree, Sciences Po and CY Tech',
-      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development or security.',
+      role: 'Political Science and Data Science · Dual Degree Student, Sciences Po & CY Tech School of Engineering (formerly EISTI)',
+      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development, security or finance.',
       meta: [
-        ['Status', 'Available from February 2027'],
+        ['Status', 'Available from February 2027 · Work-study & Internship'],
         ['Currently', 'Versailles, France'],
-        ['Based in', 'Paris area, France']
+        ['Based in', 'Île-de-France']
       ]
     },
     sections: [
@@ -384,7 +388,7 @@ const CONTENT = {
           {
             title: 'University of Bergen',
             url: 'https://www.uib.no/en',
-            logo: 'uib.no',
+            logo: 'assets/logos/uib.png',
             sub: 'Erasmus academic exchange',
             meta: ['01/2025 → 06/2025', 'Norway'],
             body: 'A semester on regional studies and political regimes: indigenous rights, Russian politics, comparative analysis of Latin American regimes.'
@@ -400,9 +404,9 @@ const CONTENT = {
             title: 'French Ministry of Armed Forces',
             url: 'https://www.linkedin.com/company/commandement-pour-l-afrique-cpa/',
             logo: 'defense.gouv.fr',
-            sub: 'Data science and analysis intern',
+            sub: 'Data Science and International Relations Intern',
             meta: ['04/2026 → 08/2026', 'Libreville, Gabon'],
-            body: 'Analyst within the Joint Liaison Detachment and the Influence and Information Warfare Office, covering the French permanent area of responsibility in Central Africa. I built a <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">predictive dashboard</a> of regional socio-economic dynamics, then a <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">media sentiment pipeline</a> that continuously processes regional press and social media: over 21 million users monitored, tens of thousands of posts and several billion views every week.',
+            body: 'Analyst within the Joint Liaison Detachment and the Influence and Information Warfare Office (BILI), covering the French permanent area of responsibility in Central Africa. I built a <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">predictive dashboard</a> of regional socio-economic dynamics, then a <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">media sentiment pipeline</a> that continuously processes regional press and social media: over 21 million users monitored, tens of thousands of posts and several billion views every week.',
             tags: ['Python|python', 'DuckDB|duckdb', 'Streamlit|streamlit', 'NLP', 'OSINT']
           },
           {
@@ -412,7 +416,7 @@ const CONTENT = {
             short: 'BAED',
             sub: 'Partnerships lead · 150-member association',
             meta: ['04/2025 → 04/2026', 'France'],
-            body: 'In charge of partner relations, from defence manufacturers to military authorities. MILIPOL 2025 and official ceremonies, articles and briefing notes for the members.'
+            body: 'In charge of partner relations, from defence manufacturers to military authorities. MILIPOL 2025 and official ceremonies (rekindling of the Flame of the Unknown Soldier, visit to the DGGN), articles and briefing notes for the members.'
           },
           {
             title: 'ANFSI',
@@ -433,6 +437,7 @@ const CONTENT = {
           },
           {
             title: 'MUN Saint-Germain',
+            logo: 'assets/logos/mun.png',
             short: 'MUN',
             sub: 'Treasurer · 100-member association',
             meta: ['09/2023 → 12/2024', 'Saint-Germain-en-Laye'],
@@ -449,28 +454,27 @@ const CONTENT = {
           {
             label: 'Social sciences',
             items: [
-              { title: 'Modern warfare UAVs and ethics', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics' },
-              { title: 'Private companies and US immigration policies', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay' },
-              { title: 'Data and Territories Challenge', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories' },
-              { title: 'Online courses and success rates', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques' },
-              { title: 'Predictive markets and information competition', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle' }
+              { title: 'Modern warfare UAVs and ethics', lang: 'EN', repo: 'Flor5378/-ENG-Modern-Warfare-UAVs-and-Ethics', image: 'assets/previews/drones.webp', alt: 'MQ-9 Reaper drone flying over the desert' },
+              { title: 'Private companies and US immigration policies', lang: 'EN', repo: 'Flor5378/-ENG-DigitalDemocracyEssay', image: 'assets/previews/digital-democracy.webp', alt: 'Title page of the “Digital Democracy” report, Sciences Po Saint-Germain-en-Laye and CY Cergy Paris Université' },
+              { title: 'Data and Territories Challenge', lang: 'FR', repo: 'Flor5378/-FR-Data_and_Territories', image: 'assets/previews/donnees-territoires.webp', alt: 'Chart of the annual growth of bilingual Breton and Basque enrolment, from 2004 to 2024' },
+              { title: 'Online courses and success rates', lang: 'FR', repo: 'Flor5378/-FR-FormationsenLigneStatistiques', image: 'assets/previews/formations-en-ligne.webp', alt: 'Results table of a logistic regression on exam success by gender and HDI' },
+              { title: 'Predictive markets and information competition', lang: 'FR', repo: 'Flor5378/-FR-MarchesPredictifs_ConcurrenceInformationnelle', image: 'assets/previews/marches-predictifs.webp', alt: 'Excerpt from the paper on asymmetric rights in prediction markets' }
             ]
           },
           {
             label: 'Data science',
             items: [
-              { title: 'Drone classification in Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA' },
-              { title: 'Air quality index studies', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies' },
-              { title: 'Clustering US crime determinants', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering' },
-              { title: 'SQL queries and optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD' },
-              { title: 'Sorting algorithms in Python', lang: 'FR', repo: 'Flor5378/-FR-ENG-SortingAlgorithmsinPython' }
+              { title: 'Drone classification in Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine.webp', alt: 'Mind map of the study on trajectory classification with deep learning' },
+              { title: 'Air quality index studies', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies', image: 'assets/previews/air-quality.webp', alt: 'Title page of the “Predicting Air Quality Index with Data Science and Machine Learning” report' },
+              { title: 'Clustering US crime determinants', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering', image: 'assets/previews/clustering-criminalite.webp', alt: 'Three-dimensional principal component analysis of crime factors' },
+              { title: 'SQL queries and optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD', image: 'assets/previews/requetes-sql.webp', alt: 'Title page of the database project on the French population between 1968 and 2020' }
             ]
           },
           {
             label: 'Field work',
             items: [
-              { title: 'Predictive intelligence platform', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' },
-              { title: 'Gabon Monitor, press and social media monitoring', lang: 'FR', repo: 'Flor5378/Gabon-Monitor' }
+              { title: 'Gabon Monitor, press and social media monitoring', lang: 'FR', repo: 'Flor5378/Gabon-Monitor', image: 'assets/previews/gabon-monitor.webp', alt: '“Veille presse Gabon” dashboard: daily article volume by source' },
+              { title: 'Predictive intelligence platform', lang: 'EN', repo: 'Flor5378/-ENG-GlobalRiskIntelligencePlatform' }
             ]
           }
         ]
@@ -482,7 +486,7 @@ const CONTENT = {
         rows: [
           {
             label: 'Data science',
-            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend', 'Selenium|selenium', 'BeautifulSoup']
+            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend|talend', 'Selenium|selenium', 'BeautifulSoup']
           },
           {
             label: 'Artificial intelligence and data',
@@ -490,11 +494,11 @@ const CONTENT = {
           },
           {
             label: 'Geospatial and data visualisation',
-            chips: ['QGIS', 'ArcGIS', 'ArcPy', 'GeoPandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistics']
+            chips: ['QGIS|qgis', 'ArcGIS|arcgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistics']
           },
           {
             label: 'Political science',
-            chips: ['International relations', 'Geopolitics', 'Policy analysis', 'Public data policy', 'Computational social science', 'AI controversies', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia', 'Economics', 'Research monitoring']
+            chips: ['International relations', 'Geopolitics', 'Policy analysis', 'Public data policy', 'Computational social science', 'AI controversies', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia', 'Economics', 'Competitive intelligence', 'Finance', 'Research monitoring']
           },
           {
             label: 'Languages',
@@ -539,7 +543,9 @@ const CONTENT = {
             body: 'Semi-professional Age of Empires II player, 2,200 Elo and ranked 150th worldwide. Daily practice at fast decisions under incomplete information.',
             logos: [
               { name: 'Age of Empires II', logo: 'ageofempires.com', url: 'https://www.ageofempires.com' }
-            ]
+            ],
+            image: 'assets/previews/aoe-elo.webp',
+            alt: 'Age of Empires II ranked 1v1 Elo history, from about 1,100 in 2022 to over 2,200 in 2026'
           }
         ]
       },
@@ -547,7 +553,7 @@ const CONTENT = {
         id: 'contact',
         title: 'Contact',
         kind: 'contact',
-        body: 'I am looking for a first role in data analysis, competitive intelligence or international affairs, from February 2027. Email is the surest way to reach me.'
+        body: 'I am looking for an internship or a work-study placement in data analysis, competitive intelligence or finance, from February 2027, for 6 months.'
       }
     ]
   }

@@ -70,6 +70,7 @@
 .cv-foot .u{color:var(--wine);font-weight:650}
 .cv-orgs{margin:0;font-size:11px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
 .cv-nb{white-space:nowrap}
+.cv-intro,.cv-txt{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
 
 /* Contenu qui grandit : le texte des entrées passe d'abord de 11,5 à 11 px (8.2). */
 .cv.tight .cv-txt{font-size:11px}

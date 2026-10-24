@@ -517,3 +517,34 @@ a.v-tile:active{transform:scale(.98)}
 /* --------------------------------- toucher ---------------------------------- */
 
 @media (pointer:coarse){.v-ibtn{width:44px;height:44px}.v-menu-btn{height:44px}.v-lang{grid-template-columns:46px 46px}.v-lang button,.v-sm-tools .v-lang button{height:44px}.v-lang-bg,.v-sm-tools .v-lang-bg{width:46px;height:44px}:root[data-lang="en"] .v-lang-bg{transform:translateX(46px)}.v-foot a{display:inline-block;padding:10px 0}.v-ga{min-height:44px}}
+
+/* Paragraphes de lecture justifiés, avec césure selon <html lang> (demande hors maquette). */
+.v-intro,.v-body,.v-int p,.v-cbody{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+/* Sous 640 px, l'introduction en grand corps compte une trentaine de signes par ligne : justifiée, elle se troue. */
+@media (max-width:640px){.v-intro{text-align:left}}
+
+/* Image d'aperçu de projet (hors maquette) : 16:9 réservé avant chargement, la hauteur du panneau reste juste.
+   Panneau : en tête, à fond perdu, coins arrondis par le panneau. Feuille basse : vignette arrondie. */
+.v-gimg{margin:0 0 18px;aspect-ratio:16/9;overflow:hidden;background:var(--on-wine-3)}
+.v-gimg img{display:block;width:100%;height:100%;object-fit:cover}
+.v-panel .v-gimg{margin:-26px -26px 20px;max-height:max(120px,calc(100dvh - 430px))}
+/* Panneau plus haut avec l'image : la marge basse de la feuille passe sous la liste, la cellule
+   de la grille s'allonge d'autant et le panneau collant n'est plus repoussé sous la barre. */
+@media (min-width:981px){
+.v-sheet:has(.v-proj){padding-bottom:0}
+.v-proj .v-list{padding-bottom:140px}
+}
+.v-psheet .v-gimg{margin:8px 0 16px;border-radius:18px}
+@media (max-height:520px){.v-psheet .v-gimg{display:none}}
+
+/* Intérêt illustré (image dans content.js) : carte en pleine largeur, texte à gauche et image à
+   droite ; les autres cartes passent sur deux colonnes et gardent leur hauteur (hors maquette). */
+.v-int .v-gimg{margin:0;border-radius:18px;background:var(--rule)}
+@media (min-width:981px){
+.v-ints:has(.v-int.wimg){grid-template-columns:repeat(2,minmax(0,1fr))}
+.v-int.wimg{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);grid-template-rows:auto auto 1fr;gap:14px 40px;align-items:start}
+.v-int.wimg>:not(.v-gimg){grid-column:1}
+.v-int.wimg>.k{justify-self:start}
+.v-int.wimg .v-ilogos{margin-top:0}
+.v-int.wimg>.v-gimg{grid-column:2;grid-row:1/4}
+}
