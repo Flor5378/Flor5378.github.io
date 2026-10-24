@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T22:40:00Z",
+  "generatedAt": "2026-10-24T15:37:28Z",
   "repos": {
     "Flor5378/-ENG-AirQualityIndexStudies": {
       "description": "Personal Project over Air Quality Index (AQI) Analysis and Machine Learning Prediction Implementation",
@@ -33,11 +33,6 @@
       "description": "Machine Learning about Ukrainians and Russian drones detection, during the Russian invasion of Ukraine's context.",
       "language": "Jupyter Notebook",
       "pushedAt": "2025-12-29T14:26:14Z"
-    },
-    "Flor5378/-FR-ENG-SortingAlgorithmsinPython": {
-      "description": "Various Examples of Sorting Algorithms with Python (e.g Merge Sort, Quick Sort ...) and analysis of their individual performances",
-      "language": "Jupyter Notebook",
-      "pushedAt": "2025-08-14T21:50:27Z"
     },
     "Flor5378/-FR-FormationsenLigneStatistiques": {
       "description": "Analyses statistiques sur les taux d'engagement des apprenants des formations en ligne (MOOC), via des variables multifactorielles",
