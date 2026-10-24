@@ -119,12 +119,12 @@ const CONTENT = {
       licenseTitle: 'Attribution, pas d’utilisation commerciale, partage dans les mêmes conditions'
     },
     hero: {
-      role: 'Science politique et ingénierie data · Double diplôme Sciences Po et CY Tech',
-      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement ou la sécurité.',
+      role: 'Science politique et Data Science · Étudiant en Double Diplôme Sciences Po & CY Tech (ex-EISTI)',
+      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement, la sécurité ou la finance.',
       meta: [
         ['Statut', 'Disponible à partir de février 2027'],
         ['Actuellement', 'Versailles, France'],
-        ['Base', 'Région parisienne, France']
+        ['Base', 'Île-de-France']
       ]
     },
     sections: [
@@ -152,7 +152,7 @@ const CONTENT = {
           {
             title: 'Université de Bergen',
             url: 'https://www.uib.no/en',
-            logo: 'uib.no',
+            logo: 'assets/logos/uib.png',
             sub: 'Échange académique Erasmus',
             meta: ['01/2025 → 06/2025', 'Norvège'],
             body: 'Un semestre consacré aux aires régionales et aux régimes politiques : droits des peuples autochtones, politique russe, analyse comparée des régimes latino-américains.'
@@ -168,9 +168,9 @@ const CONTENT = {
             title: 'Ministère des Armées',
             url: 'https://www.linkedin.com/company/commandement-pour-l-afrique-cpa/',
             logo: 'defense.gouv.fr',
-            sub: 'Stagiaire data science et analyse',
+            sub: 'Stagiaire Data Science et Relations Internationales',
             meta: ['04/2026 → 08/2026', 'Libreville, Gabon'],
-            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle, sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone : plus de 21 millions d’utilisateurs suivis, plusieurs dizaines de milliers de publications et plusieurs milliards de vues chaque semaine.',
+            body: 'Analyste au sein du Détachement de liaison interarmées et du Bureau influence et lutte informationnelle (BILI), sur la zone de responsabilité permanente française en Afrique centrale. J’y ai construit un <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">tableau de bord prédictif</a> des dynamiques socio-économiques régionales, puis une <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">chaîne d’analyse du sentiment médiatique</a> qui traite en continu la presse et les réseaux sociaux de la zone : plus de 21 millions d’utilisateurs suivis, plusieurs dizaines de milliers de publications et plusieurs milliards de vues chaque semaine.',
             tags: ['Python|python', 'DuckDB|duckdb', 'Streamlit|streamlit', 'NLP', 'OSINT']
           },
           {
@@ -180,7 +180,7 @@ const CONTENT = {
             short: 'BAED',
             sub: 'Pôle partenariats · association de 150 membres',
             meta: ['04/2025 → 04/2026', 'France'],
-            body: 'En charge des relations partenaires, des industriels de la défense aux autorités militaires. Présence au salon MILIPOL 2025 et aux cérémonies officielles, rédaction d’articles et de notes de synthèse pour les membres.'
+            body: 'En charge des relations partenaires, des industriels de la défense aux autorités militaires. Présence au salon MILIPOL 2025 et aux cérémonies officielles (ravivage de la flamme, visite de la DGGN), rédaction d’articles et de notes de synthèse pour les membres.'
           },
           {
             title: 'ANFSI',
@@ -201,6 +201,7 @@ const CONTENT = {
           },
           {
             title: 'MUN Saint-Germain',
+            logo: 'assets/logos/mun.png',
             short: 'MUN',
             sub: 'Trésorier · association de 100 membres',
             meta: ['09/2023 → 12/2024', 'Saint-Germain-en-Laye'],
@@ -351,12 +352,12 @@ const CONTENT = {
       licenseTitle: 'Attribution, non-commercial, share alike'
     },
     hero: {
-      role: 'Political science and data engineering · Dual degree, Sciences Po and CY Tech',
-      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development or security.',
+      role: 'Political Science and Data Science · Dual Degree Student, Sciences Po & CY Tech School of Engineering (formerly EISTI)',
+      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development, security or finance.',
       meta: [
         ['Status', 'Available from February 2027'],
         ['Currently', 'Versailles, France'],
-        ['Based in', 'Paris area, France']
+        ['Based in', 'Île-de-France']
       ]
     },
     sections: [
@@ -384,7 +385,7 @@ const CONTENT = {
           {
             title: 'University of Bergen',
             url: 'https://www.uib.no/en',
-            logo: 'uib.no',
+            logo: 'assets/logos/uib.png',
             sub: 'Erasmus academic exchange',
             meta: ['01/2025 → 06/2025', 'Norway'],
             body: 'A semester on regional studies and political regimes: indigenous rights, Russian politics, comparative analysis of Latin American regimes.'
@@ -400,9 +401,9 @@ const CONTENT = {
             title: 'French Ministry of Armed Forces',
             url: 'https://www.linkedin.com/company/commandement-pour-l-afrique-cpa/',
             logo: 'defense.gouv.fr',
-            sub: 'Data science and analysis intern',
+            sub: 'Data Science and International Relations Intern',
             meta: ['04/2026 → 08/2026', 'Libreville, Gabon'],
-            body: 'Analyst within the Joint Liaison Detachment and the Influence and Information Warfare Office, covering the French permanent area of responsibility in Central Africa. I built a <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">predictive dashboard</a> of regional socio-economic dynamics, then a <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">media sentiment pipeline</a> that continuously processes regional press and social media: over 21 million users monitored, tens of thousands of posts and several billion views every week.',
+            body: 'Analyst within the Joint Liaison Detachment and the Influence and Information Warfare Office (BILI), covering the French permanent area of responsibility in Central Africa. I built a <a href="https://github.com/Flor5378/-ENG-GlobalRiskIntelligencePlatform" data-repo="Flor5378/-ENG-GlobalRiskIntelligencePlatform" target="_blank" rel="noopener">predictive dashboard</a> of regional socio-economic dynamics, then a <a href="https://github.com/Flor5378/Gabon-Monitor" data-repo="Flor5378/Gabon-Monitor" target="_blank" rel="noopener">media sentiment pipeline</a> that continuously processes regional press and social media: over 21 million users monitored, tens of thousands of posts and several billion views every week.',
             tags: ['Python|python', 'DuckDB|duckdb', 'Streamlit|streamlit', 'NLP', 'OSINT']
           },
           {
@@ -412,7 +413,7 @@ const CONTENT = {
             short: 'BAED',
             sub: 'Partnerships lead · 150-member association',
             meta: ['04/2025 → 04/2026', 'France'],
-            body: 'In charge of partner relations, from defence manufacturers to military authorities. MILIPOL 2025 and official ceremonies, articles and briefing notes for the members.'
+            body: 'In charge of partner relations, from defence manufacturers to military authorities. MILIPOL 2025 and official ceremonies (rekindling of the Flame of the Unknown Soldier, visit to the DGGN), articles and briefing notes for the members.'
           },
           {
             title: 'ANFSI',
@@ -433,6 +434,7 @@ const CONTENT = {
           },
           {
             title: 'MUN Saint-Germain',
+            logo: 'assets/logos/mun.png',
             short: 'MUN',
             sub: 'Treasurer · 100-member association',
             meta: ['09/2023 → 12/2024', 'Saint-Germain-en-Laye'],

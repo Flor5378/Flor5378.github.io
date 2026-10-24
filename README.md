@@ -19,7 +19,7 @@ assets/
   js/cv.js                  rendu du CV depuis content.js
   js/dev-data.js            jeux de données de test, chargé seulement en local
   fonts/                    Figtree variable, auto-hébergée (licence OFL)
-  logos/                    logos locaux (BAED, Passés composés, Deloitte, EY, Capgemini, Wavestone)
+  logos/                    logos locaux (BAED, Passés composés, Bergen, MUN, Deloitte, EY, Capgemini, Wavestone)
   logos/tech/               icônes des technologies (Devicon)
   logos/sport/              pictogrammes de sport (Material Design Icons)
 .github/workflows/github-data.yml   action quotidienne qui met à jour github.json
@@ -76,7 +76,7 @@ Le navigateur n'interroge jamais l'API GitHub. L'action `github-data.yml` lit le
 
 Dans une entrée, un logo local qui a son propre fond (coin opaque) remplit le carré ; un logo transparent y est contenu avec une marge. `wide: true` signale un logo texte : pastille allongée dans les intérêts, image contenue dans le carré d'une entrée.
 
-Deux logos n'ont pas encore de fichier, leurs initiales s'affichent : Hadit (organisations) et MUN Saint-Germain (expérience). Pour les afficher, déposez `assets/logos/hadit.png` et `assets/logos/mun.png`, puis ajoutez `logo: 'assets/logos/hadit.png'` (ou `mun.png`) à l'élément correspondant. Format conseillé : PNG ou SVG carré, fond transparent, 128 px minimum.
+Hadit (organisations) n'a pas encore de fichier, ses initiales s'affichent. Pour afficher son logo, déposez `assets/logos/hadit.png` puis ajoutez `logo: 'assets/logos/hadit.png'` à l'élément correspondant. Format conseillé : PNG ou SVG carré, fond transparent, 128 px minimum.
 
 Les logos affichés appartiennent à leurs détenteurs et ne sont utilisés qu'à titre de référence.
 

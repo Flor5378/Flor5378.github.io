@@ -517,3 +517,8 @@ a.v-tile:active{transform:scale(.98)}
 /* --------------------------------- toucher ---------------------------------- */
 
 @media (pointer:coarse){.v-ibtn{width:44px;height:44px}.v-menu-btn{height:44px}.v-lang{grid-template-columns:46px 46px}.v-lang button,.v-sm-tools .v-lang button{height:44px}.v-lang-bg,.v-sm-tools .v-lang-bg{width:46px;height:44px}:root[data-lang="en"] .v-lang-bg{transform:translateX(46px)}.v-foot a{display:inline-block;padding:10px 0}.v-ga{min-height:44px}}
+
+/* Paragraphes de lecture justifiés, avec césure selon <html lang> (demande hors maquette). */
+.v-intro,.v-body,.v-int p,.v-cbody{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+/* Sous 640 px, l'introduction en grand corps compte une trentaine de signes par ligne : justifiée, elle se troue. */
+@media (max-width:640px){.v-intro{text-align:left}}
