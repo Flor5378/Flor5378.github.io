@@ -230,7 +230,7 @@ const CONTENT = {
           {
             label: 'Data science',
             items: [
-              { title: 'Classification de drones en Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine.webp', alt: 'Carte mentale de l’étude sur la classification de trajectoires par apprentissage profond' },
+              { title: 'Classification de drones en Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine-v2.webp', alt: 'Synthèse de la classification des pistes radar simulées : indicateurs F1, carte des erreurs de rôle et matrice de confusion' },
               { title: 'Études sur l’indice de qualité de l’air', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies', image: 'assets/previews/air-quality.webp', alt: 'Page de titre du rapport « Predicting Air Quality Index with Data Science and Machine Learning »' },
               { title: 'Clustering des facteurs de criminalité aux États-Unis', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering', image: 'assets/previews/clustering-criminalite.webp', alt: 'Analyse en composantes principales en trois dimensions des facteurs de criminalité' },
               { title: 'Requêtes SQL et optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD', image: 'assets/previews/requetes-sql.webp', alt: 'Page de titre du projet de base de données sur la population française entre 1968 et 2020' }
@@ -464,7 +464,7 @@ const CONTENT = {
           {
             label: 'Data science',
             items: [
-              { title: 'Drone classification in Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine.webp', alt: 'Mind map of the study on trajectory classification with deep learning' },
+              { title: 'Drone classification in Ukraine', lang: 'FR / EN', repo: 'Flor5378/-FR-ENG-DroneClassificationUA', image: 'assets/previews/drones-ukraine-v2.webp', alt: 'Summary of the simulated radar track classification: F1 scores, map of role errors and confusion matrix' },
               { title: 'Air quality index studies', lang: 'EN', repo: 'Flor5378/-ENG-AirQualityIndexStudies', image: 'assets/previews/air-quality.webp', alt: 'Title page of the “Predicting Air Quality Index with Data Science and Machine Learning” report' },
               { title: 'Clustering US crime determinants', lang: 'EN', repo: 'Flor5378/-ENG-Final_Project_Clustering', image: 'assets/previews/clustering-criminalite.webp', alt: 'Three-dimensional principal component analysis of crime factors' },
               { title: 'SQL queries and optimisation', lang: 'FR', repo: 'Flor5378/-FR-RequetesSQLetOptimisationBDD', image: 'assets/previews/requetes-sql.webp', alt: 'Title page of the database project on the French population between 1968 and 2020' }
