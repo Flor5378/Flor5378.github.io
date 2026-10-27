@@ -149,7 +149,7 @@ const metaRow = (labels) => T().hero.meta.find((m) => labels.includes(String(m[0
 function hasContent(s) {
   switch (s.kind) {
     case 'entries': return s.entries.length > 0;
-    case 'projects':
+    case 'projects': return !!s.featured || s.groups.some((g) => g.items.length > 0);
     case 'orgs': return s.groups.some((g) => g.items.length > 0);
     case 'skills': return s.rows.length > 0;
     case 'prose': return s.blocks.length > 0;
@@ -289,11 +289,34 @@ function previewHTML(id, where) {
   return html + `<a class="v-ga${sw(4)}" href="${esc(href)}" target="_blank" rel="noopener"${tab}>${esc(cta)}${ARROW}</a>`;
 }
 
+// Nom de domaine : coupure possible avant un point, jamais au trait d'union.
+const domainHTML = (name) => String(name).split('.')
+  .map((p) => `<span class="nb">${esc(p)}</span>`).join('<wbr>.');
+
+// Projets récents, en tête de la section (hors maquette). Un site avec `url`
+// est un lien à pastille vive ; sans `url`, il reste affiché comme inaccessible.
+function featuredHTML(f) {
+  const sites = (f.sites || []).map((x) => {
+    const st = x.status
+      ? `<span class="st lx" style="--k:6"><span class="v-dot${x.url ? ' live' : ''}" aria-hidden="true"></span>${esc(x.status)}</span>` : '';
+    return x.url
+      ? `<li><a class="v-site" href="${esc(x.url)}" target="_blank" rel="noopener"><span class="nm">${domainHTML(x.name)}</span>${ARROW}${st}</a></li>`
+      : `<li><span class="v-site off"><span class="nm">${domainHTML(x.name)}</span>${st}</span></li>`;
+  });
+  return `<div class="v-eco v-reveal" style="--i:0">
+      ${f.label ? `<p class="v-glabel lx" style="--k:3">${esc(f.label)}${sites.length ? `<span class="c">${sites.length}</span>` : ''}</p>` : ''}
+      <div class="v-eco-top"><h3 class="v-eco-t lx" style="--k:4">${esc(f.title)}</h3>${f.body ? `<p class="v-body lx" style="--k:5">${f.body}</p>` : ''}</div>
+      ${sites.length ? `<ul class="v-sites">${sites.join('')}</ul>` : ''}
+    </div>`;
+}
+
 function projectsHTML(s, num) {
   const c = T();
+  const shown = s.groups.filter((g) => g.items.length);
+  const lead = s.featured ? 1 : 0;   // la carte des projets récents arrive la première
   let n = 0;
-  const groups = s.groups.filter((g) => g.items.length).map((g, gi) =>
-    `<div class="v-group v-reveal" style="--i:${gi}">
+  const groups = shown.map((g, gi) =>
+    `<div class="v-group v-reveal" style="--i:${gi + lead}">
         <p class="v-glabel lx" style="--k:3">${esc(g.label)}<span class="c">${g.items.length}</span></p>
         ${g.items.map((p) => {
           n += 1;
@@ -301,15 +324,17 @@ function projectsHTML(s, num) {
             `<span class="n">${pad2(n)}</span><span class="t lx" style="--k:4">${esc(p.title)}</span><span class="l">${esc(p.lang)}</span>${ARROW}</a>`;
         }).join('')}
       </div>`).join('');
-  const note = s.note
+  // Sans aucune ligne de projet, ni note ni panneau : la carte reste seule.
+  const note = s.note && shown.length
     ? `<p class="v-note lx" style="--k:2"><span class="hover">${esc(s.note)}</span><span class="touch">${esc(c.ui.noteTouch)}</span></p>` : '';
-  return `<div class="v-in">${sectionHead(s, num, note)}
-      <div class="v-proj">
+  const list = shown.length
+    ? `<div class="v-proj">
         <div class="v-list" data-list="projets"><span class="v-glide" aria-hidden="true"></span>${groups}</div>
-        <div class="v-panelW v-reveal" style="--i:${s.groups.length}">
+        <div class="v-panelW v-reveal" style="--i:${shown.length + lead}">
           <div class="v-panel" data-k="${panelK}" aria-live="polite"><div class="v-panel-in">${panelInner()}</div></div>
         </div>
-      </div>
+      </div>` : '';
+  return `<div class="v-in">${sectionHead(s, num, note)}${s.featured ? featuredHTML(s.featured) : ''}${list}
     </div>`;
 }
 

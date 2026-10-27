@@ -61,6 +61,20 @@ Ajouter un projet, dans `groups[].items` :
 
 Le lien et l'aperçu sont déduits de `repo`. Pour illustrer l'aperçu, ajoutez `image: 'assets/previews/x.webp'` (format 16:9, 1280 px de large conseillés) et `alt: 'Description de l’image'` dans chaque langue : l'image s'affiche en tête du panneau et de la feuille basse. Les mêmes champs sur un bloc des centres d'intérêt affichent l'image dans sa carte, qui passe alors en pleine largeur. La navigation, la numérotation des sections et les compteurs se régénèrent seuls. Une section ou un groupe vide est masqué.
 
+Projets récents : le champ `featured` de la section Projets affiche une carte en tête de section, avant la liste. Un site avec `url` devient un lien à pastille vive ; sans `url`, il s'affiche comme inaccessible, sans lien. Supprimer `featured` retire la carte.
+
+```js
+featured: {
+  label: 'Projets récents',
+  title: 'Titre de la carte',
+  body: 'Présentation en deux ou trois lignes.',
+  sites: [
+    { name: 'exemple.com', url: 'https://exemple.com', status: 'En développement' },
+    { name: 'exemple.app', status: 'Pour l’instant inaccessible' }
+  ]
+},
+```
+
 Dans `hero.meta`, la ligne « Statut » s'affiche en pastille dans l'accueil, la ligne « Actuellement » sous le rôle avec une icône de lieu.
 
 ## Aperçus GitHub
