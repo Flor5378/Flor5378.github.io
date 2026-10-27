@@ -216,6 +216,18 @@ const CONTENT = {
         title: 'Projets',
         kind: 'projects',
         note: 'Survolez un projet pour afficher son aperçu GitHub.',
+        // Projets récents, en tête de la section. Un site sans `url` s’affiche comme inaccessible.
+        featured: {
+          label: 'Projets récents',
+          title: 'Un écosystème de sites web et d’applications autour de la donnée',
+          body: 'Encore en construction, cet écosystème concilie la collecte, le traitement et l’analyse de données avec des modèles de prédiction, sur un large éventail de domaines : statistiques, finance, économie, développement et géopolitique.',
+          sites: [
+            { name: 'worldofmetrics.com', url: 'https://worldofmetrics.com', status: 'Le plus récent · en développement' },
+            { name: 'worldofstats.app', status: 'Pour l’instant inaccessible' },
+            { name: 'worldofkpi.com', status: 'Pour l’instant inaccessible' },
+            { name: 'global-eye.app', status: 'Pour l’instant inaccessible' }
+          ]
+        },
         groups: [
           {
             label: 'Sciences sociales',
@@ -450,6 +462,17 @@ const CONTENT = {
         title: 'Projects',
         kind: 'projects',
         note: 'Hover a project to see its GitHub preview.',
+        featured: {
+          label: 'Recent projects',
+          title: 'An ecosystem of websites and applications built around data',
+          body: 'Still a work in progress, this ecosystem combines data collection, processing and analysis with predictive models, across a wide range of fields: statistics, finance, economics, development and geopolitics.',
+          sites: [
+            { name: 'worldofmetrics.com', url: 'https://worldofmetrics.com', status: 'Most recent · in development' },
+            { name: 'worldofstats.app', status: 'Not accessible yet' },
+            { name: 'worldofkpi.com', status: 'Not accessible yet' },
+            { name: 'global-eye.app', status: 'Not accessible yet' }
+          ]
+        },
         groups: [
           {
             label: 'Social sciences',

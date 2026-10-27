@@ -93,7 +93,10 @@ function empty() {
   ['fr', 'en'].forEach((l) => {
     content[l].sections.forEach((s) => {
       if (s.kind === 'entries') s.entries = [];
-      if (s.kind === 'projects') s.groups.forEach((g) => { g.items = []; });
+      if (s.kind === 'projects') {
+        s.groups.forEach((g) => { g.items = []; });
+        if (s.featured) s.featured.sites = [];
+      }
       if (s.kind === 'skills') s.rows = [];
       if (s.kind === 'orgs') s.groups.forEach((g) => { g.items = []; });
     });
