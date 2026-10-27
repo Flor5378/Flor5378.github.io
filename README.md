@@ -110,7 +110,7 @@ Une icône absente ou mal nommée disparaît sans casser la mise en page, le lib
 ## Fonctionnement
 
 - Langue : `?lang=fr` ou `?lang=en` dans l'URL, sinon le choix mémorisé, sinon la langue du navigateur. La bascule garde la section lue au même endroit.
-- Thème : préférence système au premier chargement, puis choix mémorisé, appliqué avant le premier affichage.
+- Thème : clair au premier chargement, quelle que soit la préférence système, puis choix mémorisé, appliqué avant le premier affichage.
 - Navigation : la pilule suit la section lue et le survol. Sous 1180 px, la barre affiche la section lue et un bouton Menu.
 - Projets : panneau d'aperçu au survol ou au focus sur grand écran, feuille basse au toucher et sous 980 px.
 - Mouvement réduit : aucune translation ni ressort, contenu toujours visible.
