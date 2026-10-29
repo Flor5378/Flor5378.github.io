@@ -122,11 +122,10 @@ const CONTENT = {
     },
     hero: {
       role: 'Science politique et Data Science · Étudiant en Double Diplôme Sciences Po & CY Tech (ex-EISTI)',
-      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de collecter, traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement, la sécurité ou la finance.',
+      intro: 'Étudiant en 5ᵉ année (Master 2), en double diplôme entre Sciences Po Saint-Germain-en-Laye et l’école d’ingénieurs CY Tech (ex-EISTI), j’évolue au confluent de deux disciplines interdépendantes. Ce cursus me permet de <mark>concilier rigueur scientifique, analyse quantitative et remise en contexte</mark> des projets que je mène, puis de traiter et interpréter les données qu’ils produisent. Après un stage au ministère des Armées, je souhaite poursuivre dans une organisation internationale, une institution européenne ou une entreprise tournée vers l’intelligence économique, le développement, la sécurité ou la finance.',
       meta: [
         ['Statut', 'Disponible à partir de février 2027 · Alternance & Stage'],
-        ['Actuellement', 'Versailles, France'],
-        ['Base', 'Île-de-France']
+        ['Actuellement', 'Versailles, France']
       ]
     },
     sections: [
@@ -149,7 +148,7 @@ const CONTENT = {
             logo: 'cytech.cyu.fr',
             sub: 'Ingénieur mathématiques et informatique, spécialité data science et IA · double diplôme avec Sciences Po',
             meta: ['09/2022 → aujourd’hui', 'Cergy'],
-            body: 'Cursus mené en parallèle de celui de Sciences Po. Machine learning, deep learning et statistiques appliquées sous Python et R, conception de bases de données, pratique régulière du SIG et de la visualisation.'
+            body: 'Cursus mené en parallèle de celui de Sciences Po. Machine learning, deep learning et statistiques appliquées sous Python et R, conception de bases de données.'
           },
           {
             title: 'Université de Bergen',
@@ -264,7 +263,7 @@ const CONTENT = {
         rows: [
           {
             label: 'Data science',
-            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend|talend', 'Selenium|selenium', 'BeautifulSoup']
+            chips: ['Python|python', 'R|r', 'SQL', 'pandas|pandas', 'NumPy|numpy', 'scikit-learn|scikitlearn', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Talend|talend', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex']
           },
           {
             label: 'Intelligence artificielle et données',
@@ -272,11 +271,11 @@ const CONTENT = {
           },
           {
             label: 'Géomatique et data visualisation',
-            chips: ['QGIS|qgis', 'ArcGIS|arcgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistiques']
+            chips: ['QGIS|qgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'statistiques', 'Power BI', 'plotly|plotly', 'seaborn']
           },
           {
             label: 'Science politique',
-            chips: ['Relations internationales', 'Géopolitique', 'Analyse des politiques publiques', 'Politiques de la donnée publique', 'Sciences sociales computationnelles', 'Controverses de l’IA', 'Afrique centrale et golfe de Guinée', 'Europe occidentale', 'Scandinavie', 'Économie', 'Intelligence économique', 'Finance', 'Veille scientifique']
+            chips: ['Relations internationales', 'Géopolitique', 'Économie', 'Intelligence économique', 'Finance', 'Analyse des politiques publiques', 'Sciences sociales computationnelles', 'Veille scientifique', 'Afrique centrale et golfe de Guinée', 'Europe de l’Ouest', 'Scandinavie']
           },
           {
             label: 'Langues',
@@ -368,11 +367,10 @@ const CONTENT = {
     },
     hero: {
       role: 'Political Science and Data Science · Dual Degree Student, Sciences Po & CY Tech School of Engineering (formerly EISTI)',
-      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then collect, process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development, security or finance.',
+      intro: 'Fifth-year student (Master 2) on a dual degree between Sciences Po Saint-Germain-en-Laye and the CY Tech engineering school (formerly EISTI), I work where two interdependent fields meet. That mix lets me pair <mark>scientific rigour and quantitative analysis with the context</mark> each project sits in, then process and interpret the data the work produces. After an internship with the French Ministry of Armed Forces, I am looking to continue in an international organisation, a European institution or a company working on competitive intelligence, development, security or finance.',
       meta: [
         ['Status', 'Available from February 2027 · Work-study & Internship'],
-        ['Currently', 'Versailles, France'],
-        ['Based in', 'Île-de-France']
+        ['Currently', 'Versailles, France']
       ]
     },
     sections: [
@@ -395,7 +393,7 @@ const CONTENT = {
             logo: 'cytech.cyu.fr',
             sub: 'Engineering degree in mathematics and computer science, data science and AI track · dual degree with Sciences Po',
             meta: ['09/2022 → present', 'Cergy'],
-            body: 'Taken in parallel with the Sciences Po track. Machine learning, deep learning and applied statistics in Python and R, database design, regular GIS and visualisation work.'
+            body: 'Taken in parallel with the Sciences Po track. Machine learning, deep learning and applied statistics in Python and R, and database design.'
           },
           {
             title: 'University of Bergen',
@@ -509,7 +507,7 @@ const CONTENT = {
         rows: [
           {
             label: 'Data science',
-            chips: ['Python|python', 'scikit-learn|scikitlearn', 'pandas|pandas', 'NumPy|numpy', 'Keras|keras', 'NLP', 'R|r', 'SQL', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex', 'Talend|talend', 'Selenium|selenium', 'BeautifulSoup']
+            chips: ['Python|python', 'R|r', 'SQL', 'pandas|pandas', 'NumPy|numpy', 'scikit-learn|scikitlearn', 'PostgreSQL|postgresql', 'MongoDB|mongodb', 'Talend|talend', 'Java|java', 'JavaFX|java', 'JavaScript|javascript', 'React|react', 'HTML/CSS|html5', 'Docker|docker', 'Git|git', 'Bash|bash', 'PowerShell|powershell', 'LaTeX|latex']
           },
           {
             label: 'Artificial intelligence and data',
@@ -517,11 +515,11 @@ const CONTENT = {
           },
           {
             label: 'Geospatial and data visualisation',
-            chips: ['QGIS|qgis', 'ArcGIS|arcgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'Power BI', 'seaborn', 'plotly|plotly', 'statistics']
+            chips: ['QGIS|qgis', 'ArcPy|arcgis', 'GeoPandas|geopandas', 'statistics', 'Power BI', 'plotly|plotly', 'seaborn']
           },
           {
             label: 'Political science',
-            chips: ['International relations', 'Geopolitics', 'Policy analysis', 'Public data policy', 'Computational social science', 'AI controversies', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia', 'Economics', 'Competitive intelligence', 'Finance', 'Research monitoring']
+            chips: ['International relations', 'Geopolitics', 'Economics', 'Competitive intelligence', 'Finance', 'Policy analysis', 'Computational social science', 'Research monitoring', 'Central Africa and Gulf of Guinea', 'Western Europe', 'Scandinavia']
           },
           {
             label: 'Languages',
